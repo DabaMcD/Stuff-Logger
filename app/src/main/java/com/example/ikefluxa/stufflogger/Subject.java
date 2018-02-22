@@ -8,4 +8,6 @@ public class Subject {
     String name;
     Boolean checked;
     Boolean onList;
+
+
 }
