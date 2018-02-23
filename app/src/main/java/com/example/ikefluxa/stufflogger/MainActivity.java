@@ -39,12 +39,14 @@ public class MainActivity extends AppCompatActivity {
         Constants.SCREEN_WIDTH = displayMetrics.widthPixels;
         Constants.SCREEN_HEIGHT = displayMetrics.heightPixels;
 
-        Toast.makeText(this, String.valueOf(Constants.SCREEN_WIDTH), Toast.LENGTH_LONG).show();
+        // TODO: test the permissions thing on pa's phone. First try the least probable thing to work,
+        // TODO: so we don't blow our permissions privileges.
+        // TODO: first try it without the below. if that doesn't ask for permissions
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
+//        }
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
-        }
-
+        // Draw everything (kinda obvious)
         drawEverything();
     }
 
