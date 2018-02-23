@@ -12,6 +12,7 @@ import android.view.View;
 
 public class DrawLog extends View {
     public boolean drawable = false;
+    public int rowsPerPage = 10;
     public DrawLog(Context context) {
         super(context);
     }
@@ -26,11 +27,11 @@ public class DrawLog extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if(drawable) {
-            for(int i = 0; i < Constants.SCREEN_HEIGHT) {
-
-            }
-        }
+//        if(drawable) {
+//            for(int i = 0; i < Constants.SCREEN_HEIGHT; i += Constants.SCREEN_HEIGHT / rowsPerPage) {
+//
+//            }
+//        }
         super.onDraw(canvas);
     }
 

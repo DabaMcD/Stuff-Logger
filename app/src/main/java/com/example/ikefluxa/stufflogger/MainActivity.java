@@ -7,8 +7,11 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.io.File;
@@ -18,12 +21,25 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
-    DrawLog log = findViewById(R.id.log);
+    DrawLog log;
+    ConstraintLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Define all the things in the xml code
+        layout = findViewById(R.id.constraintLayout);
+        log = findViewById(R.id.log);
+
+        // Define screen dimensions
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        Constants.SCREEN_WIDTH = displayMetrics.widthPixels;
+        Constants.SCREEN_HEIGHT = displayMetrics.heightPixels;
+
+        Toast.makeText(this, String.valueOf(Constants.SCREEN_WIDTH), Toast.LENGTH_LONG).show();
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
@@ -33,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void drawEverything() {
-
+        log.draw();
     }
 
     private void saveFile(String filename, String text) {
