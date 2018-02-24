@@ -24,8 +24,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
-    DrawLog log;
-    ConstraintLayout layout;
     EditText editText;
 
     @Override
@@ -34,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Define all the things in the xml code
-        layout = findViewById(R.id.constraintLayout);
-        log = findViewById(R.id.log);
         editText = findViewById(R.id.editText);
 
         // Define screen dimensions
@@ -55,20 +51,8 @@ public class MainActivity extends AppCompatActivity {
         drawEverything();
     }
 
-    public void showKeyboard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (getCurrentFocus() != null)
-            imm.showSoftInput(getCurrentFocus(), 0);
-    }
-
-    public void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (getCurrentFocus() != null)
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-    }
-
     private void drawEverything() {
-        log.draw();
+        // Only custom views go in here
     }
 
     private void saveFile(String filename, String text) {
