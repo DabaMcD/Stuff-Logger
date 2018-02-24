@@ -7,35 +7,20 @@ import java.util.ArrayList;
  */
 
 public class User {
-    String name;
-    ArrayList<Subject> subjects = new ArrayList<>();
+    public String name;
+    public ArrayList<Subject> subjects = new ArrayList<>();
 
-    public User () {
-
-    }
-
-    public User (String name) {
+    public User(String name) {
         this.name = name;
     }
 
-    public User (String name, ArrayList<Subject> subjects) {
+    public User(String name, ArrayList<Subject> subjects) {
         this.name = name;
         this.subjects = subjects;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ArrayList<Subject> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(ArrayList<Subject> subjects) {
-        this.subjects = subjects;
+        if (this.name.toUpperCase().equals("CORDY") || this.name.toUpperCase().equals("CORDI") || this.name.toUpperCase().equals("CORDELIA")) {
+            this.subjects.add(new Subject("Cut paper"));
+            this.subjects.add(new Subject("Watch Daba play video games"));
+            this.subjects.add(new Subject("Give Daba back rub"));
+        }
     }
 }

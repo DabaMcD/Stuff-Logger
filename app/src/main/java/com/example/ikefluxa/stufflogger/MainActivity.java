@@ -11,6 +11,9 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
     DrawLog log;
     ConstraintLayout layout;
+    EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         // Define all the things in the xml code
         layout = findViewById(R.id.constraintLayout);
         log = findViewById(R.id.log);
+        editText = findViewById(R.id.editText);
 
         // Define screen dimensions
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -48,6 +53,18 @@ public class MainActivity extends AppCompatActivity {
 
         // Draw everything (kinda obvious)
         drawEverything();
+    }
+
+    public void showKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (getCurrentFocus() != null)
+            imm.showSoftInput(getCurrentFocus(), 0);
+    }
+
+    public void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (getCurrentFocus() != null)
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 
     private void drawEverything() {
