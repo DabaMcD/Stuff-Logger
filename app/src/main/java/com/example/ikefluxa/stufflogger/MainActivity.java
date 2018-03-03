@@ -2,6 +2,7 @@ package com.example.ikefluxa.stufflogger;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -24,7 +25,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
+
 public class MainActivity extends AppCompatActivity {
+    Button newUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Define all the things in the xml code
+        newUser = findViewById(R.id.newUser);
+
+        newUser.setText("Add User");
 
         // Define screen dimensions
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -48,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Draw everything (kinda obvious)
         drawEverything();
+    }
+
+    public void newUserClick(View target) {
+        Intent myIntent = new Intent(this, UserActivity.class);
+        startActivity(myIntent);
     }
 
     private void drawEverything() {
