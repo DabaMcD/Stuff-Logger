@@ -20,14 +20,14 @@ public class UserActivity extends AppCompatActivity {
         String[] nicknames = new String[] {"e.g. Bobby Joe", "e.g. Zigzag Dude", "e.g. Ricky", "Nickname goes here", "e.g. Sandy Sanders", "e.g. Carl", "Nick's my nickname, DUH"};
         name.setHint(nicknames[(int) (Math.random() * nicknames.length)]);
 
-        name.setWidth(Constants.SCREEN_WIDTH / 2);
-        name.setX(Constants.SCREEN_WIDTH / 4);
-        name.setHeight(Constants.SCREEN_HEIGHT / 10);
-        name.setY(Constants.SCREEN_HEIGHT / 4);
-
-        createUser.setWidth(Constants.SCREEN_WIDTH / 4);
-        createUser.setX((float) ((Constants.SCREEN_WIDTH / 4) * 1.5));
-        createUser.setHeight(Constants.SCREEN_HEIGHT / 7);
-        createUser.setY((Constants.SCREEN_HEIGHT / 4) * 3);
+//        name.setWidth(Constants.SCREEN_WIDTH / 2);
+//        name.setX(Constants.SCREEN_WIDTH / 4);
+//        name.setHeight(Constants.SCREEN_HEIGHT / 10);
+//        name.setY(Constants.SCREEN_HEIGHT / 4);
+//
+//        createUser.setWidth((int) ((Constants.SCREEN_WIDTH / 4) * 1.5));
+//        createUser.setX(Constants.SCREEN_WIDTH / 4);
+//        createUser.setHeight(Constants.SCREEN_HEIGHT / 7);
+//        createUser.setY((Constants.SCREEN_HEIGHT / 4) * 3);
     }
 }
