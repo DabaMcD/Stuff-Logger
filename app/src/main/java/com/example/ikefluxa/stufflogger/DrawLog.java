@@ -15,6 +15,7 @@ import android.view.View;
 public class DrawLog extends View {
     public int rowsPerPage = 10;
     public Paint paint = new Paint();
+    public User user;
     public DrawLog(Context context) {
         super(context);
     }
@@ -29,8 +30,12 @@ public class DrawLog extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
+        canvas.drawRect(-1, -1, Constants.SCREEN_WIDTH + 2, Constants.SCREEN_HEIGHT / 10, paint);
+        user = Constants.users.get(Constants.currentUserIndex);
+        rowsPerPage = Math.max(10, user.logLines.size() + 2);
         int lineGap = Constants.SCREEN_HEIGHT / rowsPerPage;
-        for(int i = 0; i < Constants.SCREEN_HEIGHT - lineGap; i += lineGap) {
+        for(int i = lineGap / 2; i <= Constants.SCREEN_HEIGHT; i += lineGap) {
             paint.setColor(Color.LTGRAY);
             paint.setStrokeWidth(Constants.SCREEN_HEIGHT / 200);
             canvas.drawLine(0, i, Constants.SCREEN_WIDTH, i, paint);
