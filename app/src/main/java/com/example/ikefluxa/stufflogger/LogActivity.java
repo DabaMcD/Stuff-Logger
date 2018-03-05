@@ -10,15 +10,16 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 public class LogActivity extends AppCompatActivity {
+    DrawLog drawLog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
-    }
 
-    private void drawEverything() {
+        drawLog = findViewById(R.id.drawLog);
 
+        drawLog.draw();
     }
 
     private void saveFile(String filename, String text) {

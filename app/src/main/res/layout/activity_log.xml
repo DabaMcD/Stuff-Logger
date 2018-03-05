@@ -6,4 +6,9 @@
     android:layout_height="match_parent"
     tools:context="com.example.ikefluxa.stufflogger.LogActivity">
 
+    <com.example.ikefluxa.stufflogger.DrawLog
+        android:id="@+id/drawLog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </android.support.constraint.ConstraintLayout>
