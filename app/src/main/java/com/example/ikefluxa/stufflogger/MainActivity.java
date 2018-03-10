@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -45,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         Constants.SCREEN_WIDTH = displayMetrics.widthPixels;
         Constants.SCREEN_HEIGHT = displayMetrics.heightPixels;
+
+        // Define optimum colors
+        for (int i = 0; i < 10; i++) {
+            float[] bob = new float[] {0.1f * 1, 0.5f, 1.0f};
+            Constants.colors.add(ColorUtils.HSLToColor(bob));
+        }
 
         // TODO: test the permissions thing on pa's phone. First try the least probable thing to work,
         // TODO: so we don't blow our permissions privileges.

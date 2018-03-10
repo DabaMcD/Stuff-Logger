@@ -1,6 +1,10 @@
 package com.example.ikefluxa.stufflogger;
 
+import android.graphics.Color;
+import android.support.v4.graphics.ColorUtils;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Ike&Fluxa on 2/22/2018.

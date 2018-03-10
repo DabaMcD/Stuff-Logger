@@ -1,5 +1,7 @@
 package com.example.ikefluxa.stufflogger;
 
+import android.graphics.Color;
+
 import java.util.ArrayList;
 
 /**
@@ -9,13 +11,14 @@ import java.util.ArrayList;
 public class User {
     public String name;
     public ArrayList<Subject> subjects = new ArrayList<>();
-    public int color = Constants.colors.get(Math.floor(Math.random() * Constants.colors.size()));
+    public int color = Constants.colors.get((int) Math.floor(Math.random() * Constants.colors.size()));
 
     // Log info
     ArrayList<LogLine> logLines = new ArrayList<>();
 
     public User(String name) {
         this.name = name;
+        this.color = Color.RED;
         prank();
     }
 
@@ -38,7 +41,7 @@ public class User {
         prank();
     }
 
-    public void prank() {
+    private void prank() {
         if (this.name.toUpperCase().equals("CORDY") || this.name.toUpperCase().equals("CORDI") || this.name.toUpperCase().equals("CORDELIA") || this.name.toUpperCase().equals("COKEY") || this.name.toUpperCase().equals("COKESTER") || this.name.toUpperCase().equals("CORD")) {
             this.subjects.add(new Subject("Cut paper"));
             this.subjects.add(new Subject("Watch Daba play video games"));
