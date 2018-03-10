@@ -48,12 +48,6 @@ public class MainActivity extends AppCompatActivity {
         Constants.SCREEN_WIDTH = displayMetrics.widthPixels;
         Constants.SCREEN_HEIGHT = displayMetrics.heightPixels;
 
-        // Define optimum colors
-        for (int i = 0; i < 10; i++) {
-            float[] bob = new float[] {0.1f * 1, 0.5f, 1.0f};
-            Constants.colors.add(ColorUtils.HSLToColor(bob));
-        }
-
         // TODO: test the permissions thing on pa's phone. First try the least probable thing to work,
         // TODO: so we don't blow our permissions privileges.
         // TODO: first try it without the below. if that doesn't ask for permissions
@@ -63,6 +57,32 @@ public class MainActivity extends AppCompatActivity {
 
         // Draw everything (kinda obvious)
         drawEverything();
+    }
+
+    public String hsvToRgb(float hue, float saturation, float value) {
+
+        int h = (int)(hue * 6);
+        float f = hue * 6 - h;
+        float p = value * (1 - saturation);
+        float q = value * (1 - f * saturation);
+        float t = value * (1 - (1 - f) * saturation);
+
+        switch (h) {
+            case 0: return rgbToString(value, t, p);
+            case 1: return rgbToString(q, value, p);
+            case 2: return rgbToString(p, value, t);
+            case 3: return rgbToString(p, q, value);
+            case 4: return rgbToString(t, p, value);
+            case 5: return rgbToString(value, p, q);
+            default: throw new RuntimeException("Something went wrong when converting from HSV to RGB. Input was " + hue + ", " + saturation + ", " + value);
+        }
+    }
+
+    public String rgbToString(float r, float g, float b) {
+        String rs = Integer.toHexString((int)(r * 256));
+        String gs = Integer.toHexString((int)(g * 256));
+        String bs = Integer.toHexString((int)(b * 256));
+        return rs + gs + bs;
     }
 
     public void newUserClick(View target) {

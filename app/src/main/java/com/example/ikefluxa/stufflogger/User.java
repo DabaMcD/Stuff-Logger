@@ -11,20 +11,22 @@ import java.util.ArrayList;
 public class User {
     public String name;
     public ArrayList<Subject> subjects = new ArrayList<>();
-    public int color = Constants.colors.get((int) Math.floor(Math.random() * Constants.colors.size()));
+    public int color;
 
     // Log info
     ArrayList<LogLine> logLines = new ArrayList<>();
 
     public User(String name) {
         this.name = name;
-        this.color = Color.RED;
+//        color = Constants.colors.get((int) Math.floor(Math.random() * Constants.colors.size()));
+        color = Constants.colors.get(5);
         prank();
     }
 
     public User(String name, ArrayList<Subject> subjects) {
         this.name = name;
         this.subjects = subjects;
+        color = Constants.colors.get((int) Math.floor(Math.random() * Constants.colors.size()));
         prank();
     }
 

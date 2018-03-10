@@ -37,12 +37,15 @@ public class DrawLog extends View {
         // Shorten user name
         user = Constants.users.get(Constants.currentUserIndex);
 
+        // Draw top bar shadow
+        paint.setColor(Color.argb(20, 0, 0, 0));
+        canvas.drawRect(-1, -1, Constants.SCREEN_WIDTH + 1, (Constants.SCREEN_HEIGHT / 7) + (Constants.SCREEN_HEIGHT / 180), paint);
+
         // Draw top bar
         paint.setColor(user.color);
-        canvas.drawRect(-1, -1, Constants.SCREEN_WIDTH + 2, Constants.SCREEN_HEIGHT / 7, paint);
+        canvas.drawRect(-1, -1, Constants.SCREEN_WIDTH + 1, Constants.SCREEN_HEIGHT / 7, paint);
 
         // Draw name on top bar
-        paint.setColor(Color.WHITE);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         // Specialize text size
@@ -52,6 +55,11 @@ public class DrawLog extends View {
             paint.setTextSize(paint.getTextSize() - 1);
             paint.getTextBounds(user.name, 0, user.name.length(), tBounds);
         }
+        // Shadow text
+        paint.setColor(Color.argb(20, 0, 0, 0));
+        canvas.drawText(user.name, Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 14 + Constants.SCREEN_HEIGHT / 120 + paint.getTextSize() / 3, paint);
+        // Real text
+        paint.setColor(Color.WHITE);
         canvas.drawText(user.name, Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 14 + paint.getTextSize() / 3, paint);
 
         // Draw lines representing a 1D grid
