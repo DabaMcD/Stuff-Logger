@@ -18,8 +18,7 @@ public class User {
 
     public User(String name) {
         this.name = name;
-//        color = Constants.colors.get((int) Math.floor(Math.random() * Constants.colors.size()));
-        color = Constants.colors.get(5);
+        color = Constants.colors.get((int) Math.floor(Math.random() * Constants.colors.size()));
         prank();
     }
 
