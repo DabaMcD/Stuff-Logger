@@ -1,8 +1,6 @@
 package com.example.ikefluxa.stufflogger;
 
 import android.graphics.Color;
-
-import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -27,13 +25,7 @@ public class Constants {
             Color.rgb(255, 255, 0), // Yellow
             Color.rgb(180, 80, 0) // Brown
     ));
-    public static String getMonthForInt(int num) {
-        String month = "wrong";
-        DateFormatSymbols dfs = new DateFormatSymbols();
-        String[] months = dfs.getMonths();
-        if (num >= 0 && num <= 11) {
-            month = months[num];
-        }
-        return month;
+    public static double getDist(double x1, double y1, double x2, double y2) {
+        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 }

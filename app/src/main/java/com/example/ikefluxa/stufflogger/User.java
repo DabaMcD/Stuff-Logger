@@ -1,7 +1,5 @@
 package com.example.ikefluxa.stufflogger;
 
-import android.graphics.Color;
-
 import java.util.ArrayList;
 
 /**

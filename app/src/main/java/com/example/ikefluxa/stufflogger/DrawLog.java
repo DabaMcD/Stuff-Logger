@@ -5,16 +5,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Calendar;
 
 /**
@@ -89,6 +85,11 @@ public class DrawLog extends View {
         date = weekday + ", " + monthday + ", " + year;
         paint.setTextSize((float) (lineGap * 0.8));
         canvas.drawText(weekday, Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 3, paint);
+
+        // test
+        paint.setColor(Color.RED);
+        new RectShadow(Constants.SCREEN_WIDTH / 4, Constants.SCREEN_HEIGHT / 4, Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH / 4, Constants.SCREEN_HEIGHT - Constants.SCREEN_HEIGHT / 4, paint, canvas, 30, 0, 0, 255).draw();
+
         super.onDraw(canvas);
     }
 
