@@ -22,10 +22,16 @@ public class DrawLog extends View {
     public Paint paint = new Paint();
     public User user;
     Rect tBounds = new Rect();
+
+    // Date stuff
     String weekday; // First three letters
     String monthday; // First three letters
     int year;
     String date;
+
+    // Shadowy stuff
+    RectShadow topBar = new RectShadow(-100, -1, Constants.SCREEN_WIDTH + 100, Constants.SCREEN_HEIGHT / 10, Shadows.standardShadowDiam, 0, 0, Shadows.standardShadowDarkness);
+
     public DrawLog(Context context) {
         super(context);
     }
@@ -43,13 +49,9 @@ public class DrawLog extends View {
         // Shorten user name
         user = Constants.users.get(Constants.currentUserIndex);
 
-        // Draw top bar shadow
-        paint.setColor(Color.argb(20, 0, 0, 0));
-        canvas.drawRect(-1, -1, Constants.SCREEN_WIDTH + 1, (Constants.SCREEN_HEIGHT / 7) + (Constants.SCREEN_HEIGHT / 180), paint);
-
         // Draw top bar
         paint.setColor(user.color);
-        canvas.drawRect(-1, -1, Constants.SCREEN_WIDTH + 1, Constants.SCREEN_HEIGHT / 10, paint);
+        topBar.draw(canvas, paint);
 
         // Draw name on top bar
         paint.setTextAlign(Paint.Align.CENTER);
@@ -71,7 +73,7 @@ public class DrawLog extends View {
         // Draw lines representing a 1D grid
         rowsPerPage = Math.max(10, user.logLines.size() + 2);
         int lineGap = Constants.SCREEN_HEIGHT / rowsPerPage;
-        for(int i = (int) (Constants.SCREEN_HEIGHT / 7 + lineGap * 1.5); i <= Constants.SCREEN_HEIGHT; i += lineGap) {
+        for(int i = (int) (Constants.SCREEN_HEIGHT / 10 + lineGap * 1.5); i <= Constants.SCREEN_HEIGHT; i += lineGap) {
             paint.setColor(Color.LTGRAY);
             paint.setStrokeWidth(Constants.SCREEN_HEIGHT / 200);
             canvas.drawLine(0, i, Constants.SCREEN_WIDTH, i, paint);
@@ -85,11 +87,6 @@ public class DrawLog extends View {
         date = weekday + ", " + monthday + ", " + year;
         paint.setTextSize((float) (lineGap * 0.8));
         canvas.drawText(weekday, Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 3, paint);
-
-        // test
-        paint.setColor(Color.RED);
-        new RectShadow(Constants.SCREEN_WIDTH / 4, Constants.SCREEN_HEIGHT / 4, Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH / 4, Constants.SCREEN_HEIGHT - Constants.SCREEN_HEIGHT / 4, paint, canvas, 30, 0, 0, 255).draw();
-
         super.onDraw(canvas);
     }
 

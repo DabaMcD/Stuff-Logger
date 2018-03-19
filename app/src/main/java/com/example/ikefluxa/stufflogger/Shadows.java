@@ -11,14 +11,14 @@ import java.util.ArrayList;
  */
 
 public class Shadows {
-    Paint paint;
     int origcolor;
     ArrayList<Point> points = new ArrayList<>();
-    Canvas canvas;
     float shadowDiam;
     float shadowXshift;
     float shadowYshift;
     float shadowDarkness;
+    static float standardShadowDiam = 20;
+    static float standardShadowDarkness = 1;
 
     public void eraseAndAddAndEliminatePoints(float shapeCenterX, float shapeCenterY) {
         // Reset array of points
