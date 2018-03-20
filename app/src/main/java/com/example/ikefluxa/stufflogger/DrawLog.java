@@ -30,7 +30,8 @@ public class DrawLog extends View {
     String date;
 
     // Shadowy stuff
-    RectShadow topBar = new RectShadow(-100, -1, Constants.SCREEN_WIDTH + 100, Constants.SCREEN_HEIGHT / 10, Shadows.standardShadowDiam, 0, 0, Shadows.standardShadowDarkness);
+    RectShadow topBar = new RectShadow();
+    TextShadow topBarText = new TextShadow();
 
     public DrawLog(Context context) {
         super(context);
@@ -51,24 +52,20 @@ public class DrawLog extends View {
 
         // Draw top bar
         paint.setColor(user.color);
-        topBar.draw(canvas, paint);
+        topBar.draw(-100, -1, Constants.SCREEN_WIDTH + 100, Constants.SCREEN_HEIGHT / 10, canvas, paint);
 
         // Draw name on top bar
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         // Specialize text size
-        paint.setTextSize(Constants.SCREEN_HEIGHT / 14);
+        paint.setTextSize(Constants.SCREEN_HEIGHT / 16);
         paint.getTextBounds(user.name, 0, user.name.length(), tBounds);
         while(tBounds.width() > (Constants.SCREEN_WIDTH / 2) * 1.7) {
             paint.setTextSize(paint.getTextSize() - 1);
             paint.getTextBounds(user.name, 0, user.name.length(), tBounds);
         }
-        // Shadow text
-        paint.setColor(Color.argb(20, 0, 0, 0));
-        canvas.drawText(user.name, Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 20 + Constants.SCREEN_HEIGHT / 120 + paint.getTextSize() / 3, paint);
-        // Real text
-        paint.setColor(Color.WHITE);
-        canvas.drawText(user.name, Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 20 + paint.getTextSize() / 3, paint);
+        paint.setColor(Color.BLACK);
+        topBarText.draw(user.name, Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 20 + paint.getTextSize() / 3, canvas, paint);
 
         // Draw lines representing a 1D grid
         rowsPerPage = Math.max(10, user.logLines.size() + 2);

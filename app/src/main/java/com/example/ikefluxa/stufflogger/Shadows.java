@@ -1,9 +1,6 @@
 package com.example.ikefluxa.stufflogger;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.Point;
-
 import java.util.ArrayList;
 
 /**
@@ -17,8 +14,10 @@ public class Shadows {
     float shadowXshift;
     float shadowYshift;
     float shadowDarkness;
-    static float standardShadowDiam = 20;
-    static float standardShadowDarkness = 1;
+    static float standardShadowDiam = 13;
+    static float standardShadowXshift = 3;
+    static float standardShadowYshift = 3;
+    static int standardShadowDarkness = 2;
 
     public void eraseAndAddAndEliminatePoints(float shapeCenterX, float shapeCenterY) {
         // Reset array of points
