@@ -27,6 +27,7 @@ public class DrawLog extends View {
     int recordLineWidth;
     int longestLoglineIndex = -1;
     int leftLimit;
+    int lineGap;
 
     // Date stuff
     String weekday; // First three letters
@@ -83,8 +84,28 @@ public class DrawLog extends View {
 
         // Draw lines representing a 1D grid
         rowsPerPage = Math.max(10, user.logLines.size() + 2);
-        int lineGap = Constants.SCREEN_HEIGHT / rowsPerPage;
+        lineGap = Constants.SCREEN_HEIGHT / rowsPerPage;
         // Tweak lineGap
+        tweakLinegap();
+        // Draw lines
+        for(int i = (int) (Constants.SCREEN_HEIGHT / 10 + lineGap * 1.5); i <= Constants.SCREEN_HEIGHT; i += lineGap) {
+            paint.setColor(Color.LTGRAY);
+            paint.setStrokeWidth(Constants.SCREEN_HEIGHT / 200);
+            canvas.drawLine(0, i, Constants.SCREEN_WIDTH, i, paint);
+        }
+
+        leftLimit = lineGap / 2;
+
+        // Draw date at top of log
+        paint.setTextSize((float) (lineGap * 0.8));
+        paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
+        paint.setColor(Color.DKGRAY);
+        paint.setTextAlign(Paint.Align.LEFT);
+        canvas.drawText(date, leftLimit, (float) (Constants.SCREEN_HEIGHT / 10 + lineGap) + paint.getTextSize() / 3, paint);
+        super.onDraw(canvas);
+    }
+
+    private void tweakLinegap() {
         paint.setTextSize((float) (lineGap * 0.8));
         paint.getTextBounds(date, 0, date.length(), dateBounds);
         recordLineWidth = dateBounds.width();
@@ -96,7 +117,7 @@ public class DrawLog extends View {
             String logLineTime = user.logLines.get(i).startTime.toString();
             paint.getTextBounds(logLineTime + "W:W", 0, logLineTime.length() + 3, logLineBounds);
             thisLogLineLength += logLineBounds.width();
-            
+
             if(thisLogLineLength > recordLineWidth) { // If it breaks the line length record
                 longestLoglineIndex = i;
                 recordLineWidth = (int) thisLogLineLength;
@@ -121,22 +142,6 @@ public class DrawLog extends View {
                 recordLineWidth = (int) thisLogLineLength;
             }
         }
-        // Draw lines
-        for(int i = (int) (Constants.SCREEN_HEIGHT / 10 + lineGap * 1.5); i <= Constants.SCREEN_HEIGHT; i += lineGap) {
-            paint.setColor(Color.LTGRAY);
-            paint.setStrokeWidth(Constants.SCREEN_HEIGHT / 200);
-            canvas.drawLine(0, i, Constants.SCREEN_WIDTH, i, paint);
-        }
-
-        leftLimit = lineGap / 2;
-
-        // Draw date at top of log
-        paint.setTextSize((float) (lineGap * 0.8));
-        paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
-        paint.setColor(Color.DKGRAY);
-        paint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText(date, leftLimit, Constants.SCREEN_HEIGHT / 3, paint);
-        super.onDraw(canvas);
     }
 
     private String weekdayFromInt(int day) {
