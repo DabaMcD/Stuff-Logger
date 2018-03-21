@@ -22,10 +22,16 @@ public class DrawLog extends View {
     public Paint paint = new Paint();
     public User user;
     Rect tBounds = new Rect();
+    Rect dateBounds = new Rect();
+    Rect logLineBounds = new Rect();
+    int recordLineWidth;
+    int longestLoglineIndex = -1;
+    int leftLimit;
 
     // Date stuff
     String weekday; // First three letters
-    String monthday; // First three letters
+    String month; // First three letters
+    int day;
     int year;
     String date;
 
@@ -57,7 +63,7 @@ public class DrawLog extends View {
         // Draw name on top bar
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        // Specialize text size
+        // Tweak text size
         paint.setTextSize(Constants.SCREEN_HEIGHT / 16);
         paint.getTextBounds(user.name, 0, user.name.length(), tBounds);
         while(tBounds.width() > (Constants.SCREEN_WIDTH / 2) * 1.7) {
@@ -67,23 +73,69 @@ public class DrawLog extends View {
         paint.setColor(Color.BLACK);
         topBarText.draw(user.name, Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 20 + paint.getTextSize() / 3, canvas, paint);
 
+        // Set date vals
+        Calendar cal = Calendar.getInstance();
+        month = new SimpleDateFormat("MMM").format(cal.getTime());
+        day = cal.get(cal.DAY_OF_MONTH);
+        weekday = weekdayFromInt(cal.get(cal.DAY_OF_WEEK));
+        year = cal.get(cal.YEAR);
+        date = weekday + ", " + month + " " + day + ", " + year;
+
         // Draw lines representing a 1D grid
         rowsPerPage = Math.max(10, user.logLines.size() + 2);
         int lineGap = Constants.SCREEN_HEIGHT / rowsPerPage;
+        // Tweak lineGap
+        paint.setTextSize((float) (lineGap * 0.8));
+        paint.getTextBounds(date, 0, date.length(), dateBounds);
+        recordLineWidth = dateBounds.width();
+        for(int i = 0; i < user.logLines.size(); i ++) {
+            // Get the length of a log line
+            String logLineSubjectName = user.logLines.get(i).subject.name;
+            paint.getTextBounds(logLineSubjectName, 0, logLineSubjectName.length(), logLineBounds);
+            float thisLogLineLength = logLineBounds.width();
+            String logLineTime = user.logLines.get(i).startTime.toString();
+            paint.getTextBounds(logLineTime + "W:W", 0, logLineTime.length() + 3, logLineBounds);
+            thisLogLineLength += logLineBounds.width();
+            
+            if(thisLogLineLength > recordLineWidth) { // If it breaks the line length record
+                longestLoglineIndex = i;
+                recordLineWidth = (int) thisLogLineLength;
+            }
+        }
+        while(recordLineWidth > Constants.SCREEN_WIDTH - (Constants.SCREEN_WIDTH / 15)) {
+            lineGap --;
+            paint.setTextSize((float) (lineGap * 0.8));
+
+            if(longestLoglineIndex == -1) {
+                paint.setTextSize((float) (lineGap * 0.8));
+                paint.getTextBounds(date, 0, date.length(), dateBounds);
+                recordLineWidth = dateBounds.width();
+            } else {
+                String logLineSubjectName = user.logLines.get(longestLoglineIndex).subject.name;
+                paint.getTextBounds(logLineSubjectName, 0, logLineSubjectName.length(), logLineBounds);
+                float thisLogLineLength = logLineBounds.width();
+                String logLineTime = user.logLines.get(longestLoglineIndex).startTime.toString();
+                paint.getTextBounds(logLineTime + "W:W", 0, logLineTime.length() + 3, logLineBounds);
+                thisLogLineLength += logLineBounds.width();
+
+                recordLineWidth = (int) thisLogLineLength;
+            }
+        }
+        // Draw lines
         for(int i = (int) (Constants.SCREEN_HEIGHT / 10 + lineGap * 1.5); i <= Constants.SCREEN_HEIGHT; i += lineGap) {
             paint.setColor(Color.LTGRAY);
             paint.setStrokeWidth(Constants.SCREEN_HEIGHT / 200);
             canvas.drawLine(0, i, Constants.SCREEN_WIDTH, i, paint);
         }
 
+        leftLimit = lineGap / 2;
+
         // Draw date at top of log
-        Calendar cal = Calendar.getInstance();
-        monthday = new SimpleDateFormat("MMM DD").format(cal.getTime());
-        weekday = weekdayFromInt(cal.get(cal.DAY_OF_WEEK));
-        year = cal.get(cal.YEAR);
-        date = weekday + ", " + monthday + ", " + year;
         paint.setTextSize((float) (lineGap * 0.8));
-        canvas.drawText(weekday, Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 3, paint);
+        paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
+        paint.setColor(Color.DKGRAY);
+        paint.setTextAlign(Paint.Align.LEFT);
+        canvas.drawText(date, leftLimit, Constants.SCREEN_HEIGHT / 3, paint);
         super.onDraw(canvas);
     }
 
