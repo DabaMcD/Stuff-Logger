@@ -66,11 +66,7 @@ public class DrawLog extends View {
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         // Tweak text size
         paint.setTextSize(Constants.SCREEN_HEIGHT / 16);
-        paint.getTextBounds(user.name, 0, user.name.length(), tBounds);
-        while(tBounds.width() > (Constants.SCREEN_WIDTH / 2) * 1.7) {
-            paint.setTextSize(paint.getTextSize() - 1);
-            paint.getTextBounds(user.name, 0, user.name.length(), tBounds);
-        }
+        tweakTopBarTextSize();
         paint.setColor(Color.BLACK);
         topBarText.draw(user.name, Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 20 + paint.getTextSize() / 3, canvas, paint);
 
@@ -102,7 +98,21 @@ public class DrawLog extends View {
         paint.setColor(Color.DKGRAY);
         paint.setTextAlign(Paint.Align.LEFT);
         canvas.drawText(date, leftLimit, (float) (Constants.SCREEN_HEIGHT / 10 + lineGap) + paint.getTextSize() / 3, paint);
+
+        // Draw loglines
+        for(int i = 0; i < user.logLines.size(); i ++) {
+            double txtYpos = (Constants.SCREEN_HEIGHT / 10 + lineGap * 1.5) + (lineGap * (i + 1)) + (paint.getTextSize() / 3);
+
+        }
         super.onDraw(canvas);
+    }
+
+    private void tweakTopBarTextSize() {
+        paint.getTextBounds(user.name, 0, user.name.length(), tBounds);
+        while(tBounds.width() > (Constants.SCREEN_WIDTH / 2) * 1.7) {
+            paint.setTextSize(paint.getTextSize() - 1);
+            paint.getTextBounds(user.name, 0, user.name.length(), tBounds);
+        }
     }
 
     private void tweakLinegap() {

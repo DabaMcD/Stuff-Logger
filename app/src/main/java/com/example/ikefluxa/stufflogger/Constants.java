@@ -3,6 +3,7 @@ package com.example.ikefluxa.stufflogger;
 import android.graphics.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 
 /**
  * Created by Ike&Fluxa on 2/22/2018.
@@ -27,5 +28,14 @@ public class Constants {
     ));
     public static double getDist(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+    }
+    public static int getHour() {
+        return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+    }
+    public static int getMinute() {
+        return Calendar.getInstance().get(Calendar.MINUTE);
+    }
+    public static int getSecond() {
+        return Calendar.getInstance().get(Calendar.SECOND);
     }
 }
