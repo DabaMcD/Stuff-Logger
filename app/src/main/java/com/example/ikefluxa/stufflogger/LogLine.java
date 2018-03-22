@@ -10,7 +10,7 @@ public class LogLine {
     public Subject subject;
 
     public LogLine(MyTime startTime, Subject subject) {
-        startTime = startTime;
+        this.startTime = startTime;
         this.subject = subject;
     }
 }

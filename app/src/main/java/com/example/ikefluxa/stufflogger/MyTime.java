@@ -13,4 +13,15 @@ public class MyTime {
         this.minute = minute;
         this.second = second;
     }
+    public static String getDadTime(MyTime time) {
+        String result = "";
+        if(Math.round(time.minute / 6) * 6 >= 10) {
+            result += String.valueOf(time.hour + 1);
+            result += "0";
+        } else {
+            result += String.valueOf(time.hour);
+            result += Math.round(time.minute / 6) * 6;
+        }
+        return result;
+    }
 }
