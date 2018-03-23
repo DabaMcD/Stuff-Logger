@@ -15,12 +15,18 @@ public class MyTime {
     }
     public static String getDadTime(MyTime time) {
         String result = "";
-        if(Math.round(time.minute / 6) * 6 >= 10) {
+        if(Math.round((double) time.minute / (double) 6) >= 10) {
+            if(String.valueOf(time.hour + 1).length() <= 1) {
+                result += "0";
+            }
             result += String.valueOf(time.hour + 1);
             result += "0";
         } else {
+            if(String.valueOf(time.hour).length() <= 1) {
+                result += "0";
+            }
             result += String.valueOf(time.hour);
-            result += Math.round(time.minute / 6) * 6;
+            result += Math.round((double) time.minute / (double) 6);
         }
         return result;
     }

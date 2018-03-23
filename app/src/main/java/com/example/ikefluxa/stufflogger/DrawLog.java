@@ -150,9 +150,11 @@ public class DrawLog extends View {
         while(recordLineWidth > Constants.SCREEN_WIDTH) {
             lineGap -= 2;
             paint.setTextSize((float) (lineGap * 0.8));
+            leftLimit = lineGap / 2;
 
             if(longestLoglineIndex == -1) {
                 paint.setTextSize((float) (lineGap * 0.8));
+                leftLimit = lineGap / 2;
                 paint.getTextBounds(date, 0, date.length(), dateBounds);
                 recordLineWidth = dateBounds.width() + leftLimit;
             } else {
