@@ -19,9 +19,9 @@ public class User {
         this.name = name;
         color = Constants.colors.get((int) Math.floor(Math.random() * Constants.colors.size()));
         // Delete the below later
-        logLines.add(new LogLine(new MyTime(Constants.getHour(), Constants.getMinute(), Constants.getSecond()), new Subject("Dwadling")));
-        logLines.add(new LogLine(new MyTime(Constants.getHour(), Constants.getMinute() + 1, Constants.getSecond()), new Subject("Doodle")));
-        logLines.add(new LogLine(new MyTime(Constants.getHour(), Constants.getMinute() + 3, Constants.getSecond()), new Subject("Dwadle some more.................................... CAN YOU SEE ME?")));
+//        logLines.add(new LogLine(new MyTime(Constants.getHour(), Constants.getMinute(), Constants.getSecond()), new Subject("Dwadling")));
+//        logLines.add(new LogLine(new MyTime(Constants.getHour(), Constants.getMinute() + 1, Constants.getSecond()), new Subject("Doodle")));
+//        logLines.add(new LogLine(new MyTime(Constants.getHour(), Constants.getMinute() + 3, Constants.getSecond()), new Subject("Dwadle some more.................................... CAN YOU SEE ME?")));
         prank();
     }
 
