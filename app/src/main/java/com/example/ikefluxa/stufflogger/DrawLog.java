@@ -117,6 +117,10 @@ public class DrawLog extends View {
             canvas.drawText(String.valueOf(MyTime.getDadTime(user.logLines.get(i).startTime).charAt(1)), leftLimit + eightBounds.width(), txtYpos, paint);
             canvas.drawText(String.valueOf(MyTime.getDadTime(user.logLines.get(i).startTime).charAt(2)), leftLimit + eightBounds.width() * 2, txtYpos, paint);
         }
+
+        // Add logline button
+
+
         super.onDraw(canvas);
     }
 
@@ -133,6 +137,7 @@ public class DrawLog extends View {
         paint.getTextBounds(date, 0, date.length(), dateBounds);
         paint.getTextBounds("8", 0, 1, eightBounds);
         paint.getTextBounds("N:N", 0, 3, dashBounds);
+        paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
         recordLineWidth = dateBounds.width();
         for(int i = 0; i < user.logLines.size(); i ++) {
             // Get the length of a log line
@@ -148,7 +153,7 @@ public class DrawLog extends View {
             }
         }
         while(recordLineWidth > Constants.SCREEN_WIDTH) {
-            lineGap -= 2;
+            lineGap -= 0.1;
             paint.setTextSize((float) (lineGap * 0.8));
             leftLimit = lineGap / 2;
 
@@ -162,7 +167,7 @@ public class DrawLog extends View {
 
                 // logLineNameBounds = bounds of subject name
                 paint.getTextBounds(logLineSubjectName, 0, logLineSubjectName.length(), logLineNameBounds);
-                paint.getTextBounds("N:N", 0, 3, logLineBounds);
+                paint.getTextBounds("N:N", 0, 3, dashBounds);
                 paint.getTextBounds("8", 0, 1, eightBounds);
                 float thisLogLineLength = leftLimit * 2 + logLineNameBounds.width() + dashBounds.width() + eightBounds.width() * 3;
 
