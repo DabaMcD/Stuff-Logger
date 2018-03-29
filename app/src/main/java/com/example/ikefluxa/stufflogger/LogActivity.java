@@ -1,9 +1,13 @@
 package com.example.ikefluxa.stufflogger;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.FileInputStream;
@@ -11,15 +15,22 @@ import java.io.FileOutputStream;
 
 public class LogActivity extends AppCompatActivity {
     DrawLog drawLog;
-
+    ConstraintLayout layoutBackgound;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
 
         drawLog = findViewById(R.id.drawLog);
+        // Specify var name layoutBackground
 
         drawLog.draw();
+
+        // Set up click litener
+    }
+
+    public void newLogline() {
+
     }
 
     private void saveFile(String filename, String text) {

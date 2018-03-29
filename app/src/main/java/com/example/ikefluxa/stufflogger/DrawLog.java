@@ -92,7 +92,7 @@ public class DrawLog extends View {
         tweakLinegap();
         // Draw lines
         paint.setColor(Color.LTGRAY);
-        paint.setStrokeWidth((Constants.SCREEN_HEIGHT / 20) / lineGap);
+        paint.setStrokeWidth(Math.max(lineGap / 20, 2));
         for(int i = (int) (Constants.SCREEN_HEIGHT / 10 + lineGap * 1.5); i <= Constants.SCREEN_HEIGHT; i += lineGap) {
             canvas.drawLine(0, i, Constants.SCREEN_WIDTH, i, paint);
         }
@@ -125,6 +125,7 @@ public class DrawLog extends View {
         paint.setColor(user.color);
         int buttonDistFromCorner = (int) (Constants.SCREEN_WIDTH / 6.5);
         loglineAdder.draw(Constants.SCREEN_WIDTH - buttonDistFromCorner, Constants.SCREEN_HEIGHT - buttonDistFromCorner, buttonDistFromCorner / 2, canvas, paint);
+        // Draw '+' sign
         paint.setTextSize(buttonDistFromCorner / 2 * 3);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
@@ -174,7 +175,7 @@ public class DrawLog extends View {
                 paint.setTextSize((float) (lineGap * 0.8));
                 leftLimit = lineGap / 2;
                 paint.getTextBounds(date, 0, date.length(), dateBounds);
-                recordLineWidth = dateBounds.width() + leftLimit;
+                recordLineWidth = (int) (dateBounds.width() + leftLimit * 2.5);
             } else {
                 String logLineSubjectName = user.logLines.get(longestLoglineIndex).subject.name;
 
@@ -182,7 +183,7 @@ public class DrawLog extends View {
                 paint.getTextBounds(logLineSubjectName, 0, logLineSubjectName.length(), logLineNameBounds);
                 paint.getTextBounds("N:N", 0, 3, dashBounds);
                 paint.getTextBounds("8", 0, 1, eightBounds);
-                float thisLogLineLength = leftLimit * 2 + logLineNameBounds.width() + dashBounds.width() + eightBounds.width() * 3;
+                int thisLogLineLength = (int) (leftLimit * 2.5 + logLineNameBounds.width() + dashBounds.width() + eightBounds.width() * 3);
 
                 recordLineWidth = (int) thisLogLineLength;
             }
