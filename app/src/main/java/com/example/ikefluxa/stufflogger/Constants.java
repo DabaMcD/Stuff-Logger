@@ -38,4 +38,9 @@ public class Constants {
     public static int getSecond() {
         return Calendar.getInstance().get(Calendar.SECOND);
     }
+    public static int inverseColor(int color) {
+        return Color.rgb(255-Color.red(color),
+                255-Color.green(color),
+                255-Color.blue(color));
+    }
 }

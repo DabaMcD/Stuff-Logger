@@ -43,9 +43,6 @@ public class DrawLog extends View {
     // Shadowy stuff
     RectShadow topBar = new RectShadow();
     TextShadow topBarText = new TextShadow();
-    RectShadow loglineAdderPlus1 = new RectShadow();
-    RectShadow loglineAdderPlus2 = new RectShadow();
-    CircleShadow loglineAdder = new CircleShadow();
 
     public DrawLog(Context context) {
         super(context);
@@ -120,20 +117,6 @@ public class DrawLog extends View {
             canvas.drawText(String.valueOf(MyTime.getDadTime(user.logLines.get(i).startTime).charAt(1)), leftLimit + eightBounds.width(), txtYpos, paint);
             canvas.drawText(String.valueOf(MyTime.getDadTime(user.logLines.get(i).startTime).charAt(2)), leftLimit + eightBounds.width() * 2, txtYpos, paint);
         }
-
-        // Add logline button
-        paint.setColor(user.color);
-        int buttonDistFromCorner = (int) (Constants.SCREEN_WIDTH / 6.5);
-        loglineAdder.draw(Constants.SCREEN_WIDTH - buttonDistFromCorner, Constants.SCREEN_HEIGHT - buttonDistFromCorner, buttonDistFromCorner / 2, canvas, paint);
-        // Draw '+' sign
-        paint.setTextSize(buttonDistFromCorner / 2 * 3);
-        paint.setTextAlign(Paint.Align.CENTER);
-        paint.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        paint.setColor(Color.DKGRAY);
-        paint.setStrokeCap(Paint.Cap.ROUND);
-        loglineAdderPlus1.draw(Constants.SCREEN_WIDTH - buttonDistFromCorner - Constants.SCREEN_HEIGHT / 200, Constants.SCREEN_HEIGHT - buttonDistFromCorner - Constants.SCREEN_HEIGHT / 40, Constants.SCREEN_WIDTH - buttonDistFromCorner + Constants.SCREEN_HEIGHT / 200, Constants.SCREEN_HEIGHT - buttonDistFromCorner + Constants.SCREEN_HEIGHT / 40, canvas, paint);
-        loglineAdderPlus1.draw(Constants.SCREEN_WIDTH - buttonDistFromCorner - Constants.SCREEN_HEIGHT / 40, Constants.SCREEN_HEIGHT - buttonDistFromCorner - Constants.SCREEN_HEIGHT / 200, Constants.SCREEN_WIDTH - buttonDistFromCorner + Constants.SCREEN_HEIGHT / 40, Constants.SCREEN_HEIGHT - buttonDistFromCorner + Constants.SCREEN_HEIGHT / 200, canvas, paint);
-        canvas.drawRect(Constants.SCREEN_WIDTH - buttonDistFromCorner - Constants.SCREEN_HEIGHT / 200, Constants.SCREEN_HEIGHT - buttonDistFromCorner - Constants.SCREEN_HEIGHT / 40, Constants.SCREEN_WIDTH - buttonDistFromCorner + Constants.SCREEN_HEIGHT / 200, Constants.SCREEN_HEIGHT - buttonDistFromCorner + Constants.SCREEN_HEIGHT / 40, paint);
 
         super.onDraw(canvas);
     }

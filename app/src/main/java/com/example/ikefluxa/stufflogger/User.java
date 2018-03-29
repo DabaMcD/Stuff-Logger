@@ -42,13 +42,14 @@ public class User {
     }
 
     private void prank() {
-        if (this.name.toUpperCase().equals("CORDY") || this.name.toUpperCase().equals("CORDI") || this.name.toUpperCase().equals("CORDELIA") || this.name.toUpperCase().equals("COKEY") || this.name.toUpperCase().equals("COKESTER") || this.name.toUpperCase().equals("CORD")) {
+        if (this.name.toUpperCase().equals("CORDY") || this.name.toUpperCase().equals("CORDI") || this.name.toUpperCase().equals("CORDELIA") || this.name.toUpperCase().equals("COKEY") || this.name.toUpperCase().equals("COKESTER") || this.name.toUpperCase().equals("CORD") || this.name.toUpperCase().equals("CORDI N")) {
             this.subjects.add(new Subject("Cut paper"));
             this.subjects.add(new Subject("Watch Daba play video games"));
             this.subjects.add(new Subject("Give Daba back rub"));
             this.subjects.add(new Subject("Scrape knee on driveway"));
             this.subjects.add(new Subject("Get bee sting on nose"));
         }
+        this.name = "¿¡KrOrKeE!?";
     } // Delete later
 
     public void clearLog() {
