@@ -20,7 +20,7 @@ import java.io.FileOutputStream;
 public class LogActivity extends AppCompatActivity {
     DrawLog drawLog;
     NewLoglineButtonView newLoglineButton;
-    Boolean clicking = false;
+    Boolean clicking;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +34,8 @@ public class LogActivity extends AppCompatActivity {
 
         newLoglineButton.draw(false);
 
-//        newLogline();
+        clicking = false;
+
         // Set up click listener
         findViewById(R.id.LayoutBackground).setOnTouchListener(new RelativeLayout.OnTouchListener() {
             @Override

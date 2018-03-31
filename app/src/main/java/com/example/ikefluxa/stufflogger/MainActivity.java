@@ -1,7 +1,10 @@
 package com.example.ikefluxa.stufflogger;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
         // TODO: test the permissions thing on pa's phone. First try the least probable thing to work,
         // TODO: so we don't blow our permissions privileges.
         // TODO: first try it without the below. if that doesn't ask for permissions
-//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
-//        }
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
+        }
 
         // Draw everything (kinda obvious)
         drawEverything();
