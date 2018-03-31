@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".LogActivity" />
-        <activity android:name=".UserActivity"></activity>
+        <activity android:name=".UserActivity" />
+        <activity android:name=".NewLoglineActivity"></activity>
     </application>
 
 </manifest>

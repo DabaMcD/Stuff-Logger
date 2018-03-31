@@ -48,8 +48,8 @@ public class User {
             this.subjects.add(new Subject("Give Daba back rub"));
             this.subjects.add(new Subject("Scrape knee on driveway"));
             this.subjects.add(new Subject("Get bee sting on nose"));
+            this.name = "¿¡KrOrKeE!? = Cordi -- UN";
         }
-        this.name = "¿¡KrOrKeE!?";
     } // Delete later
 
     public void clearLog() {

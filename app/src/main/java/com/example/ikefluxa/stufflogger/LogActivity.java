@@ -1,6 +1,8 @@
 package com.example.ikefluxa.stufflogger;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -17,8 +19,8 @@ import java.io.FileOutputStream;
 
 public class LogActivity extends AppCompatActivity {
     DrawLog drawLog;
-    ConstraintLayout layoutBackgound;
     NewLoglineButtonView newLoglineButton;
+    Boolean clicking = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,16 +32,31 @@ public class LogActivity extends AppCompatActivity {
 
         newLoglineButton = findViewById(R.id.newLoglineButton);
 
+        newLoglineButton.draw(false);
+
+//        newLogline();
         // Set up click listener
         findViewById(R.id.LayoutBackground).setOnTouchListener(new RelativeLayout.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+                        if(Constants.getDist(event.getX(), event.getY(), newLoglineButton.x, newLoglineButton.y) <= newLoglineButton.rad) {
+                            newLoglineButton.draw(true);
+                            clicking = true;
+                        }
                         break;
                     case MotionEvent.ACTION_MOVE:
+                        if(Constants.getDist(event.getX(), event.getY(), newLoglineButton.x, newLoglineButton.y) > newLoglineButton.rad) {
+                            clicking = false;
+                        }
                         break;
                     case MotionEvent.ACTION_UP:
+                        if(Constants.getDist(event.getX(), event.getY(), newLoglineButton.x, newLoglineButton.y) <= newLoglineButton.rad && clicking) {
+                            newLogline();
+                        } else {
+                            newLoglineButton.draw(false);
+                        }
                         break;
                 }
                 return true;
@@ -48,7 +65,8 @@ public class LogActivity extends AppCompatActivity {
     }
 
     public void newLogline() {
-
+        Intent myIntent = new Intent(this, NewLoglineActivity.class);
+        startActivity(myIntent);
     }
 
     private void saveFile(String filename, String text) {

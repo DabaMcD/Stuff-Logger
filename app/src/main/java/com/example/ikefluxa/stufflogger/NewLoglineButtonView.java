@@ -23,6 +23,8 @@ public class NewLoglineButtonView extends View {
     public float y = Constants.SCREEN_HEIGHT - buttonDistFromCorner;
     public float rad = buttonDistFromCorner / 2;
 
+    private boolean hovering;
+
     public NewLoglineButtonView(Context context) {
         super(context);
     }
@@ -38,8 +40,13 @@ public class NewLoglineButtonView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         // Button
-        paint.setColor(Constants.users.get(Constants.currentUserIndex).color);
+        paint.setColor(Constants.inverseColor(Constants.users.get(Constants.currentUserIndex).color));
         loglineAdder.draw(x, y, rad, canvas, paint);
+        if(hovering) {
+            paint.setColor(Color.argb(30, 0, 0, 0));
+            canvas.drawCircle(x, y, rad, paint);
+        }
+
         // '+' sign
         paint.setTextSize(buttonDistFromCorner / 2 * 3);
         paint.setTextAlign(Paint.Align.CENTER);
@@ -53,7 +60,8 @@ public class NewLoglineButtonView extends View {
         super.onDraw(canvas);
     }
 
-    public void draw() {
+    public void draw(Boolean hovering) {
+        this.hovering = hovering;
         invalidate();
         requestLayout();
     }
