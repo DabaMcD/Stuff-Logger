@@ -23,22 +23,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Need the line below in the startup activity
         defineConstantsStuff();
+        // Need the line below in every activity
         Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
 
         // Define all the things in the xml code
         newUser = findViewById(R.id.newUser);
         newUser.setText("Add User");
 
-        // TODO: test the permissions thing on pa's phone. First try the least probable thing to work,
-        // TODO: so we don't blow our permissions privileges.
-        // TODO: first try it without the below. if that doesn't ask for permissions
+        // Ask for permissions
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
         }
-
-        // Draw everything (kinda obvious)
-        drawEverything();
     }
 
     public void defineConstantsStuff() {
@@ -55,22 +52,13 @@ public class MainActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int wd = displayMetrics.widthPixels;
         int ht = displayMetrics.heightPixels;
-        if(wd > ht) {
-            Constants.ORIG_LONGER_SCREEN_DIM = wd;
-            Constants.ORIG_SHORTER_SCREEN_DIM = ht;
-        } else {
-            Constants.ORIG_LONGER_SCREEN_DIM = ht;
-            Constants.ORIG_SHORTER_SCREEN_DIM = wd;
-        }
+        Constants.ORIG_LONGER_SCREEN_DIM = Math.max(ht, wd);
+        Constants.ORIG_SHORTER_SCREEN_DIM = Math.min(ht, wd);
     }
 
     public void newUserClick(View target) {
         Intent myIntent = new Intent(this, UserActivity.class);
         startActivity(myIntent);
-    }
-
-    private void drawEverything() {
-        // Only custom views go in here
     }
 
     private void saveFile(String filename, String text) {

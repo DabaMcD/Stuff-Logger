@@ -16,6 +16,8 @@ public class UserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
+        Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
+
         createUser = findViewById(R.id.createUser);
         name = findViewById(R.id.name);
 

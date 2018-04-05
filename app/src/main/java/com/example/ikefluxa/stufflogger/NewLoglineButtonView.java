@@ -18,10 +18,10 @@ public class NewLoglineButtonView extends View {
     RectShadow loglineAdderPlus1 = new RectShadow();
     RectShadow loglineAdderPlus2 = new RectShadow();
     CircleShadow loglineAdder = new CircleShadow();
-    float buttonDistFromCorner = (float) (Constants.SCREEN_WIDTH / 6.5);
-    public float x = Constants.SCREEN_WIDTH - buttonDistFromCorner;
-    public float y = Constants.SCREEN_HEIGHT - buttonDistFromCorner;
-    public float rad = buttonDistFromCorner / 2;
+    public float buttonDistFromCorner;
+    public float x;
+    public float y;
+    public float rad;
 
     private boolean hovering;
 
@@ -39,6 +39,12 @@ public class NewLoglineButtonView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        // Define vars
+        buttonDistFromCorner = (float) (Math.min(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT) / 4.5);
+        x = (float) (Constants.SCREEN_WIDTH - buttonDistFromCorner / 1.2);
+        y = (float) (Constants.SCREEN_HEIGHT - buttonDistFromCorner / 1.2);
+        rad = buttonDistFromCorner / 2;
+
         // Button
         paint.setColor(Constants.inverseColor(Constants.users.get(Constants.currentUserIndex).color));
         loglineAdder.draw(x, y, rad, canvas, paint);
@@ -53,9 +59,15 @@ public class NewLoglineButtonView extends View {
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         paint.setColor(Color.DKGRAY);
         paint.setStrokeCap(Paint.Cap.ROUND);
-        loglineAdderPlus1.draw(x - Constants.SCREEN_HEIGHT / 200, y - Constants.SCREEN_HEIGHT / 40, x + Constants.SCREEN_HEIGHT / 200, y + Constants.SCREEN_HEIGHT / 40, canvas, paint);
-        loglineAdderPlus2.draw(x - Constants.SCREEN_HEIGHT / 40, y - Constants.SCREEN_HEIGHT / 200, x + Constants.SCREEN_HEIGHT / 40, y + Constants.SCREEN_HEIGHT / 200, canvas, paint);
-        canvas.drawRect(x - Constants.SCREEN_HEIGHT / 200, y - Constants.SCREEN_HEIGHT / 40, x + Constants.SCREEN_HEIGHT / 200, y + Constants.SCREEN_HEIGHT / 40, paint);
+        float endOfRectRelToCircle = rad / 2;
+        float sideOfRectRelToCircle = rad / 15;
+
+        // Vertical rect
+        loglineAdderPlus1.draw(x - sideOfRectRelToCircle, y - endOfRectRelToCircle, x + sideOfRectRelToCircle, y + endOfRectRelToCircle, canvas, paint);
+        // Horizontal rect
+        loglineAdderPlus2.draw(x - endOfRectRelToCircle, y - sideOfRectRelToCircle, x + endOfRectRelToCircle, y + sideOfRectRelToCircle, canvas, paint);
+        // Vertical rect
+        canvas.drawRect(x - sideOfRectRelToCircle, y - endOfRectRelToCircle, x + sideOfRectRelToCircle, y + endOfRectRelToCircle, paint);
 
         super.onDraw(canvas);
     }

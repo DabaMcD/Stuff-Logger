@@ -1,6 +1,7 @@
 package com.example.ikefluxa.stufflogger;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,12 +20,10 @@ public class NewLoglineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_logline);
 
-        addLogline = findViewById(R.id.addLogline);
-        back = findViewById(R.id.back);
-        title = findViewById(R.id.title);
+        Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
+
         subjectName = findViewById(R.id.subjectName);
-        User user = Constants.users.get(Constants.currentUserIndex);
-        subjectName.setTextColor(user.color);
+        subjectName.setTextColor(Color.DKGRAY);
     }
 
     public void back(View view) {
