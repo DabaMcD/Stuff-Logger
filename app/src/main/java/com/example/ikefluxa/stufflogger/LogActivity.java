@@ -1,16 +1,12 @@
 package com.example.ikefluxa.stufflogger;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -25,6 +21,8 @@ public class LogActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
+
+        Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
 
         drawLog = findViewById(R.id.drawLog);
 
@@ -68,6 +66,7 @@ public class LogActivity extends AppCompatActivity {
     public void newLogline() {
         Intent myIntent = new Intent(this, NewLoglineActivity.class);
         startActivity(myIntent);
+
     }
 
     private void saveFile(String filename, String text) {

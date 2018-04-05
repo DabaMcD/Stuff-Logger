@@ -10,6 +10,9 @@ import java.util.Calendar;
  */
 
 public class Constants {
+    public static int STATUS_BAR_HEIGHT; // Sataus bar is a
+    public static int ORIG_LONGER_SCREEN_DIM; // With status bar and always the longer dimension
+    public static int ORIG_SHORTER_SCREEN_DIM; // With status bar if included and always the shorter dim
     public static int SCREEN_WIDTH;
     public static int SCREEN_HEIGHT;
     public static ArrayList<User> users = new ArrayList<>();
@@ -42,5 +45,16 @@ public class Constants {
         return Color.rgb(255-Color.red(color),
                 255-Color.green(color),
                 255-Color.blue(color));
+    }
+    public static void correctScreenDims(int orientation) {
+        if (orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE) {
+            SCREEN_WIDTH = ORIG_LONGER_SCREEN_DIM;
+            SCREEN_HEIGHT = ORIG_SHORTER_SCREEN_DIM - STATUS_BAR_HEIGHT;
+        } else if (orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT){
+            SCREEN_WIDTH = ORIG_SHORTER_SCREEN_DIM;
+            SCREEN_HEIGHT = ORIG_LONGER_SCREEN_DIM - STATUS_BAR_HEIGHT;
+        } else {
+            System.out.println("ERROR in Constants, method correctScreenDims");
+        }
     }
 }

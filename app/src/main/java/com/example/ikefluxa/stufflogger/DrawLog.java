@@ -29,7 +29,6 @@ public class DrawLog extends View {
     Rect logLineNameBounds = new Rect();
     Rect nBounds = new Rect();
     int recordLineWidth;
-    int longestLoglineIndex = -1;
     int leftLimit;
     int lineGap;
 
@@ -130,6 +129,7 @@ public class DrawLog extends View {
     }
 
     private void tweakLinegap() {
+        int longestLoglineIndex = -1;
         paint.setTextSize((float) (lineGap * 0.8));
         paint.getTextBounds(date, 0, date.length(), dateBounds);
         paint.getTextBounds("8", 0, 1, eightBounds);
@@ -137,7 +137,7 @@ public class DrawLog extends View {
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
         recordLineWidth = dateBounds.width();
         for(int i = 0; i < user.logLines.size(); i ++) {
-            // Get the length of a log line
+            // Get the length of a log line (without left and right margins)
             String logLineSubjectName = user.logLines.get(i).subject.name;
             paint.getTextBounds(logLineSubjectName, 0, logLineSubjectName.length(), logLineBounds);
             float thisLogLineLength = logLineBounds.width();
@@ -156,7 +156,6 @@ public class DrawLog extends View {
 
             if(longestLoglineIndex == -1) {
                 paint.setTextSize((float) (lineGap * 0.8));
-                leftLimit = lineGap / 2;
                 paint.getTextBounds(date, 0, date.length(), dateBounds);
                 recordLineWidth = (int) (dateBounds.width() + leftLimit * 2.5);
             } else {
@@ -168,7 +167,7 @@ public class DrawLog extends View {
                 paint.getTextBounds("8", 0, 1, eightBounds);
                 int thisLogLineLength = (int) (leftLimit * 2.5 + logLineNameBounds.width() + dashBounds.width() + eightBounds.width() * 3);
 
-                recordLineWidth = (int) thisLogLineLength;
+                recordLineWidth = thisLogLineLength;
             }
         }
     }

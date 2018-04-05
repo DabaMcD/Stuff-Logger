@@ -23,16 +23,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        defineConstantsStuff();
+        Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
+
         // Define all the things in the xml code
         newUser = findViewById(R.id.newUser);
-
         newUser.setText("Add User");
-
-        // Define screen dimensions
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        Constants.SCREEN_WIDTH = displayMetrics.widthPixels;
-        Constants.SCREEN_HEIGHT = displayMetrics.heightPixels - getStatusBarHeight();
 
         // TODO: test the permissions thing on pa's phone. First try the least probable thing to work,
         // TODO: so we don't blow our permissions privileges.
@@ -45,13 +41,27 @@ public class MainActivity extends AppCompatActivity {
         drawEverything();
     }
 
-    public int getStatusBarHeight() {
+    public void defineConstantsStuff() {
+        // Status bar height
         int result = 0;
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
             result = getResources().getDimensionPixelSize(resourceId);
         }
-        return result;
+        Constants.STATUS_BAR_HEIGHT = result;
+
+        // Screen dimensions
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int wd = displayMetrics.widthPixels;
+        int ht = displayMetrics.heightPixels;
+        if(wd > ht) {
+            Constants.ORIG_LONGER_SCREEN_DIM = wd;
+            Constants.ORIG_SHORTER_SCREEN_DIM = ht;
+        } else {
+            Constants.ORIG_LONGER_SCREEN_DIM = ht;
+            Constants.ORIG_SHORTER_SCREEN_DIM = wd;
+        }
     }
 
     public void newUserClick(View target) {
