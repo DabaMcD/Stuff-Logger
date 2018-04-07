@@ -39,7 +39,8 @@ public class UserActivity extends AppCompatActivity {
     public void newUserClick(View target) {
         Constants.users.add(new User(name.getText().toString()));
         Constants.currentUserIndex = Constants.users.size() - 1;
-        Intent myIntent = new Intent(this, LogActivity.class);
+        Constants.goToLogActivityFromMainActivity = true;
+        Intent myIntent = new Intent(this, MainActivity.class);
         startActivity(myIntent);
     }
 }

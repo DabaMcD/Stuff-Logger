@@ -1,5 +1,6 @@
 package com.example.ikefluxa.stufflogger;
 
+import android.app.Activity;
 import android.graphics.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import java.util.Calendar;
  */
 
 public class Constants {
+    public static boolean goToLogActivityFromMainActivity = false;
     public static int STATUS_BAR_HEIGHT; // Sataus bar is a
     public static int ORIG_LONGER_SCREEN_DIM; // With status bar and always the longer dimension
     public static int ORIG_SHORTER_SCREEN_DIM; // With status bar if included and always the shorter dim

@@ -17,11 +17,17 @@ import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity {
     Button newUser;
+    UsersListView usersListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(Constants.goToLogActivityFromMainActivity) {
+            goToLogActivity();
+            Constants.goToLogActivityFromMainActivity = false;
+        }
 
         // Need the line below in the startup activity
         defineConstantsStuff();
@@ -58,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void newUserClick(View target) {
         Intent myIntent = new Intent(this, UserActivity.class);
+        startActivity(myIntent);
+    }
+
+    public void goToLogActivity() {
+        Intent myIntent = new Intent(this, LogActivity.class);
         startActivity(myIntent);
     }
 
