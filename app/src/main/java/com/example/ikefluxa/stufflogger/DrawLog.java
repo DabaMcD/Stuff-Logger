@@ -131,10 +131,10 @@ public class DrawLog extends View {
     private void tweakLinegap() {
         int longestLoglineIndex = -1;
         paint.setTextSize((float) (lineGap * 0.8));
+        paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
         paint.getTextBounds(date, 0, date.length(), dateBounds);
         paint.getTextBounds("8", 0, 1, eightBounds);
         paint.getTextBounds("N:N", 0, 3, dashBounds);
-        paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
         recordLineWidth = dateBounds.width();
         for(int i = 0; i < user.logLines.size(); i ++) {
             // Get the length of a log line (without left and right margins)
@@ -149,15 +149,14 @@ public class DrawLog extends View {
                 recordLineWidth = (int) thisLogLineLength;
             }
         }
-        while(recordLineWidth > Constants.SCREEN_WIDTH) {
+        while(recordLineWidth - 1 > Constants.SCREEN_WIDTH) {
             lineGap -= 0.1;
             paint.setTextSize((float) (lineGap * 0.8));
             leftLimit = lineGap / 2;
 
             if(longestLoglineIndex == -1) {
-                paint.setTextSize((float) (lineGap * 0.8));
                 paint.getTextBounds(date, 0, date.length(), dateBounds);
-                recordLineWidth = (int) (dateBounds.width() + leftLimit * 2.5);
+                recordLineWidth = dateBounds.width() + leftLimit * 3;
             } else {
                 String logLineSubjectName = user.logLines.get(longestLoglineIndex).subject.name;
 
@@ -165,10 +164,11 @@ public class DrawLog extends View {
                 paint.getTextBounds(logLineSubjectName, 0, logLineSubjectName.length(), logLineNameBounds);
                 paint.getTextBounds("N:N", 0, 3, dashBounds);
                 paint.getTextBounds("8", 0, 1, eightBounds);
-                int thisLogLineLength = (int) (leftLimit * 2.5 + logLineNameBounds.width() + dashBounds.width() + eightBounds.width() * 3);
-
-                recordLineWidth = thisLogLineLength;
+                recordLineWidth = (int) (leftLimit * 2.5 + logLineNameBounds.width() + dashBounds.width() + eightBounds.width() * 3);
             }
+        }
+        while(user.logLines.size() * lineGap + (Constants.SCREEN_HEIGHT / 10 + lineGap * 3) > Constants.SCREEN_HEIGHT) {
+            lineGap -= 0.1;
         }
     }
 
