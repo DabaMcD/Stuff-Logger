@@ -6,9 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.example.ikefluxa.stufflogger.MainActivity">
 
-    <Button
-        android:id="@+id/newUser"
+    <com.example.ikefluxa.stufflogger.UsersListView
+        android:id="@+id/usersListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:onClick="newUserClick"/>
+        android:layout_height="match_parent" />
 </android.support.constraint.ConstraintLayout>

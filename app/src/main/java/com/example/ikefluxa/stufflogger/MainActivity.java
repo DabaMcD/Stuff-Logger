@@ -16,7 +16,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity {
-    Button newUser;
     UsersListView usersListView;
 
     @Override
@@ -35,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
         Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
 
         // Define all the things in the xml code
-        newUser = findViewById(R.id.newUser);
-        newUser.setText("Add User");
+        usersListView = findViewById(R.id.usersListView);
+
+        // Do other things to the stuff in the xml code
+        usersListView.draw();
 
         // Ask for permissions
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
