@@ -31,11 +31,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Add Logline"
         android:onClick="addLogline"
+        android:text="Add Logline"
         app:layout_constraintBottom_toTopOf="@+id/back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.792" />
@@ -44,7 +43,7 @@
         android:id="@+id/subjectName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="152dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -53,13 +52,13 @@
         android:hint="Subject"
         android:inputType="textPersonName"
         android:textCursorDrawable="@null"
-        app:layout_constraintBottom_toTopOf="@+id/addLogline"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" >
-        <requestFocus/>
+        app:layout_constraintVertical_bias="0.376">
+
+        <requestFocus />
     </EditText>
 
     <TextView
@@ -75,8 +74,7 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/subjectName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.089" />
+        app:layout_constraintVertical_bias="0.0" />
 </android.support.constraint.ConstraintLayout>
