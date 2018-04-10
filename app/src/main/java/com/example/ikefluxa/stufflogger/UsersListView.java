@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class UsersListView extends View {
+public class UsersListView extends View{
     Paint paint = new Paint();
     RectShadow topBar = new RectShadow();
     RectF rainbowRect = new RectF();
@@ -18,45 +18,34 @@ public class UsersListView extends View {
 
     public UsersListView(Context context) {
         super(context);
+        setVerticalScrollBarEnabled(true);
+        setMinimumHeight(1000);
     }
 
     public UsersListView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        setVerticalScrollBarEnabled(true);
+        setMinimumHeight(1000);
     }
 
     public UsersListView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setVerticalScrollBarEnabled(true);
+        setMinimumHeight(1000);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        // Draw top bar
-        topBar.draw(-100, -1, Constants.SCREEN_WIDTH + 100, Constants.SCREEN_HEIGHT / 10, canvas, paint);
-        drawRainbowTopBar(canvas);
+        drawList(canvas);
 
-        // Draw name on top bar
-        drawText(canvas);
         super.onDraw(canvas);
     }
 
-    private void drawRainbowTopBar(Canvas canvas) {
-        rainbowRect.top = 0;
-        rainbowRect.bottom = Constants.SCREEN_HEIGHT / 10;
-        for(int i = 0; i < Constants.SCREEN_WIDTH; i ++) {
-            rainbowRect.left = i;
-            rainbowRect.right = i + 1;
-            paint.setColor(Color.HSVToColor(new float[] {(float) ((360.000 / Constants.SCREEN_WIDTH) * i), 100, 100}));
-            canvas.drawRect(rainbowRect, paint);
+    private void drawList(Canvas canvas) {
+        for(int i = 0; i < /*Constants.users.size()*/10; i ++) {
+            paint.setColor(Color.rgb(i * 25, i * 25, i * 25));
+            canvas.drawRect(100, i * 100, 200, (i + 1) * 100, paint);
         }
-    }
-
-    private void drawText(Canvas canvas) {
-        // Draw text "STUFF LOGGER"
-        paint.setTextAlign(Paint.Align.LEFT);
-        paint.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        paint.setTextSize(Constants.SCREEN_HEIGHT / 17);
-        paint.setColor(Color.DKGRAY);
-        topBarText.draw("Stuff Logger", Constants.SCREEN_WIDTH / 28, Constants.SCREEN_HEIGHT / 20 + paint.getTextSize() / 3, canvas, paint);
     }
 
     public void draw() {

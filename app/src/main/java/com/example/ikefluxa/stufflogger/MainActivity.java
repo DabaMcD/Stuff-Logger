@@ -10,13 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity {
     UsersListView usersListView;
+    MainTopBarView mainTopBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +34,11 @@ public class MainActivity extends AppCompatActivity {
         Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
 
         // Define all the things in the xml code
+        mainTopBarView = findViewById(R.id.mainTopBarView);
         usersListView = findViewById(R.id.usersListView);
 
         // Do other things to the stuff in the xml code
+        mainTopBarView.draw();
         usersListView.draw();
 
         // Ask for permissions
