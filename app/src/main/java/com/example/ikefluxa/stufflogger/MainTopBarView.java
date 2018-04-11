@@ -12,9 +12,18 @@ import android.view.View;
 
 public class MainTopBarView extends View {
     Paint paint = new Paint();
-    RectShadow topBar = new RectShadow();
+    RectShadow topBar = new RectShadow(100, 10, 10, 2);
     RectF rainbowRect = new RectF();
     TextShadow topBarText = new TextShadow();
+    Boolean hovering;
+
+    // Unique to button stuff
+    RectShadow userAdderV = new RectShadow();
+    RectShadow userAdderH = new RectShadow();
+    public float buttonDistFromCorner;
+    public float x;
+    public float y;
+    public float rad;
 
     public MainTopBarView(Context context) {
         super(context);
@@ -30,6 +39,8 @@ public class MainTopBarView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        paint.setColor(Color.WHITE);
+        canvas.drawRect(-1, -1, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, paint);
         // Draw top bar
         paint.setColor(Color.BLACK);
         topBar.draw(-100, -1, Constants.SCREEN_WIDTH + 100, Constants.SCREEN_HEIGHT / 10, canvas, paint); // Just for the shadow
@@ -37,16 +48,20 @@ public class MainTopBarView extends View {
 
         // Draw name on top bar
         drawText(canvas);
+
+        // Draw button
+        drawButton(canvas);
+
         super.onDraw(canvas);
     }
 
     private void drawRainbowTopBar(Canvas canvas) {
         rainbowRect.top = 0;
-        rainbowRect.bottom = Constants.SCREEN_HEIGHT / 10;
+        rainbowRect.bottom = (float) (Constants.SCREEN_HEIGHT / 10.0);
         for(int i = 0; i < Constants.SCREEN_WIDTH; i ++) {
             rainbowRect.left = i;
             rainbowRect.right = i + 1;
-            paint.setColor(Color.HSVToColor(new float[] {(float) ((360.000 / Constants.SCREEN_WIDTH) * i), 100, 100}));
+            paint.setColor(Color.HSVToColor(new float[] {(float) ((360.000 / Constants.SCREEN_WIDTH) * i), 1, 1}));
             canvas.drawRect(rainbowRect, paint);
         }
     }
@@ -60,7 +75,38 @@ public class MainTopBarView extends View {
         topBarText.draw("Stuff Logger", Constants.SCREEN_WIDTH / 28, Constants.SCREEN_HEIGHT / 20 + paint.getTextSize() / 3, canvas, paint);
     }
 
-    public void draw() {
+    private void drawButton(Canvas canvas) {
+        // Define vars
+        buttonDistFromCorner = (float) ((Constants.SCREEN_HEIGHT / 20) * 1.2);
+        x = (float) (Constants.SCREEN_WIDTH - buttonDistFromCorner / 1.2);
+        y = (float) (buttonDistFromCorner / 1.2);
+        rad = (float) (buttonDistFromCorner / 1.5);
+
+        // Button
+        paint.setColor(Color.TRANSPARENT);
+        if(hovering) {
+            paint.setColor(Color.argb(30, 0, 0, 0));
+            canvas.drawCircle(x, y, rad, paint);
+        }
+
+        // '+' sign
+        paint.setTextSize(buttonDistFromCorner / 2 * 3);
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        paint.setColor(Color.GREEN);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+        float endOfRectRelToCircle = rad / 2;
+        float sideOfRectRelToCircle = rad / 15;
+        // Vertical rect
+        userAdderV.draw(x - sideOfRectRelToCircle, y - endOfRectRelToCircle, x + sideOfRectRelToCircle, y + endOfRectRelToCircle, canvas, paint);
+        // Horizontal rect
+        userAdderH.draw(x - endOfRectRelToCircle, y - sideOfRectRelToCircle, x + endOfRectRelToCircle, y + sideOfRectRelToCircle, canvas, paint);
+        // Vertical rect
+        canvas.drawRect(x - sideOfRectRelToCircle, y - endOfRectRelToCircle, x + sideOfRectRelToCircle, y + endOfRectRelToCircle, paint);
+    }
+
+    public void draw(Boolean hovering) {
+        this.hovering = hovering;
         invalidate();
         requestLayout();
     }

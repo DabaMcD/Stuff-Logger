@@ -9,7 +9,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,6 +19,7 @@ import java.io.FileOutputStream;
 public class MainActivity extends AppCompatActivity {
     UsersListView usersListView;
     MainTopBarView mainTopBarView;
+    Boolean clickingOnAddUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +41,48 @@ public class MainActivity extends AppCompatActivity {
         usersListView = findViewById(R.id.usersListView);
 
         // Do other things to the stuff in the xml code
-        mainTopBarView.draw();
+        mainTopBarView.draw(false);
         usersListView.draw();
 
         // Ask for permissions
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
         }
+
+        clickingOnAddUser = false;
+
+        findViewById(R.id.mainTopBarView).setOnTouchListener(handleTouch);
     }
+
+    private View.OnTouchListener handleTouch = new View.OnTouchListener() {
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    if(Constants.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) <= mainTopBarView.rad) {
+                        clickingOnAddUser = true;
+                        mainTopBarView.draw(true);
+                    }
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    if(Constants.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) > mainTopBarView.rad) {
+                        clickingOnAddUser = false;
+                        mainTopBarView.draw(false);
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+                    if(Constants.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) <= mainTopBarView.rad && clickingOnAddUser) {
+                        newUserClick();
+                    }
+                    mainTopBarView.draw(false);
+                    clickingOnAddUser = false;
+                    break;
+            }
+
+            return true;
+        }
+    };
 
     public void defineConstantsStuff() {
         // Status bar height
@@ -65,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         Constants.ORIG_SHORTER_SCREEN_DIM = Math.min(ht, wd);
     }
 
-    public void newUserClick(View target) {
+    public void newUserClick() {
         Intent myIntent = new Intent(this, UserActivity.class);
         startActivity(myIntent);
     }

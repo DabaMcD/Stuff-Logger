@@ -12,40 +12,45 @@ import android.view.View;
 
 public class UsersListView extends View{
     Paint paint = new Paint();
-    RectShadow topBar = new RectShadow();
-    RectF rainbowRect = new RectF();
-    TextShadow topBarText = new TextShadow();
+    float lineThk = Constants.SCREEN_HEIGHT / 300;
 
     public UsersListView(Context context) {
         super(context);
         setVerticalScrollBarEnabled(true);
-        setMinimumHeight(1000);
+        setMinimumHeight(100); // ToDo: Fix this babby thing
     }
 
     public UsersListView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setVerticalScrollBarEnabled(true);
-        setMinimumHeight(1000);
+        setMinimumHeight(100);
     }
 
     public UsersListView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setVerticalScrollBarEnabled(true);
-        setMinimumHeight(1000);
+        setMinimumHeight(100);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        drawList(canvas);
+        for(int i = 0; i < Constants.users.size(); i ++) {
+            // Define some helpful stuff
+            User user = Constants.users.get(i);
+            int bob = (int) (Constants.SCREEN_HEIGHT / 10.0);
+            float top = bob * (i + 1) + lineThk * (i + 1);
+            float bottom = (float) ((Constants.SCREEN_HEIGHT / 10.0) * (i + 2) + lineThk * (i + 1));
+
+            // Draw the line in between the users
+//            paint.setColor(Color.DKGRAY);
+//            canvas.drawRect(0, top - lineThk, Constants.SCREEN_WIDTH, top, paint);
+
+            // Draw the user's box
+            paint.setColor(user.color);
+            canvas.drawRect(0, top, Constants.SCREEN_WIDTH, bottom, paint);
+        }
 
         super.onDraw(canvas);
-    }
-
-    private void drawList(Canvas canvas) {
-        for(int i = 0; i < /*Constants.users.size()*/10; i ++) {
-            paint.setColor(Color.rgb(i * 25, i * 25, i * 25));
-            canvas.drawRect(100, i * 100, 200, (i + 1) * 100, paint);
-        }
     }
 
     public void draw() {
