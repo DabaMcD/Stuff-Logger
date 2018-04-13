@@ -12,7 +12,7 @@ import android.view.View;
 
 public class MainTopBarView extends View {
     Paint paint = new Paint();
-    RectShadow topBar = new RectShadow(100, 10, 10, 2);
+    RectShadow topBar = new RectShadow();
     RectF rainbowRect = new RectF();
     TextShadow topBarText = new TextShadow();
     Boolean hovering;
@@ -39,11 +39,9 @@ public class MainTopBarView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        paint.setColor(Color.WHITE);
-        canvas.drawRect(-1, -1, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, paint);
         // Draw top bar
         paint.setColor(Color.BLACK);
-        topBar.draw(-100, -1, Constants.SCREEN_WIDTH + 100, Constants.SCREEN_HEIGHT / 10, canvas, paint); // Just for the shadow
+        topBar.draw((float) -100, (float) (Constants.SCREEN_HEIGHT / 20), (float) Constants.SCREEN_WIDTH, (float) (Constants.SCREEN_HEIGHT / 10), canvas, paint); // Just for the shadow
         drawRainbowTopBar(canvas);
 
         // Draw name on top bar

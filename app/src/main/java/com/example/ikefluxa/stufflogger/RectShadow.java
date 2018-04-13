@@ -30,7 +30,7 @@ public class RectShadow extends Shadows {
         // Save the original color for later
         origcolor = paint.getColor();
 
-        // Calculate the opacity based on number of points & the darkness
+        // Set very translucent color
         paint.setColor(Color.argb((int) shadowDarkness, 0, 0, 0));
 
         // Loop through all the points

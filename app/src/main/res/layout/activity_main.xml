@@ -19,5 +19,5 @@
     <com.example.ikefluxa.stufflogger.MainTopBarView
         android:id="@+id/mainTopBarView"
         android:layout_width="320dp"
-        android:layout_height="54dp" />
+        android:layout_height="56dp" />
 </android.support.constraint.ConstraintLayout>
