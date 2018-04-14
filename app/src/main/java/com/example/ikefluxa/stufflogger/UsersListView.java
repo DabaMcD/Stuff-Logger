@@ -13,7 +13,7 @@ import android.view.View;
 
 public class UsersListView extends View{
     Paint paint = new Paint();
-    float lineThk = Constants.SCREEN_HEIGHT / 100;
+    float lineThk = Constants.SCREEN_HEIGHT / 200;
     Rect userNameBounds = new Rect();
 
     public UsersListView(Context context) {
@@ -48,24 +48,31 @@ public class UsersListView extends View{
             canvas.drawRect(0, top - lineThk, Constants.SCREEN_WIDTH, top, paint);
 
             // Draw the user's box
-            paint.setColor(Constants.inverseColor(user.color));
+            paint.setColor(Color.LTGRAY);
             canvas.drawRect(0, top, Constants.SCREEN_WIDTH, bottom, paint);
 
             // Draw the user's name
-            paint.setColor(user.color);
+            paint.setColor(Constants.darkenColor(user.color));
             paint.setTextAlign(Paint.Align.LEFT);
+            paint.setTypeface(Typeface.DEFAULT_BOLD);
             paint.setTextSize(Constants.SCREEN_HEIGHT / 17);
-            canvas.drawText(getLongestName(user.name), Constants.SCREEN_WIDTH / 28, top + (Constants.SCREEN_HEIGHT / 20) - (paint.getTextSize() / 3), paint);
+            canvas.drawText(getLongestName(user.name), Constants.SCREEN_WIDTH / 28, top + (Constants.SCREEN_HEIGHT / 20) + (paint.getTextSize() / 3), paint);
         }
 
         super.onDraw(canvas);
     }
 
     private String getLongestName(String name) {
-        String result = "";
-        paint.getTextBounds(name, 0, name.length(), userNameBounds);
-
-        return result;
+        Boolean dotdotdot = false;
+        String result = name;
+        int maxRight = (Constants.SCREEN_WIDTH / 3) * 2;
+        paint.getTextBounds(result, 0, name.length(), userNameBounds);
+        while(userNameBounds.width() + (Constants.SCREEN_WIDTH / 28) > maxRight) {
+            result = result.substring(0, result.length() - 1);
+            paint.getTextBounds(result + "...", 0, result.length() + 3, userNameBounds);
+            dotdotdot = true;
+        }
+        return result + (dotdotdot ? "..." : "");
     }
 
     public void draw() {

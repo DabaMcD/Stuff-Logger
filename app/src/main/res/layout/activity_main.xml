@@ -9,11 +9,13 @@
 
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/mainTopBarView">
+
         <com.example.ikefluxa.stufflogger.UsersListView
             android:id="@+id/usersListView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </ScrollView>
 
     <com.example.ikefluxa.stufflogger.MainTopBarView

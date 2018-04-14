@@ -59,4 +59,13 @@ public class Constants {
             System.out.println("ERROR in Constants, method correctScreenDims");
         }
     }
+    public static int darkenColor(int color) {
+        if(Color.red(color) + Color.green(color) * 1.5 + Color.blue(color) * 1.5 > 450) {
+            return Color.rgb((int) (Color.red(color) / 1.5),
+                    (int) (Color.green(color) / 1.5),
+                    (int) (Color.blue(color) / 1.5));
+        } else {
+            return color;
+        }
+    }
 }
