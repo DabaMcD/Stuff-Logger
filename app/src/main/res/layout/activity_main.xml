@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,16 +10,20 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@+id/mainTopBarView">
-
+        android:layout_below="@id/mainTopBarView">
         <com.example.ikefluxa.stufflogger.UsersListView
             android:id="@+id/usersListView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </ScrollView>
 
+    <com.example.ikefluxa.stufflogger.MainTopBarShadowView
+        android:id="@+id/mainTopBarShadowView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <com.example.ikefluxa.stufflogger.MainTopBarView
         android:id="@+id/mainTopBarView"
         android:layout_width="320dp"
-        android:layout_height="56dp" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_height="50.5dp" />
+</RelativeLayout>

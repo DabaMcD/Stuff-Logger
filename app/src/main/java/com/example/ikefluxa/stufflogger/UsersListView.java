@@ -19,19 +19,19 @@ public class UsersListView extends View{
     public UsersListView(Context context) {
         super(context);
         setVerticalScrollBarEnabled(true);
-        setMinimumHeight((int) (((Constants.SCREEN_HEIGHT / 10) + lineThk) * (Constants.users.size() + 1) - lineThk));
+        setMinimumHeight((int) (((Constants.SCREEN_HEIGHT / 10) + lineThk) * Constants.users.size()));
     }
 
     public UsersListView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setVerticalScrollBarEnabled(true);
-        setMinimumHeight((int) (((Constants.SCREEN_HEIGHT / 10) + lineThk) * (Constants.users.size() + 1) - lineThk));
+        setMinimumHeight((int) (((Constants.SCREEN_HEIGHT / 10) + lineThk) * Constants.users.size()));
     }
 
     public UsersListView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setVerticalScrollBarEnabled(true);
-        setMinimumHeight((int) (((Constants.SCREEN_HEIGHT / 10) + lineThk) * (Constants.users.size() + 1) - lineThk));
+        setMinimumHeight((int) (((Constants.SCREEN_HEIGHT / 10) + lineThk) * Constants.users.size()));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class UsersListView extends View{
             // Define some helpful stuff
             User user = Constants.users.get(i);
             int bob = (int) (Constants.SCREEN_HEIGHT / 10.0);
-            float top = bob * (i + 1) + lineThk * (i + 1);
+            float top = bob * i + lineThk * (i + 1);
             float bottom = top + bob;
 
             // Draw the line in between the users

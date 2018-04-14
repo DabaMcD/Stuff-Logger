@@ -40,8 +40,6 @@ public class MainTopBarView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         // Draw top bar
-        paint.setColor(Color.BLACK);
-        topBar.draw((float) -100, (float) (Constants.SCREEN_HEIGHT / 20), (float) Constants.SCREEN_WIDTH, (float) (Constants.SCREEN_HEIGHT / 10), canvas, paint); // Just for the shadow
         drawRainbowTopBar(canvas);
 
         // Draw name on top bar

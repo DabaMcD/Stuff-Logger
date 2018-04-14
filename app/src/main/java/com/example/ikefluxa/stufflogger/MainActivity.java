@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     UsersListView usersListView;
     MainTopBarView mainTopBarView;
     Boolean clickingOnAddUser;
+    MainTopBarShadowView mainTopBarShadowView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
         Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
 
         // Define all the things in the xml code
+        mainTopBarShadowView = findViewById(R.id.mainTopBarShadowView);
         mainTopBarView = findViewById(R.id.mainTopBarView);
         usersListView = findViewById(R.id.usersListView);
 
         // Do other things to the stuff in the xml code
+        mainTopBarShadowView.draw();
         mainTopBarView.draw(false);
         usersListView.draw();
 
