@@ -21,11 +21,3 @@ No help is wanted for now. If you want to help or test out this app, please talk
 ### Who do I talk to? ###
 
 If you wish to help out in this project, you can make a comment on this repo.
-
-### To Do ###
-
-###### These are the things which I hope to do within a while ######
-* Fix date sizing bug
-* Fix date initialization
-* Make user list with trash can button on each user
-* Add top bar on AddLogline activity & AddUser activity
