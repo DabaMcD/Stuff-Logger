@@ -14,7 +14,11 @@ import android.view.View;
 public class UsersListView extends View{
     Paint paint = new Paint();
     float lineThk = Constants.SCREEN_HEIGHT / 200;
+    float userButtonHt = (float) (Constants.SCREEN_HEIGHT / 10.0);
     Rect userNameBounds = new Rect();
+
+    // Touch listener stuff
+//    int touchedUserIndex = -1; // -1 if no user is selected
 
     public UsersListView(Context context) {
         super(context);
@@ -39,17 +43,16 @@ public class UsersListView extends View{
         for(int i = 0; i < Constants.users.size(); i ++) {
             // Define some helpful stuff
             User user = Constants.users.get(i);
-            int bob = (int) (Constants.SCREEN_HEIGHT / 10.0);
-            float top = bob * i + lineThk * (i + 1);
-            float bottom = top + bob;
+            float top = userButtonHt * i + lineThk * (i + 1);
+            float bottom = top + userButtonHt;
 
             // Draw the line in between the users
             paint.setColor(Color.DKGRAY);
-            canvas.drawRect(0, top - lineThk, Constants.SCREEN_WIDTH, top, paint);
+            canvas.drawRect(-1, top - lineThk, Constants.SCREEN_WIDTH + 1, top, paint);
 
             // Draw the user's box
             paint.setColor(Color.LTGRAY);
-            canvas.drawRect(0, top, Constants.SCREEN_WIDTH, bottom, paint);
+            canvas.drawRect(-1, top, Constants.SCREEN_WIDTH + 1, bottom, paint);
 
             // Draw the user's name
             paint.setColor(Constants.darkenColor(user.color));
@@ -57,6 +60,12 @@ public class UsersListView extends View{
             paint.setTypeface(Typeface.DEFAULT_BOLD);
             paint.setTextSize(Constants.SCREEN_HEIGHT / 17);
             canvas.drawText(getLongestName(user.name), Constants.SCREEN_WIDTH / 28, top + (Constants.SCREEN_HEIGHT / 20) + (paint.getTextSize() / 3), paint);
+
+            // Draw dark rectangle over the box (only if being clicked)
+            if(Constants.mainClickingUserIndex == i) {
+                paint.setColor(Color.argb(30, 0, 0, 0));
+                canvas.drawRect(-1, top, Constants.SCREEN_WIDTH + 1, bottom, paint);
+            }
         }
 
         super.onDraw(canvas);
@@ -75,7 +84,52 @@ public class UsersListView extends View{
         return result + (dotdotdot ? "..." : "");
     }
 
-    public void draw() {
+    public int actionDown(float x, float y) {
+        // If they touch down inside one of the boxes,
+        // acivate the touchedUserIndex and set it to that user.
+        Constants.mainClickingUserIndex = -1;
+        for(int i = 0; i < Constants.users.size(); i ++) {
+            float top = userButtonHt * i + lineThk * (i + 1);
+            float bottom = top + userButtonHt;
+            if(y > top && y < bottom) {
+                Constants.mainClickingUserIndex = i;
+                break;
+            }
+        }
+        return Constants.mainClickingUserIndex;
+    } // Triggers on scroll start
+
+    public int actionMove(float x, float y) {
+        // If they go outside the box, deactivate the touchedUserIndex
+        float top = userButtonHt * Constants.mainClickingUserIndex + lineThk * (Constants.mainClickingUserIndex + 1);
+        float bottom = top + userButtonHt;
+        if (y > top && y < bottom) {
+            // Return the user clicked
+            return Constants.mainClickingUserIndex;
+        } else {
+            // Reset things
+            Constants.mainClickingUserIndex = -1;
+            return -1;
+        }
+    } // Triggers on scroll move
+
+    public int actionUp(float x, float y) {
+        // If they're still inside the box when their finger lets up,
+        // and the touchedUserIndex is still activated, return the user index.
+        float top = userButtonHt * Constants.mainClickingUserIndex + lineThk * (Constants.mainClickingUserIndex + 1);
+        float bottom = top + userButtonHt;
+        if (y > top && y < bottom) {
+            // Return the user clicked
+            return Constants.mainClickingUserIndex;
+        } else {
+            // Reset things
+            Constants.mainClickingUserIndex = -1;
+            return -1;
+        }
+    } // Does not trigger after scrolling
+
+    public void draw(int clickingUserIndex) {
+        Constants.mainClickingUserIndex = clickingUserIndex;
         invalidate();
         requestLayout();
     }

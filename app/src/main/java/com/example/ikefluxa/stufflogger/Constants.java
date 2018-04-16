@@ -11,6 +11,8 @@ import java.util.Calendar;
  */
 
 public class Constants {
+    public static int moveUserToFrontIndex = -1;
+    public static int mainClickingUserIndex = -1;
     public static boolean goToLogActivityFromMainActivity = false;
     public static int STATUS_BAR_HEIGHT; // Sataus bar is a
     public static int ORIG_LONGER_SCREEN_DIM; // With status bar and always the longer dimension

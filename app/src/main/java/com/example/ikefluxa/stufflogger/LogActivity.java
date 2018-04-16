@@ -34,7 +34,26 @@ public class LogActivity extends AppCompatActivity {
 
         clicking = false;
 
+        // Stuff for previous activity
+        if(Constants.moveUserToFrontIndex != -1) {
+            // Move the user clicked to the front of the users list,
+            // effectively putting it as the most recent.
+            Constants.users.add(0, Constants.users.get(Constants.moveUserToFrontIndex));
+            Constants.users.remove(Constants.moveUserToFrontIndex + 1);
+            Constants.currentUserIndex = 0;
+            Constants.moveUserToFrontIndex = -1;
+        } else {
+            Constants.users.add(0, Constants.users.get(Constants.currentUserIndex));
+            Constants.users.remove(Constants.currentUserIndex + 1);
+            Constants.currentUserIndex = 0;
+        }
+        Constants.mainClickingUserIndex = -1;
+
         // Set up click listener
+        setLogTouchListener();
+    }
+
+    public void setLogTouchListener() {
         findViewById(R.id.LayoutBackground).setOnTouchListener(new RelativeLayout.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -95,10 +114,4 @@ public class LogActivity extends AppCompatActivity {
         }
         return text;
     }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
 }

@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         // Do other things to the stuff in the xml code
         mainTopBarShadowView.draw();
         mainTopBarView.draw(false);
-        usersListView.draw();
+        usersListView.draw(-1); // -1 if no index
 
         // Ask for permissions
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -54,38 +54,71 @@ public class MainActivity extends AppCompatActivity {
 
         clickingOnAddUser = false;
 
-        findViewById(R.id.mainTopBarView).setOnTouchListener(handleTouch);
+        // Touch listeners
+        setTopBarTouchListener();
+        setUserListTouchListener();
     }
 
-    private View.OnTouchListener handleTouch = new View.OnTouchListener() {
-
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    if(Constants.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) <= mainTopBarView.rad) {
-                        clickingOnAddUser = true;
-                        mainTopBarView.draw(true);
-                    }
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    if(Constants.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) > mainTopBarView.rad) {
-                        clickingOnAddUser = false;
+    public void setTopBarTouchListener() {
+        findViewById(R.id.mainTopBarView).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        if(Constants.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) <= mainTopBarView.rad) {
+                            clickingOnAddUser = true;
+                            mainTopBarView.draw(true);
+                        }
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        if(Constants.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) > mainTopBarView.rad) {
+                            clickingOnAddUser = false;
+                            mainTopBarView.draw(false);
+                        }
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if(Constants.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) <= mainTopBarView.rad && clickingOnAddUser) {
+                            newUserClick();
+                        }
                         mainTopBarView.draw(false);
-                    }
-                    break;
-                case MotionEvent.ACTION_UP:
-                    if(Constants.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) <= mainTopBarView.rad && clickingOnAddUser) {
-                        newUserClick();
-                    }
-                    mainTopBarView.draw(false);
-                    clickingOnAddUser = false;
-                    break;
+                        clickingOnAddUser = false;
+                        break;
+                }
+                return true;
             }
+        });
+    }
 
-            return true;
-        }
-    };
+    public void setUserListTouchListener() {
+        findViewById(R.id.usersListView).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        usersListView.draw(usersListView.actionDown(event.getX(), event.getY()));
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        usersListView.draw(usersListView.actionMove(event.getX(), event.getY()));
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        int clickedIndex = usersListView.actionUp(event.getX(), event.getY());
+                        if(clickedIndex != -1) {
+                            usersListClick(clickedIndex);
+                            usersListView.draw(clickedIndex);
+                        }
+                        break;
+                }
+                return true;
+            }
+        });
+    }
+
+    public void usersListClick(int userIndex) {
+        Constants.moveUserToFrontIndex = userIndex;
+
+        Intent myIntent = new Intent(this, LogActivity.class);
+        startActivity(myIntent);
+    }
 
     public void defineConstantsStuff() {
         // Status bar height
