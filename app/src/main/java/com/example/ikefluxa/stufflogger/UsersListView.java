@@ -5,8 +5,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -17,8 +20,9 @@ public class UsersListView extends View{
     float userButtonHt = (float) (Constants.SCREEN_HEIGHT / 10.0);
     Rect userNameBounds = new Rect();
 
-    // Touch listener stuff
-//    int touchedUserIndex = -1; // -1 if no user is selected
+//    Drawable trashCan = getResources().getDrawable(R.drawable.ic_trashcan);
+//    VectorDrawable vectorTrashCan;
+//    BitmapDrawable bitmapTrashCan;
 
     public UsersListView(Context context) {
         super(context);
@@ -40,6 +44,11 @@ public class UsersListView extends View{
 
     @Override
     protected void onDraw(Canvas canvas) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            vectorTrashCan = (VectorDrawable) trashCan;
+//        } else {
+//            bitmapTrashCan = (BitmapDrawable) trashCan;
+//        }
         for(int i = 0; i < Constants.users.size(); i ++) {
             // Define some helpful stuff
             User user = Constants.users.get(i);
@@ -60,6 +69,25 @@ public class UsersListView extends View{
             paint.setTypeface(Typeface.DEFAULT_BOLD);
             paint.setTextSize(Constants.SCREEN_HEIGHT / 17);
             canvas.drawText(getLongestName(user.name), Constants.SCREEN_WIDTH / 28, top + (Constants.SCREEN_HEIGHT / 20) + (paint.getTextSize() / 3), paint);
+
+            // See whether I have to use bitmap instead of vector (bitmap is depricated)
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                vectorTrashCan.setBounds(
+//                        (int) (Constants.SCREEN_WIDTH * 0.8),
+//                        (int) (top + (bottom - top) / 7),
+//                        (int) (Constants.SCREEN_WIDTH * 0.9 + (bottom - top - (bottom - top) / 3.5) * (7/10)) ,
+//                        (int) (bottom - (bottom - top) / 7)
+//                );
+//                vectorTrashCan.draw(canvas);
+//            } else {
+//                bitmapTrashCan.setBounds(
+//                        (int) (Constants.SCREEN_WIDTH * 0.8),
+//                        (int) (top + (bottom - top) / 5),
+//                        (int) (Constants.SCREEN_WIDTH * 0.9),
+//                        (int) (bottom - (bottom - top) / 5)
+//                );
+//                bitmapTrashCan.draw(canvas);
+//            }
 
             // Draw dark rectangle over the box (only if being clicked)
             if(Constants.mainClickingUserIndex == i) {

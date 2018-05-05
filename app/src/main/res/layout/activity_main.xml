@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.ikefluxa.stufflogger.MainActivity"
-    android:id="@+id/constraintLayout">
+    android:orientation="horizontal">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/mainTopBarView">
+
         <com.example.ikefluxa.stufflogger.UsersListView
             android:id="@+id/usersListView"
             android:layout_width="wrap_content"
@@ -20,10 +22,23 @@
     <com.example.ikefluxa.stufflogger.MainTopBarShadowView
         android:id="@+id/mainTopBarShadowView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.example.ikefluxa.stufflogger.MainTopBarView
         android:id="@+id/mainTopBarView"
-        android:layout_width="320dp"
-        android:layout_height="50.5dp" />
-</RelativeLayout>
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/topBarHorizontalGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mainTopBarShadowView" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/topBarHorizontalGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.175" />
+    <!--Before, the above's layout w&h were 320dp and 50.5dp respectively-->
+</android.support.constraint.ConstraintLayout>

@@ -53,6 +53,12 @@ public class LogActivity extends AppCompatActivity {
         setLogTouchListener();
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity.class));
+        super.onBackPressed();
+    }
+
     public void setLogTouchListener() {
         findViewById(R.id.LayoutBackground).setOnTouchListener(new RelativeLayout.OnTouchListener() {
             @Override

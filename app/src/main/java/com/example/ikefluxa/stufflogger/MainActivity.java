@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         usersListView = findViewById(R.id.usersListView);
 
         // Do other things to the stuff in the xml code
-        mainTopBarShadowView.draw();
+        mainTopBarShadowView.draw(mainTopBarView);
         mainTopBarView.draw(false);
         usersListView.draw(-1); // -1 if no index
 
@@ -57,6 +57,16 @@ public class MainActivity extends AppCompatActivity {
         // Touch listeners
         setTopBarTouchListener();
         setUserListTouchListener();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
+        super.onBackPressed();
     }
 
     public void setTopBarTouchListener() {

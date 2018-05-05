@@ -11,6 +11,7 @@ import android.view.View;
 public class MainTopBarShadowView extends View {
     Paint paint = new Paint();
     RectShadow topBar = new RectShadow();
+    MainTopBarView mainTopBarView;
 
     public MainTopBarShadowView(Context context) {
         super(context);
@@ -27,11 +28,12 @@ public class MainTopBarShadowView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         paint.setColor(Color.BLACK);
-        topBar.draw((float) -100, (float) (Constants.SCREEN_HEIGHT / 20), (float) Constants.SCREEN_WIDTH, (float) (Constants.SCREEN_HEIGHT / 10), canvas, paint);
+        topBar.draw((float) -100, 0, Constants.SCREEN_WIDTH, mainTopBarView.getHeight(), canvas, paint);
         super.onDraw(canvas);
     }
 
-    public void draw() {
+    public void draw(MainTopBarView mainTopBarView) {
+        this.mainTopBarView = mainTopBarView;
         invalidate();
         requestLayout();
     }

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Stuff Logger</string>
     <string name="title_activity_user">UserActivity</string>
+    <string name="AddLogline">Add Logline</string>
+    <string name="Back">Back</string>
+    <string name="Subject">Subject</string>
+    <string name="Nickname">Nickname</string>
+    <string name="AddUser">Add User</string>
 </resources>

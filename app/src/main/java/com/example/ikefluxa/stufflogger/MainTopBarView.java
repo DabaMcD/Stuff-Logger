@@ -53,7 +53,7 @@ public class MainTopBarView extends View {
 
     private void drawRainbowTopBar(Canvas canvas) {
         rainbowRect.top = 0;
-        rainbowRect.bottom = (float) (Constants.SCREEN_HEIGHT / 10.0);
+        rainbowRect.bottom = (float) (Constants.SCREEN_HEIGHT);
         for(int i = 0; i < Constants.SCREEN_WIDTH; i ++) {
             rainbowRect.left = i;
             rainbowRect.right = i + 1;
@@ -68,12 +68,12 @@ public class MainTopBarView extends View {
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         paint.setTextSize(Constants.SCREEN_HEIGHT / 17);
         paint.setColor(Color.DKGRAY);
-        topBarText.draw("Stuff Logger", Constants.SCREEN_WIDTH / 28, Constants.SCREEN_HEIGHT / 20 + paint.getTextSize() / 3, canvas, paint);
+        topBarText.draw("Stuff Logger", Constants.SCREEN_WIDTH / 28, this.getHeight() / 2 + paint.getTextSize() / 3, canvas, paint);
     }
 
     private void drawButton(Canvas canvas) {
         // Define vars
-        buttonDistFromCorner = (float) ((Constants.SCREEN_HEIGHT / 20) * 1.2);
+        buttonDistFromCorner = (float) ((this.getHeight() / 2) * 1.2);
         x = (float) (Constants.SCREEN_WIDTH - buttonDistFromCorner / 1.2);
         y = (float) (buttonDistFromCorner / 1.2);
         rad = (float) (buttonDistFromCorner / 1.5);
