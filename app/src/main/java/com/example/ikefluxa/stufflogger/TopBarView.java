@@ -17,9 +17,9 @@ public class TopBarView extends View {
     protected RectShadow rectShadow = new RectShadow();
     protected Rect tBounds = new Rect();
     protected RectF rainbowRect = new RectF();
-    private boolean rainbow = true;
     protected boolean textHasShadow = true;
-    private int color; // Color is ranbow
+    private boolean rainbow = true; // See below
+    private int color; // Color of rect is rainbow until defined
     protected float height;
     public TopBarView(Context context) {
         super(context);
@@ -35,6 +35,12 @@ public class TopBarView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        drawRectTextAndShadows(canvas);
+
+        super.onDraw(canvas);
+    }
+
+    protected void drawRectTextAndShadows(Canvas canvas) {
         if(rainbow) {
             drawRectShadow(canvas);
             drawRainbowRect(canvas);
@@ -47,8 +53,6 @@ public class TopBarView extends View {
         } else {
             drawTextWithoutShadow(canvas);
         }
-
-        super.onDraw(canvas);
     }
 
     protected void drawTextWithShadow(Canvas canvas) {
@@ -86,6 +90,7 @@ public class TopBarView extends View {
     }
 
     protected void drawRectShadow(Canvas canvas) {
+        paint.setColor(Color.BLACK);
         rectShadow.draw((float) -100, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT / 8, canvas, paint);
     }
 
