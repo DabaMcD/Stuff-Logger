@@ -4,11 +4,14 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.View;
 
-public class MainTopBarView extends TopBarView {
+public class MainTopBarView extends View {
+    Paint paint = new Paint();
 
     // Unique to button stuff
     Boolean hovering;
@@ -18,6 +21,7 @@ public class MainTopBarView extends TopBarView {
     public float x;
     public float y;
     public float rad;
+    RectF rainbowRect = new RectF();
 
     public MainTopBarView(Context context) {
         super(context);
@@ -33,7 +37,7 @@ public class MainTopBarView extends TopBarView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        drawRectTextAndShadows(canvas);
+        TopBarView.drawRectTextAndShadows(canvas, 12345, true, "Stuff Logger");
         super.onDraw(canvas);
     }
 
@@ -69,9 +73,7 @@ public class MainTopBarView extends TopBarView {
 
     public void draw(Boolean hovering) {
         this.hovering = hovering;
-        text = "Stuff Logger";
         invalidate();
         requestLayout();
-        super.draw();
     }
 }

@@ -1,70 +1,52 @@
 package com.example.ikefluxa.stufflogger;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.support.annotation.Nullable;
-import android.util.AttributeSet;
-import android.view.View;
+import android.graphics.Typeface;
 
-public class TopBarView extends View {
-    protected Paint paint = new Paint();
-    protected String text = "Nothing for now";
-    protected TextShadow textShadow = new TextShadow();
-    protected RectShadow rectShadow = new RectShadow();
-    protected Rect tBounds = new Rect();
-    protected RectF rainbowRect = new RectF();
-    protected boolean textHasShadow = true;
-    private boolean rainbow = true; // See below
-    private int color; // Color of rect is rainbow until defined
-    protected float height;
-    public TopBarView(Context context) {
-        super(context);
-    }
+public class TopBarView {
+    public static float standardHeight;
+    private static Paint paint = new Paint();
+    private static TextShadow textShadow = new TextShadow();
+    private static RectShadow rectShadow = new RectShadow();
+    private static Rect tBounds = new Rect();
+    private static RectF rainbowRect = new RectF();
+    private static int color; // Color of rect is rainbow until defined
 
-    public TopBarView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    public TopBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        drawRectTextAndShadows(canvas);
-
-        super.onDraw(canvas);
-    }
-
-    protected void drawRectTextAndShadows(Canvas canvas) {
-        if(rainbow) {
+    public static void drawRectTextAndShadows(Canvas canvas, int color12345ForRainbow, boolean textHasShadow, String text) {
+        if(color12345ForRainbow == 12345) {
             drawRectShadow(canvas);
             drawRainbowRect(canvas);
         } else {
-            drawRectWithShadow(canvas);
+            TopBarView.color = color12345ForRainbow;
+            drawRectWithShadow(canvas, color12345ForRainbow);
         }
-        tweakTopBarTextSize();
+        tweakTopBarTextSize(text);
         if(textHasShadow) {
-            drawTextWithShadow(canvas);
+            drawTextWithShadow(canvas, text);
         } else {
-            drawTextWithoutShadow(canvas);
+            drawTextWithoutShadow(canvas, text);
         }
     }
 
-    protected void drawTextWithShadow(Canvas canvas) {
+    public static void drawTextWithShadow(Canvas canvas, String text) {
         paint.setColor(Color.BLACK);
-        textShadow.draw(text, Constants.SCREEN_WIDTH / 2, height / 2 + paint.getTextSize() / 3, canvas, paint);
+        paint.setTypeface(Typeface.DEFAULT_BOLD);
+        paint.setTextAlign(Paint.Align.CENTER);
+        textShadow.draw(text, Constants.SCREEN_WIDTH / 2, standardHeight / 2 + paint.getTextSize() / 3, canvas, paint);
     }
 
-    protected void drawTextWithoutShadow(Canvas canvas) {
-        canvas.drawText(text, Constants.SCREEN_WIDTH / 2, height / 2 + paint.getTextSize() / 3, paint);
+    public static void drawTextWithoutShadow(Canvas canvas, String text) {
+        paint.setColor(Color.BLACK);
+        paint.setTypeface(Typeface.DEFAULT_BOLD);
+        paint.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText(text, Constants.SCREEN_WIDTH / 2, standardHeight / 2 + paint.getTextSize() / 3, paint);
     }
 
-    private void tweakTopBarTextSize() {
+    public static void tweakTopBarTextSize(String text) {
         paint.setTextSize(Constants.SCREEN_HEIGHT / 10);
         paint.getTextBounds(text, 0, text.length(), tBounds);
         while(tBounds.width() > (Constants.SCREEN_WIDTH / 2) * 1.7) {
@@ -73,14 +55,14 @@ public class TopBarView extends View {
         }
     }
 
-    protected void drawRectWithShadow(Canvas canvas) {
+    public static void drawRectWithShadow(Canvas canvas, int color) {
         paint.setColor(color);
-        rectShadow.draw(-20, -1, Constants.SCREEN_WIDTH + 1, height, canvas, paint);
+        rectShadow.draw(-20, -1, Constants.SCREEN_WIDTH + 1, standardHeight, canvas, paint);
     }
 
-    protected void drawRainbowRect(Canvas canvas) {
+    public static void drawRainbowRect(Canvas canvas) {
         rainbowRect.top = 0;
-        rainbowRect.bottom = height;
+        rainbowRect.bottom = standardHeight;
         for(int i = 0; i < Constants.SCREEN_WIDTH; i ++) {
             rainbowRect.left = i;
             rainbowRect.right = i + 1;
@@ -89,18 +71,8 @@ public class TopBarView extends View {
         }
     }
 
-    protected void drawRectShadow(Canvas canvas) {
+    public static void drawRectShadow(Canvas canvas) {
         paint.setColor(Color.BLACK);
-        rectShadow.draw((float) -100, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT / 8, canvas, paint);
-    }
-
-    public void setColor(int color) {
-        this.color = color;
-        rainbow = false;
-    }
-
-    public void draw() {
-        invalidate();
-        requestLayout();
+        rectShadow.draw((float) -100, 0, Constants.SCREEN_WIDTH, standardHeight, canvas, paint);
     }
 }
