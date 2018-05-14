@@ -1,7 +1,7 @@
 package com.example.ikefluxa.stufflogger;
 
-import android.app.Activity;
 import android.graphics.Color;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -60,6 +60,9 @@ public class Constants {
         } else {
             System.out.println("ERROR in Constants, method correctScreenDims");
         }
+
+        // Just to re-define the top bar height
+        TopBar.standardHeight = (float) (Constants.SCREEN_HEIGHT  * 0.175);
     }
     public static int darkenColor(int color) {
         if(Color.red(color) + Color.green(color) * 1.5 + Color.blue(color) * 1.5 > 450) {

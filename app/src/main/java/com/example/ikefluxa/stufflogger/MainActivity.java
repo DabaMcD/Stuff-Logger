@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
 import java.io.FileInputStream;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         // Need the line below in the startup activity
         defineConstantsStuff();
         // Need the line below in every other activity
-//        Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
+        Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
 
         // Define all the things in the xml code
         mainTopBarShadowView = findViewById(R.id.mainTopBarShadowView);
@@ -57,6 +58,13 @@ public class MainActivity extends AppCompatActivity {
         // Touch listeners
         setTopBarTouchListener();
         setUserListTouchListener();
+
+        usersListView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                usersListView.draw(-1);
+            }
+        });
     }
 
     @Override
@@ -148,9 +156,6 @@ public class MainActivity extends AppCompatActivity {
         Constants.ORIG_SHORTER_SCREEN_DIM = Math.min(ht, wd);
 
         Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
-
-        // Isn't a constant stuff
-        TopBarView.standardHeight = (float) (Constants.SCREEN_HEIGHT  * 0.175);
     }
 
     public void newUserClick() {

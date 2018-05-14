@@ -37,7 +37,15 @@ public class MainTopBarView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        TopBarView.drawRectTextAndShadows(canvas, 12345, true, "Stuff Logger");
+        TopBar.drawRainbowRect(canvas);
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.DEFAULT_BOLD);
+        paint.setTextSize(Constants.SCREEN_HEIGHT / 14);
+        paint.setColor(Color.BLACK);
+        TopBar.textShadow.draw("Stuff Logger", Constants.SCREEN_HEIGHT / 40, TopBar.standardHeight / 2 + paint.getTextSize() / 3, canvas, paint);
+
+        drawButton(canvas);
+
         super.onDraw(canvas);
     }
 
@@ -69,6 +77,12 @@ public class MainTopBarView extends View {
         userAdderH.draw(x - endOfRectRelToCircle, y - sideOfRectRelToCircle, x + endOfRectRelToCircle, y + sideOfRectRelToCircle, canvas, paint);
         // Vertical rect
         canvas.drawRect(x - sideOfRectRelToCircle, y - endOfRectRelToCircle, x + sideOfRectRelToCircle, y + endOfRectRelToCircle, paint);
+    }
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        System.out.println("SCROLL CHANGED");
+        super.onScrollChanged(l, t, oldl, oldt);
     }
 
     public void draw(Boolean hovering) {

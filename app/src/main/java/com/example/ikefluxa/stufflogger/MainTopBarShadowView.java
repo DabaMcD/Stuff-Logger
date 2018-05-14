@@ -27,8 +27,7 @@ public class MainTopBarShadowView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        paint.setColor(Color.BLACK);
-        topBar.draw((float) -100, 0, Constants.SCREEN_WIDTH, mainTopBarView.getHeight(), canvas, paint);
+        TopBar.drawRectWithShadow(canvas, Color.BLACK);
         super.onDraw(canvas);
     }
 

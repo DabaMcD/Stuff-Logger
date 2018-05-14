@@ -6,10 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.VectorDrawable;
-import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -97,6 +93,12 @@ public class UsersListView extends View{
         }
 
         super.onDraw(canvas);
+    }
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        System.out.println("SCROLL CHANGED");
+        super.onScrollChanged(l, t, oldl, oldt);
     }
 
     private String getLongestName(String name) {
