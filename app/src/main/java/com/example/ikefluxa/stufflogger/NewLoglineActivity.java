@@ -14,6 +14,7 @@ public class NewLoglineActivity extends AppCompatActivity {
     Button back;
     TextView title;
     EditText subjectName;
+    NewLoglineTopBarView newLoglineTopBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,9 @@ public class NewLoglineActivity extends AppCompatActivity {
 
         subjectName = findViewById(R.id.subjectName);
         subjectName.setTextColor(Color.DKGRAY);
+
+        newLoglineTopBarView = findViewById(R.id.newLoglineTopBarView);
+        newLoglineTopBarView.draw();
     }
 
     public void back(View view) {

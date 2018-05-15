@@ -7,6 +7,11 @@
     tools:context="com.example.ikefluxa.stufflogger.LogActivity"
     android:id="@+id/LayoutBackground">
 
+    <com.example.ikefluxa.stufflogger.LogTopBarView
+        android:id="@+id/logTopBarView"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
+
     <com.example.ikefluxa.stufflogger.DrawLog
         android:id="@+id/drawLog"
         android:layout_width="match_parent"

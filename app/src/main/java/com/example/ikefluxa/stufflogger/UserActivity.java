@@ -10,6 +10,7 @@ import android.widget.EditText;
 public class UserActivity extends AppCompatActivity {
     Button createUser;
     EditText name;
+    UserTopBarView userTopBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,8 @@ public class UserActivity extends AppCompatActivity {
 
         createUser = findViewById(R.id.createUser);
         name = findViewById(R.id.name);
+        userTopBarView = findViewById(R.id.userTopBarView);
+        userTopBarView.draw();
 
         String[] nicknames = new String[] {
                 "e.g. Bobby Joe",

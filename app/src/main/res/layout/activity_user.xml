@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context="com.example.ikefluxa.stufflogger.UserActivity">
 
+    <com.example.ikefluxa.stufflogger.UserTopBarView
+        android:id="@+id/userTopBarView"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
+
     <EditText
         android:id="@+id/name"
         android:maxLines="1"
