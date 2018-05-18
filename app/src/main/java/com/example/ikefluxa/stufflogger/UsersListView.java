@@ -24,6 +24,10 @@ public class UsersListView extends View{
     VectorDrawable vectorTrashCan;
     BitmapDrawable bitmapTrashCan;
 
+    float trashX;
+    float trashRad;
+    int trashClickingIndex;
+
     public UsersListView(Context context) {
         super(context);
         setVerticalScrollBarEnabled(true);
@@ -92,6 +96,8 @@ public class UsersListView extends View{
                 );
                 bitmapTrashCan.draw(canvas);
             }
+            trashX = centerX;
+            trashRad = (float) (trashHeight * 0.65);
 
             // Draw dark rectangle over the box (only if being clicked)
             if(Constants.mainClickingUserIndex == i) {
@@ -124,12 +130,21 @@ public class UsersListView extends View{
 
     public int actionDown(float x, float y) {
         // If they touch down inside one of the boxes,
-        // acivate the touchedUserIndex and set it to that user.
+        // activate the touchedUserIndex and set it to that user.
         Constants.mainClickingUserIndex = -1;
         for(int i = 0; i < Constants.users.size(); i ++) {
-            float top = userButtonHt * i + lineThk * (i + 1);
+            // Trash can button part
+            float top = userButtonHt * trashClickingIndex + lineThk * (trashClickingIndex + 1);
             float bottom = top + userButtonHt;
-            if(y > top && y < bottom) {
+            if (Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) < trashRad) {
+                trashClickingIndex = i;
+                break;
+            }
+
+            // User button part
+            top = userButtonHt * Constants.mainClickingUserIndex + lineThk * (Constants.mainClickingUserIndex + 1);
+            bottom = top + userButtonHt;
+            if(y > top && y < bottom && Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
                 Constants.mainClickingUserIndex = i;
                 break;
             }
@@ -138,10 +153,19 @@ public class UsersListView extends View{
     } // Triggers on scroll start
 
     public int actionMove(float x, float y) {
-        // If they go outside the box, deactivate the touchedUserIndex
-        float top = userButtonHt * Constants.mainClickingUserIndex + lineThk * (Constants.mainClickingUserIndex + 1);
+        // Trash can button part
+        float top = userButtonHt * trashClickingIndex + lineThk * (trashClickingIndex + 1);
         float bottom = top + userButtonHt;
-        if (y > top && y < bottom) {
+
+        if (Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
+            trashClickingIndex = -1;
+        }
+
+        // User button part
+        // If they go outside the box, deactivate the touchedUserIndex
+        top = userButtonHt * Constants.mainClickingUserIndex + lineThk * (Constants.mainClickingUserIndex + 1);
+        bottom = top + userButtonHt;
+        if (y > top && y < bottom && Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
             // Return the user clicked
             return Constants.mainClickingUserIndex;
         } else {
@@ -152,11 +176,22 @@ public class UsersListView extends View{
     } // Triggers on scroll move
 
     public int actionUp(float x, float y) {
+        // Trash can button part
+        float top = userButtonHt * trashClickingIndex + lineThk * (trashClickingIndex + 1);
+        float bottom = top + userButtonHt;
+
+        if (Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
+            trashClickingIndex = -1;
+        } else {
+            
+        }
+
+        // User button part
         // If they're still inside the box when their finger lets up,
         // and the touchedUserIndex is still activated, return the user index.
-        float top = userButtonHt * Constants.mainClickingUserIndex + lineThk * (Constants.mainClickingUserIndex + 1);
-        float bottom = top + userButtonHt;
-        if (y > top && y < bottom) {
+        top = userButtonHt * Constants.mainClickingUserIndex + lineThk * (Constants.mainClickingUserIndex + 1);
+        bottom = top + userButtonHt;
+        if (y > top && y < bottom && Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
             // Return the user clicked
             return Constants.mainClickingUserIndex;
         } else {

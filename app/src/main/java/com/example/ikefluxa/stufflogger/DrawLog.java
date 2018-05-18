@@ -34,7 +34,7 @@ public class DrawLog extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         // Shorten user name
-        log = Constants.users.get(Constants.currentUserIndex).logs.get(Constants.users.get(Constants.currentUserIndex).currentLog);
+        log = Constants.users.get(Constants.currentUserIndex).logs.get(Constants.users.get(Constants.currentUserIndex).logs.size() - 1);
 
         // Draw lines making a 1D grid
         lineGap = (int) (Constants.SCREEN_HEIGHT / 10f);
@@ -62,11 +62,11 @@ public class DrawLog extends View {
         float eightWidth = paint.measureText("8");
 
         // Draw loglines
-        for(int i = 0; i < user.logLines.size(); i ++) {
+        for(int i = 0; i < log.logLines.size(); i ++) {
             float txtYpos = (float) ((TopBar.standardHeight + lineGap * 1.5) + (lineGap * (i + 0.5)) + (paint.getTextSize() / 3));
-            canvas.drawText(user.logLines.get(i).subject.name, leftLimit + eightWidth * 3 + dashWidth, txtYpos, paint);
+            canvas.drawText(log.logLines.get(i).subject.name, leftLimit + eightWidth * 3 + dashWidth, txtYpos, paint);
             canvas.drawText("-", leftLimit + eightWidth * 3 + nWidth, txtYpos, paint);
-            String dadTime = MyTime.getDadTime(user.logLines.get(i).startTime);
+            String dadTime = MyTime.getDadTime(log.logLines.get(i).startTime);
             canvas.drawText(String.valueOf(dadTime.charAt(0)), leftLimit, txtYpos, paint);
             canvas.drawText(String.valueOf(dadTime.charAt(1)), leftLimit + eightWidth, txtYpos, paint);
             canvas.drawText(String.valueOf(dadTime.charAt(2)), leftLimit + eightWidth * 2, txtYpos, paint);

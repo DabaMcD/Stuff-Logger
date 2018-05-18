@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -22,6 +23,11 @@ public class LogActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
+
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.flags |= WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
+        params.screenBrightness = 0;
+        getWindow().setAttributes(params);
 
         Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
 
