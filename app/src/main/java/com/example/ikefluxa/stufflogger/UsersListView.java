@@ -26,7 +26,7 @@ public class UsersListView extends View{
 
     float trashX;
     float trashRad;
-    int trashClickingIndex;
+    int trashClickingIndex = -1;
 
     public UsersListView(Context context) {
         super(context);
@@ -104,6 +104,12 @@ public class UsersListView extends View{
                 paint.setColor(Color.argb(30, 0, 0, 0));
                 canvas.drawRect(-1, top, Constants.SCREEN_WIDTH + 1, bottom, paint);
             }
+
+            // Draw dark circle over trash can (only if being clicked)
+            if(trashClickingIndex == i) {
+                paint.setColor(Color.argb(30, 0, 0, 0));
+                canvas.drawCircle(trashX, top + (spaceY / 2), trashRad, paint);
+            }
         }
 
         super.onDraw(canvas);
@@ -134,16 +140,15 @@ public class UsersListView extends View{
         Constants.mainClickingUserIndex = -1;
         for(int i = 0; i < Constants.users.size(); i ++) {
             // Trash can button part
-            float top = userButtonHt * trashClickingIndex + lineThk * (trashClickingIndex + 1);
+            float top = userButtonHt * i + lineThk * (i + 1);
             float bottom = top + userButtonHt;
+
             if (Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) < trashRad) {
                 trashClickingIndex = i;
                 break;
             }
 
             // User button part
-            top = userButtonHt * Constants.mainClickingUserIndex + lineThk * (Constants.mainClickingUserIndex + 1);
-            bottom = top + userButtonHt;
             if(y > top && y < bottom && Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
                 Constants.mainClickingUserIndex = i;
                 break;
@@ -179,11 +184,10 @@ public class UsersListView extends View{
         // Trash can button part
         float top = userButtonHt * trashClickingIndex + lineThk * (trashClickingIndex + 1);
         float bottom = top + userButtonHt;
-
         if (Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
             trashClickingIndex = -1;
         } else {
-            
+
         }
 
         // User button part
