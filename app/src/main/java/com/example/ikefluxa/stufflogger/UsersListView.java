@@ -180,21 +180,22 @@ public class UsersListView extends View{
         }
     } // Triggers on scroll move
 
-    public int actionUp(float x, float y) {
-        // Trash can button part
+    public int actionUpTrashButton(float x, float y) {
         float top = userButtonHt * trashClickingIndex + lineThk * (trashClickingIndex + 1);
         float bottom = top + userButtonHt;
         if (Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
             trashClickingIndex = -1;
+            return -1;
         } else {
-
+            return trashClickingIndex;
         }
+    }
 
-        // User button part
+    public int actionUpUserButton(float x, float y) {
         // If they're still inside the box when their finger lets up,
         // and the touchedUserIndex is still activated, return the user index.
-        top = userButtonHt * Constants.mainClickingUserIndex + lineThk * (Constants.mainClickingUserIndex + 1);
-        bottom = top + userButtonHt;
+        float top = userButtonHt * Constants.mainClickingUserIndex + lineThk * (Constants.mainClickingUserIndex + 1);
+        float bottom = top + userButtonHt;
         if (y > top && y < bottom && Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
             // Return the user clicked
             return Constants.mainClickingUserIndex;

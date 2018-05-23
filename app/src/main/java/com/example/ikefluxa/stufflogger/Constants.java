@@ -20,6 +20,7 @@ public class Constants {
     public static int SCREEN_WIDTH;
     public static int SCREEN_HEIGHT;
     public static ArrayList<User> users = new ArrayList<>();
+    public static User deletedUser;
     public static int currentUserIndex;
     public static ArrayList<Integer> colors = new ArrayList<>(Arrays.asList(
             Color.rgb(255, 0, 0), // Red

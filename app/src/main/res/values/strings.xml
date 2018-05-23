@@ -6,4 +6,6 @@
     <string name="Subject">Subject</string>
     <string name="Nickname">Nickname</string>
     <string name="AddUser">Add User</string>
+    <string name="Yes">Yes</string>
+    <string name="Cancel">Cancel</string>
 </resources>

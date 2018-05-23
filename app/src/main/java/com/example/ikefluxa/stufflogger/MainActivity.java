@@ -119,10 +119,15 @@ public class MainActivity extends AppCompatActivity {
                         usersListView.draw(usersListView.actionMove(event.getX(), event.getY()));
                         break;
                     case MotionEvent.ACTION_UP:
-                        int clickedIndex = usersListView.actionUp(event.getX(), event.getY());
+                        int clickedIndex = usersListView.actionUpUserButton(event.getX(), event.getY());
                         if(clickedIndex != -1) {
                             usersListClick(clickedIndex);
-                            usersListView.draw(clickedIndex);
+                        }
+                        usersListView.draw(clickedIndex);
+
+                        int trashClickedIndex = usersListView.actionUpTrashButton(event.getX(), event.getY());
+                        if(trashClickedIndex != -1) {
+                            trashUsersListClick(trashClickedIndex);
                         }
                         break;
                 }
@@ -136,6 +141,11 @@ public class MainActivity extends AppCompatActivity {
 
         Intent myIntent = new Intent(this, LogActivity.class);
         startActivity(myIntent);
+    }
+
+    public void trashUsersListClick(int clickIndex) {
+        ConfirmUserDeleteActivity.userIndex = clickIndex;
+        startActivity(new Intent(this, ConfirmUserDeleteActivity.class));
     }
 
     public void defineConstantsStuff() {
