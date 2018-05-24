@@ -16,8 +16,9 @@ import java.io.FileOutputStream;
 public class LogActivity extends AppCompatActivity {
     DrawLog drawLog;
     NewLoglineButtonView newLoglineButton;
-    Boolean clicking;
+    Boolean clicking = false;
     LogTopBarView logTopBarView;
+    ClearLogButtonView clearLogButtonView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,9 @@ public class LogActivity extends AppCompatActivity {
 
         logTopBarView.draw();
 
-        clicking = false;
+        clearLogButtonView = findViewById(R.id.clearLogButtonView);
+
+        clearLogButtonView.draw(false);
 
         // Stuff for previous activity
         if(Constants.moveUserToFrontIndex != -1) {
@@ -62,6 +65,7 @@ public class LogActivity extends AppCompatActivity {
 
         // Set up click listener
         setLogTouchListener();
+        setClearTouchListener();
     }
 
     @Override
@@ -91,6 +95,35 @@ public class LogActivity extends AppCompatActivity {
                             newLogline();
                         } else {
                             newLoglineButton.draw(false);
+                        }
+                        break;
+                }
+                return true;
+            }
+        });
+    }
+
+    public void setClearTouchListener() {
+        findViewById(R.id.LayoutBackground).setOnTouchListener(new RelativeLayout.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        if(Constants.getDist(event.getX(), event.getY(), clearLogButtonView.x, clearLogButtonView.y) <= clearLogButtonView.rad) {
+                            clearLogButtonView.draw(true);
+                            clicking = true;
+                        }
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        if(Constants.getDist(event.getX(), event.getY(), clearLogButtonView.x, clearLogButtonView.y) > clearLogButtonView.rad) {
+                            clicking = false;
+                        }
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if(Constants.getDist(event.getX(), event.getY(), clearLogButtonView.x, clearLogButtonView.y) <= newLoglineButton.rad && clicking) {
+                            Constants.users.get(0).newLog();
+                        } else {
+                            clearLogButtonView.draw(false);
                         }
                         break;
                 }

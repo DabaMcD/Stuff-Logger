@@ -1,2 +1,6 @@
-### To Do ###
-* Make user list with trash can button on each user
+# To Do
+* Make clear log button
+* File saving
+
+### EVENTUALLY,
+* Make "undo" button after deleting user

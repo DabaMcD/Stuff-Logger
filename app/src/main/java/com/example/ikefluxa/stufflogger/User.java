@@ -36,7 +36,7 @@ public class User {
         this.color = color;
     }
 
-    public void clearLog() {
+    public void newLog() {
         logs.add(new Log());
     }
 }
