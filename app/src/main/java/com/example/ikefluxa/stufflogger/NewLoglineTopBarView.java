@@ -21,7 +21,7 @@ public class NewLoglineTopBarView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        User user = Constants.users.get(Constants.currentUserIndex);
+        User user = Constants.users.get(0);
         TopBar.drawRectTextAndShadows(canvas, user.color, true, "Add Logline (for " + user.name + ")");
 
         super.onDraw(canvas);

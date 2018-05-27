@@ -1,6 +1,9 @@
 package com.example.ikefluxa.stufflogger;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +24,6 @@ public class Constants {
     public static int SCREEN_HEIGHT;
     public static ArrayList<User> users = new ArrayList<>();
     public static User deletedUser;
-    public static int currentUserIndex;
     public static ArrayList<Integer> colors = new ArrayList<>(Arrays.asList(
             Color.rgb(255, 0, 0), // Red
             Color.rgb(0, 0, 255), // Blue

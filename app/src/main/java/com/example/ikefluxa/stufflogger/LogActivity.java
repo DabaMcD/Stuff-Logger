@@ -54,18 +54,11 @@ public class LogActivity extends AppCompatActivity {
             // effectively putting it as the most recent.
             Constants.users.add(0, Constants.users.get(Constants.moveUserToFrontIndex));
             Constants.users.remove(Constants.moveUserToFrontIndex + 1);
-            Constants.currentUserIndex = 0;
             Constants.moveUserToFrontIndex = -1;
-        } else {
-            Constants.users.add(0, Constants.users.get(Constants.currentUserIndex));
-            Constants.users.remove(Constants.currentUserIndex + 1);
-            Constants.currentUserIndex = 0;
         }
-        Constants.mainClickingUserIndex = -1;
 
         // Set up click listener
-        setLogTouchListener();
-        setClearTouchListener();
+        setTouchListeners();
     }
 
     @Override
@@ -74,57 +67,48 @@ public class LogActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    public void setLogTouchListener() {
+    public void setTouchListeners() {
         findViewById(R.id.LayoutBackground).setOnTouchListener(new RelativeLayout.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+                        // Add logline button
                         if(Constants.getDist(event.getX(), event.getY(), newLoglineButton.x, newLoglineButton.y) <= newLoglineButton.rad) {
                             newLoglineButton.draw(true);
                             clicking = true;
                         }
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        if(Constants.getDist(event.getX(), event.getY(), newLoglineButton.x, newLoglineButton.y) > newLoglineButton.rad) {
-                            clicking = false;
-                        }
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        if(Constants.getDist(event.getX(), event.getY(), newLoglineButton.x, newLoglineButton.y) <= newLoglineButton.rad && clicking) {
-                            newLogline();
-                        } else {
-                            newLoglineButton.draw(false);
-                        }
-                        break;
-                }
-                return true;
-            }
-        });
-    }
 
-    public void setClearTouchListener() {
-        findViewById(R.id.LayoutBackground).setOnTouchListener(new RelativeLayout.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch(event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
+                        // Clear log button
                         if(Constants.getDist(event.getX(), event.getY(), clearLogButtonView.x, clearLogButtonView.y) <= clearLogButtonView.rad) {
                             clearLogButtonView.draw(true);
                             clicking = true;
                         }
                         break;
                     case MotionEvent.ACTION_MOVE:
+                        // Add logline button
+                        if(Constants.getDist(event.getX(), event.getY(), newLoglineButton.x, newLoglineButton.y) > newLoglineButton.rad) {
+                            clicking = false;
+                        }
+
+                        // Clear log button
                         if(Constants.getDist(event.getX(), event.getY(), clearLogButtonView.x, clearLogButtonView.y) > clearLogButtonView.rad) {
                             clicking = false;
                         }
                         break;
                     case MotionEvent.ACTION_UP:
-                        if(Constants.getDist(event.getX(), event.getY(), clearLogButtonView.x, clearLogButtonView.y) <= newLoglineButton.rad && clicking) {
-                            Constants.users.get(0).newLog();
+                        // Add logline button
+                        if(Constants.getDist(event.getX(), event.getY(), newLoglineButton.x, newLoglineButton.y) <= newLoglineButton.rad && clicking) {
+                            newLogline();
                         } else {
-                            clearLogButtonView.draw(false);
+                            newLoglineButton.draw(false);
                         }
+
+                        // Clear log button
+                        if(Constants.getDist(event.getX(), event.getY(), clearLogButtonView.x, clearLogButtonView.y) <= newLoglineButton.rad && clearLogButtonView.hovering) {
+                            Constants.users.get(0).newLog();
+                        }
+                        clearLogButtonView.draw(false);
                         break;
                 }
                 return true;

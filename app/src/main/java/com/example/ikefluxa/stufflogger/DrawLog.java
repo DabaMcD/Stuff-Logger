@@ -34,7 +34,7 @@ public class DrawLog extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         // Shorten user name
-        log = Constants.users.get(Constants.currentUserIndex).logs.get(Constants.users.get(Constants.currentUserIndex).logs.size() - 1);
+        log = Constants.users.get(0).logs.get(Constants.users.get(0).logs.size() - 1);
 
         // Draw lines making a 1D grid
         lineGap = (int) (Constants.SCREEN_HEIGHT / 10f);
