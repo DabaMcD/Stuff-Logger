@@ -87,28 +87,35 @@ public class LogActivity extends AppCompatActivity {
                         break;
                     case MotionEvent.ACTION_MOVE:
                         // Add logline button
-                        if(Constants.getDist(event.getX(), event.getY(), newLoglineButton.x, newLoglineButton.y) > newLoglineButton.rad) {
+                        if(Constants.getDist(event.getX(), event.getY(), newLoglineButton.x, newLoglineButton.y) > newLoglineButton.rad && clicking) {
                             clicking = false;
-                        }
-
-                        // Clear log button
-                        if(Constants.getDist(event.getX(), event.getY(), clearLogButtonView.x, clearLogButtonView.y) > clearLogButtonView.rad) {
-                            clicking = false;
-                        }
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        // Add logline button
-                        if(Constants.getDist(event.getX(), event.getY(), newLoglineButton.x, newLoglineButton.y) <= newLoglineButton.rad && clicking) {
-                            newLogline();
-                        } else {
                             newLoglineButton.draw(false);
                         }
 
                         // Clear log button
-                        if(Constants.getDist(event.getX(), event.getY(), clearLogButtonView.x, clearLogButtonView.y) <= newLoglineButton.rad && clearLogButtonView.hovering) {
-                            Constants.users.get(0).newLog();
+                        if(Constants.getDist(event.getX(), event.getY(), clearLogButtonView.x, clearLogButtonView.y) > clearLogButtonView.rad && clearLogButtonView.hovering) {
+                            clearLogButtonView.hovering = false;
+                            clearLogButtonView.draw(false);
                         }
-                        clearLogButtonView.draw(false);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        // Add logline button
+                        if(clicking) {
+                            if (Constants.getDist(event.getX(), event.getY(), newLoglineButton.x, newLoglineButton.y) <= newLoglineButton.rad) {
+                                newLogline();
+                            } else {
+                                newLoglineButton.draw(false);
+                            }
+                        }
+
+                        // Clear log button
+                        if(clearLogButtonView.hovering) {
+                            if (Constants.getDist(event.getX(), event.getY(), clearLogButtonView.x, clearLogButtonView.y) <= newLoglineButton.rad) {
+                                Constants.users.get(0).newLog();
+                                drawLog.draw();
+                            }
+                            clearLogButtonView.draw(false);
+                        }
                         break;
                 }
                 return true;

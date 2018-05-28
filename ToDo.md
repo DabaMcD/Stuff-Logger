@@ -1,5 +1,4 @@
 # To Do
-* Make clear log button
 * File saving
 
 ### EVENTUALLY,

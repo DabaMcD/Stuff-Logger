@@ -47,9 +47,21 @@ public class ClearLogButtonView extends View {
 
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setColor(Color.BLACK);
-        clearText.draw("CLEAR", x, y, canvas, paint);
+        paint.setTypeface(Typeface.DEFAULT_BOLD);
+        tweakClearTextSize();
+        clearText.draw("CLEAR", x, y + paint.getTextSize() / 3, canvas, paint);
 
         super.onDraw(canvas);
+    }
+
+    private void tweakClearTextSize() {
+        paint.setTextSize(0);
+        while(paint.measureText("CLEAR") < rad * 2) {
+            paint.setTextSize(paint.getTextSize() + 1);
+        }
+        while(paint.measureText("CLEAR") > rad * 1.5) {
+            paint.setTextSize(paint.getTextSize() - 1);
+        }
     }
 
     public void draw(boolean hovering) {
