@@ -2,22 +2,21 @@ package com.example.ikefluxa.stufflogger;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
-/**
- * Created by Ike&Fluxa on 2/22/2018.
- */
-
 public class Constants {
     public static int moveUserToFrontIndex = -1;
     public static int mainClickingUserIndex = -1;
-    public static boolean goToLogActivityFromMainActivity = false;
-    public static int STATUS_BAR_HEIGHT; // Sataus bar is a
+    public static int STATUS_BAR_HEIGHT; // Status bar is a
     public static int ORIG_LONGER_SCREEN_DIM; // With status bar and always the longer dimension
     public static int ORIG_SHORTER_SCREEN_DIM; // With status bar if included and always the shorter dim
     public static int SCREEN_WIDTH;
@@ -74,6 +73,50 @@ public class Constants {
                     (int) (Color.blue(color) / 1.5));
         } else {
             return color;
+        }
+    }
+    public static void saveUserFiles(Context context) {
+        // Erase previous files
+        int i = 0;
+        File file = new File(context.getFilesDir(), "User" + String.valueOf(i) + ".txt");
+        while(file.getAbsoluteFile().exists() && !file.isDirectory()) {
+            context.deleteFile(file.getName());
+            i ++;
+            file = new File(context.getFilesDir(), "User" + String.valueOf(i) + ".txt");
+        }
+
+        // Create new files
+        i = 0;
+        while(i < users.size()) {
+            try {
+                File outputFile = new File(context.getFilesDir(), "User" + String.valueOf(i) + ".txt");
+                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(outputFile));
+                oos.writeObject(users.get(i));
+                oos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            i ++;
+        }
+    }
+    public static void retrieveUserFiles(Context context) {
+        if(users.size() == 0) {
+            int i = 0;
+            File inputFile = new File(context.getFilesDir(), "User" + String.valueOf(i) + ".txt");
+            while (inputFile.exists() && !inputFile.isDirectory()) {
+                try {
+                    ObjectInputStream ois = new ObjectInputStream(new FileInputStream(inputFile));
+                    users.add((User) ois.readObject());
+                    ois.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                i++;
+                inputFile = new File(context.getFilesDir(), "User" + String.valueOf(i) + ".txt");
+            }
+        } else {
+            System.out.println("Oops, and error has occurred when retrieving user files. Users was:");
+            System.out.println(users);
         }
     }
 }

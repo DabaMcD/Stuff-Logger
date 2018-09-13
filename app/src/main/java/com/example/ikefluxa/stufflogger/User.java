@@ -1,14 +1,15 @@
 package com.example.ikefluxa.stufflogger;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Ike&Fluxa on 2/19/2018.
  */
 
-public class User {
+public class User implements Serializable {
     public String name;
-    public ArrayList<Subject> subjects = new ArrayList<>();
+    public ArrayList<Subject> subjects = new ArrayList<>(); // todo: do we really need this??
     public int color;
 
     ArrayList<Log> logs = new ArrayList<>();

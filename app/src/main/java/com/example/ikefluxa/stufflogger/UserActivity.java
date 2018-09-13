@@ -1,11 +1,9 @@
 package com.example.ikefluxa.stufflogger;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -43,8 +41,10 @@ public class UserActivity extends AppCompatActivity {
 
     public void newUserClick(View target) {
         Constants.users.add(new User(name.getText().toString()));
-        Constants.goToLogActivityFromMainActivity = true;
-        Intent myIntent = new Intent(this, MainActivity.class);
+
+
+
+        Intent myIntent = new Intent(this, LogActivity.class);
         startActivity(myIntent);
     }
 }

@@ -1,9 +1,10 @@
 package com.example.ikefluxa.stufflogger;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Log {
+public class Log implements Serializable {
     public ArrayList<LogLine> logLines;
 
     // Date stuff

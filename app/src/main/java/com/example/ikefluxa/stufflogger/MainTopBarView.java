@@ -21,7 +21,6 @@ public class MainTopBarView extends View {
     public float x;
     public float y;
     public float rad;
-    RectF rainbowRect = new RectF();
 
     public MainTopBarView(Context context) {
         super(context);
