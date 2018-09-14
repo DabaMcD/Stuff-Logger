@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -12,27 +11,16 @@ import android.view.View;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-/**
- * Created by Ike&Fluxa on 2/22/2018.
- */
+import java.util.Locale;
 
 public class DrawLog extends View {
-    public int rowsPerPage = 10;
-    public Paint paint = new Paint();
-    public User user;
-    Rect tBounds = new Rect();
-    Rect dateBounds = new Rect();
-    Rect logLineBounds = new Rect();
-    Rect dashBounds = new Rect();
-    Rect eightBounds = new Rect();
-    Rect logLineNameBounds = new Rect();
-    Rect nBounds = new Rect();
-    int recordLineWidth;
-    int leftLimit;
-    int lineGap;
+    private Paint paint = new Paint();
+    private User user;
+    private int leftLimit;
+    private int lineGap;
 
     // Date stuff
+    SimpleDateFormat simpleDateFormatMMM = new SimpleDateFormat("MMM", Locale.getDefault());
     String weekday; // First three letters
     String month; // First three letters
     int day;
@@ -75,17 +63,17 @@ public class DrawLog extends View {
 
         // Set date vals
         Calendar cal = Calendar.getInstance();
-        month = new SimpleDateFormat("MMM").format(cal.getTime());
-        day = cal.get(cal.DAY_OF_MONTH);
-        weekday = weekdayFromInt(cal.get(cal.DAY_OF_WEEK));
-        year = cal.get(cal.YEAR);
+        month = simpleDateFormatMMM.format(cal.getTime());
+        day = cal.get(Calendar.DAY_OF_MONTH);
+        weekday = weekdayFromInt(cal.get(Calendar.DAY_OF_WEEK));
+        year = cal.get(Calendar.YEAR);
         date = weekday + ", " + month + " " + day + ", " + year;
 
         // Draw lines representing a 1D grid
-        rowsPerPage = Math.max(10, user.logLines.size() + 2);
-        lineGap = Constants.SCREEN_HEIGHT / rowsPerPage;
+        int minRowsPerPage = 10;
+        lineGap = Constants.SCREEN_HEIGHT / minRowsPerPage;
         // Tweak lineGap
-        tweakLinegap();
+        tweakLineGap();
         // Draw lines
         paint.setColor(Color.LTGRAY);
         paint.setStrokeWidth(Math.max(lineGap / 20, 2));
@@ -102,51 +90,37 @@ public class DrawLog extends View {
         paint.setTextAlign(Paint.Align.LEFT);
         canvas.drawText(date, leftLimit, (float) (Constants.SCREEN_HEIGHT / 10 + lineGap) + paint.getTextSize() / 3, paint);
 
-        // Get some bounds
-        paint.getTextBounds("N-N", 0, 3, dashBounds);
-        paint.getTextBounds("N", 0, 1, nBounds);
-        paint.getTextBounds("8", 0, 1, eightBounds);
-
         // Draw loglines
         for(int i = 0; i < user.logLines.size(); i ++) {
             float txtYpos = (float) ((Constants.SCREEN_HEIGHT / 10 + lineGap * 1.5) + (lineGap * (i + 0.5)) + (paint.getTextSize() / 3));
-            canvas.drawText(user.logLines.get(i).subject.name, leftLimit + eightBounds.width() * 3 + dashBounds.width(), txtYpos, paint);
-            canvas.drawText("-", leftLimit + eightBounds.width() * 3 + nBounds.width(), txtYpos, paint);
+            canvas.drawText(user.logLines.get(i).subject.name, leftLimit + paint.measureText("8") * 3 + paint.measureText("N-N"), txtYpos, paint);
+            canvas.drawText("-", leftLimit + paint.measureText("8") * 3 + paint.measureText("N"), txtYpos, paint);
             canvas.drawText(String.valueOf(MyTime.getDadTime(user.logLines.get(i).startTime).charAt(0)), leftLimit, txtYpos, paint);
-            canvas.drawText(String.valueOf(MyTime.getDadTime(user.logLines.get(i).startTime).charAt(1)), leftLimit + eightBounds.width(), txtYpos, paint);
-            canvas.drawText(String.valueOf(MyTime.getDadTime(user.logLines.get(i).startTime).charAt(2)), leftLimit + eightBounds.width() * 2, txtYpos, paint);
+            canvas.drawText(String.valueOf(MyTime.getDadTime(user.logLines.get(i).startTime).charAt(1)), leftLimit + paint.measureText("8"), txtYpos, paint);
+            canvas.drawText(String.valueOf(MyTime.getDadTime(user.logLines.get(i).startTime).charAt(2)), leftLimit + paint.measureText("8") * 2, txtYpos, paint);
         }
 
         super.onDraw(canvas);
     }
 
     private void tweakTopBarTextSize() {
-        paint.getTextBounds(user.name, 0, user.name.length(), tBounds);
-        while(tBounds.width() > (Constants.SCREEN_WIDTH / 2) * 1.7) {
+        while(paint.measureText(user.name) > (Constants.SCREEN_WIDTH / 2) * 1.7) {
             paint.setTextSize(paint.getTextSize() - 1);
-            paint.getTextBounds(user.name, 0, user.name.length(), tBounds);
         }
     }
 
-    private void tweakLinegap() {
+    private void tweakLineGap() {
         int longestLoglineIndex = -1;
+        leftLimit = lineGap / 2;
         paint.setTextSize((float) (lineGap * 0.8));
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
-        paint.getTextBounds(date, 0, date.length(), dateBounds);
-        paint.getTextBounds("8", 0, 1, eightBounds);
-        paint.getTextBounds("N:N", 0, 3, dashBounds);
-        recordLineWidth = dateBounds.width();
-        for(int i = 0; i < user.logLines.size(); i ++) {
-            // Get the length of a log line (without left and right margins)
-            String logLineSubjectName = user.logLines.get(i).subject.name;
-            paint.getTextBounds(logLineSubjectName, 0, logLineSubjectName.length(), logLineBounds);
-            float thisLogLineLength = logLineBounds.width();
-            paint.getTextBounds(user.logLines.get(i).subject.name, 0, user.logLines.get(i).subject.name.length(), logLineNameBounds);
-            thisLogLineLength += logLineNameBounds.width() + dashBounds.width() + eightBounds.width() * 3;
 
-            if(thisLogLineLength > recordLineWidth) { // If it breaks the line length record
+        // I had a big bug before, because the line below didn't have " + leftLimit * 2" on the end.
+        int recordLineWidth = (int) paint.measureText(date) + leftLimit * 2;
+        for(int i = 0; i < user.logLines.size(); i ++) {
+            if(paint.measureText(user.logLines.get(i).subject.name) * 2 + paint.measureText("N-N") + paint.measureText("8") * 3 + leftLimit * 2 > recordLineWidth) { // If it breaks the line length record
                 longestLoglineIndex = i;
-                recordLineWidth = (int) thisLogLineLength;
+                recordLineWidth = (int) (paint.measureText(user.logLines.get(i).subject.name) * 2 + paint.measureText("N-N") + paint.measureText("8") * 3 + leftLimit * 2);
             }
         }
         while(recordLineWidth - 1 > Constants.SCREEN_WIDTH) {
@@ -155,16 +129,12 @@ public class DrawLog extends View {
             leftLimit = lineGap / 2;
 
             if(longestLoglineIndex == -1) {
-                paint.getTextBounds(date, 0, date.length(), dateBounds);
-                recordLineWidth = dateBounds.width() + leftLimit * 3;
+                recordLineWidth = (int) (paint.measureText(date) + leftLimit * 2);
             } else {
                 String logLineSubjectName = user.logLines.get(longestLoglineIndex).subject.name;
 
                 // logLineNameBounds = bounds of subject name
-                paint.getTextBounds(logLineSubjectName, 0, logLineSubjectName.length(), logLineNameBounds);
-                paint.getTextBounds("N:N", 0, 3, dashBounds);
-                paint.getTextBounds("8", 0, 1, eightBounds);
-                recordLineWidth = (int) (leftLimit * 2.5 + logLineNameBounds.width() + dashBounds.width() + eightBounds.width() * 3);
+                recordLineWidth = (int) (leftLimit * 2.5 + paint.measureText(logLineSubjectName) + paint.measureText("N-N") + paint.measureText("8") * 3 + leftLimit * 2);
             }
         }
         while(user.logLines.size() * lineGap + (Constants.SCREEN_HEIGHT / 10 + lineGap * 3) > Constants.SCREEN_HEIGHT) {
@@ -189,7 +159,7 @@ public class DrawLog extends View {
             case Calendar.SUNDAY:
                 return "Sun";
             default:
-                return "Invaid number";
+                return "Invalid number";
         }
     }
 

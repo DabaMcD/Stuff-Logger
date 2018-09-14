@@ -5,19 +5,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
-/**
- * Created by Ike&Fluxa on 2/22/2018.
- */
-
 public class Constants {
-    public static int STATUS_BAR_HEIGHT; // Sataus bar is a
-    public static int ORIG_LONGER_SCREEN_DIM; // With status bar and always the longer dimension
-    public static int ORIG_SHORTER_SCREEN_DIM; // With status bar if included and always the shorter dim
-    public static int SCREEN_WIDTH;
-    public static int SCREEN_HEIGHT;
-    public static ArrayList<User> users = new ArrayList<>();
-    public static int currentUserIndex;
-    public static ArrayList<Integer> colors = new ArrayList<>(Arrays.asList(
+    static int STATUS_BAR_HEIGHT; // Status bar is a
+    static int ORIG_LONGER_SCREEN_DIM; // With status bar and always the longer dimension
+    static int ORIG_SHORTER_SCREEN_DIM; // With status bar if included and always the shorter dim
+    static int SCREEN_WIDTH;
+    static int SCREEN_HEIGHT;
+    static ArrayList<User> users = new ArrayList<>();
+    static int currentUserIndex;
+    static ArrayList<Integer> colors = new ArrayList<>(Arrays.asList(
             Color.rgb(255, 0, 0), // Red
             Color.rgb(0, 0, 255), // Blue
             Color.rgb(100, 255, 0), // Neon green
@@ -29,24 +25,21 @@ public class Constants {
             Color.rgb(255, 255, 0), // Yellow
             Color.rgb(180, 80, 0) // Brown
     ));
-    public static double getDist(double x1, double y1, double x2, double y2) {
+    static double getDist(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
-    public static int getHour() {
+    static int getHour() {
         return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
     }
-    public static int getMinute() {
+    static int getMinute() {
         return Calendar.getInstance().get(Calendar.MINUTE);
     }
-    public static int getSecond() {
-        return Calendar.getInstance().get(Calendar.SECOND);
-    }
-    public static int inverseColor(int color) {
+    static int inverseColor(int color) {
         return Color.rgb(255-Color.red(color),
                 255-Color.green(color),
                 255-Color.blue(color));
     }
-    public static void correctScreenDims(int orientation) {
+    static void correctScreenDims(int orientation) {
         if (orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE) {
             SCREEN_WIDTH = ORIG_LONGER_SCREEN_DIM;
             SCREEN_HEIGHT = ORIG_SHORTER_SCREEN_DIM - STATUS_BAR_HEIGHT;

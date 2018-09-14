@@ -9,16 +9,11 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-/**
- * Created by Ike&Fluxa on 3/29/2018.
- */
-
 public class NewLoglineButtonView extends View {
-    Paint paint = new Paint();
-    RectShadow loglineAdderPlus1 = new RectShadow();
-    RectShadow loglineAdderPlus2 = new RectShadow();
-    CircleShadow loglineAdder = new CircleShadow();
-    public float buttonDistFromCorner;
+    private Paint paint = new Paint();
+    private RectShadow loglineAdderPlus1 = new RectShadow();
+    private RectShadow loglineAdderPlus2 = new RectShadow();
+    private CircleShadow loglineAdder = new CircleShadow();
     public float x;
     public float y;
     public float rad;
@@ -40,7 +35,7 @@ public class NewLoglineButtonView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         // Define vars
-        buttonDistFromCorner = (float) (Math.min(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT) / 4.5);
+        float buttonDistFromCorner = (float) (Math.min(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT) / 4.5);
         x = (float) (Constants.SCREEN_WIDTH - buttonDistFromCorner / 1.2);
         y = (float) (Constants.SCREEN_HEIGHT - buttonDistFromCorner / 1.2);
         rad = buttonDistFromCorner / 2;

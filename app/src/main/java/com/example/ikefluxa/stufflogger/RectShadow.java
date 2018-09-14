@@ -5,30 +5,20 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-/**
- * Created by Ike&Fluxa on 3/18/2018.
- */
-
 public class RectShadow extends Shadows {
-    public RectShadow(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
-        this.shadowDiam = shadowDiam;
-        this.shadowXshift = shadowXshift;
-        this.shadowYshift = shadowYshift;
-        this.shadowDarkness = shadowDarkness;
-    }
-    public RectShadow() {
+    RectShadow() {
         this.shadowDiam = Shadows.standardShadowDiam;
         this.shadowXshift = Shadows.standardShadowXshift;
         this.shadowYshift = Shadows.standardShadowYshift;
         this.shadowDarkness = Shadows.standardShadowDarkness;
     }
 
-    public void draw(float left, float top, float right, float bottom, Canvas canvas, Paint paint) {
+    void draw(float left, float top, float right, float bottom, Canvas canvas, Paint paint) {
         // I think the function name explains it
         eraseAndAddAndEliminatePoints((left + right) / 2, (top + bottom) / 2);
 
         // Save the original color for later
-        origcolor = paint.getColor();
+        origColor = paint.getColor();
 
         // Calculate the opacity based on number of points & the darkness
         paint.setColor(Color.argb((int) shadowDarkness, 0, 0, 0));
@@ -43,7 +33,7 @@ public class RectShadow extends Shadows {
         }
 
         // Draw the initial rect
-        paint.setColor(origcolor);
+        paint.setColor(origColor);
         canvas.drawRect(left, top, right, bottom, paint);
     }
 }

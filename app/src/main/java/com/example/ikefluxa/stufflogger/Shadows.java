@@ -3,23 +3,19 @@ package com.example.ikefluxa.stufflogger;
 import android.graphics.Point;
 import java.util.ArrayList;
 
-/**
- * Created by Ike&Fluxa on 3/18/2018.
- */
-
 public class Shadows {
-    int origcolor;
+    int origColor;
     ArrayList<Point> points = new ArrayList<>();
     float shadowDiam;
     float shadowXshift;
     float shadowYshift;
     float shadowDarkness;
-    static float standardShadowDiam = 13;
-    static float standardShadowXshift = 3;
-    static float standardShadowYshift = 3;
-    static int standardShadowDarkness = 2;
+    final static float standardShadowDiam = 13;
+    final static float standardShadowXshift = 3;
+    final static float standardShadowYshift = 3;
+    final static int standardShadowDarkness = 2;
 
-    public void eraseAndAddAndEliminatePoints(float shapeCenterX, float shapeCenterY) {
+    void eraseAndAddAndEliminatePoints(float shapeCenterX, float shapeCenterY) {
         // Reset array of points
         points = new ArrayList<>();
 
@@ -35,7 +31,7 @@ public class Shadows {
         eliminatePoints(shapeCenterX + shadowXshift, shapeCenterY + shadowYshift);
     }
 
-    public void eliminatePoints(float shadeCenterX, float shadeCenterY) {
+    private void eliminatePoints(float shadeCenterX, float shadeCenterY) {
         for(int i = 0; i < points.size(); i ++) {
             if (Constants.getDist(shadeCenterX, shadeCenterY, points.get(i).x, points.get(i).y) > shadowDiam / 2) {
                 points.remove(i);

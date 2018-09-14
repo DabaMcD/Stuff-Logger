@@ -5,30 +5,20 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-/**
- * Created by Ike&Fluxa on 3/20/2018.
- */
-
 public class TextShadow extends Shadows {
-    public TextShadow(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
-        this.shadowDiam = shadowDiam;
-        this.shadowXshift = shadowXshift;
-        this.shadowYshift = shadowYshift;
-        this.shadowDarkness = shadowDarkness;
-    }
-    public TextShadow() {
+    TextShadow() {
         this.shadowDiam = Shadows.standardShadowDiam;
         this.shadowXshift = Shadows.standardShadowXshift;
         this.shadowYshift = Shadows.standardShadowYshift;
         this.shadowDarkness = Shadows.standardShadowDarkness;
     }
 
-    public void draw(String txt, float x, float y, Canvas canvas, Paint paint) {
+    void draw(String txt, float x, float y, Canvas canvas, Paint paint) {
         // I think the function name explains it
         eraseAndAddAndEliminatePoints(x, y);
 
         // Save the original color for later
-        origcolor = paint.getColor();
+        origColor = paint.getColor();
 
         // Calculate the opacity based on number of points & the darkness
         paint.setColor(Color.argb((int) shadowDarkness, 0, 0, 0));
@@ -43,7 +33,7 @@ public class TextShadow extends Shadows {
         }
 
         // Draw the initial rect
-        paint.setColor(origcolor);
+        paint.setColor(origColor);
         canvas.drawText(txt, x, y, paint);
     }
 }

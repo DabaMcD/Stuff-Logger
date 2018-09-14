@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 public class UserActivity extends AppCompatActivity {
-    Button createUser;
     EditText name;
 
     @Override
@@ -18,10 +16,8 @@ public class UserActivity extends AppCompatActivity {
 
         Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
 
-        createUser = findViewById(R.id.createUser);
         name = findViewById(R.id.name);
-
-        String[] nicknames = new String[] {
+        String[] nicknameHints = new String[] {
                 "e.g. Bobby Joe",
                 "e.g. Zigzag Dude",
                 "e.g. Ricky",
@@ -33,7 +29,7 @@ public class UserActivity extends AppCompatActivity {
                 "___________ <-- nickname",
                 "Nick's name, please"
         };
-        name.setHint(nicknames[(int) (Math.random() * nicknames.length)]);
+        name.setHint(nicknameHints[(int) (Math.random() * nicknameHints.length)]);
     }
 
     public void newUserClick(View target) {

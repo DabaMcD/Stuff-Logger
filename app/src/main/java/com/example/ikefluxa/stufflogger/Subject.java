@@ -1,13 +1,9 @@
 package com.example.ikefluxa.stufflogger;
 
-/**
- * Created by Ike&Fluxa on 2/19/2018.
- */
+class Subject {
+    String name;
 
-public class Subject {
-    public String name;
-
-    public Subject(String name) {
+    Subject(String name) {
         this.name = name;
     }
 }
