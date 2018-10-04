@@ -2,33 +2,30 @@ package com.example.ikefluxa.stufflogger;
 
 import java.io.Serializable;
 
-/**
- * Created by Ike&Fluxa on 3/21/2018.
- */
-
 public class MyTime implements Serializable {
     public int hour;
     public int minute;
-    public int second;
-    public MyTime(int hour, int minute, int second) {
+    private int second; // not needed now but maybe later
+
+    MyTime(int hour, int minute, int second) {
         this.hour = hour;
         this.minute = minute;
         this.second = second;
     }
-    public static String getDadTime(MyTime time) {
+    public static String getDadTime(int hour, int minute) {
         String result = "";
-        if(Math.round((double) time.minute / (double) 6) >= 10) {
-            if(String.valueOf((time.hour + 1) % 24).length() <= 1) {
+        if(Math.round((double) minute / (double) 6) >= 10) {
+            if(String.valueOf((hour + 1) % 24).length() <= 1) {
                 result += "0";
             }
-            result += String.valueOf((time.hour + 1) % 24);
+            result += String.valueOf((hour + 1) % 24);
             result += "0";
         } else {
-            if(String.valueOf(time.hour).length() <= 1) {
+            if(String.valueOf(hour).length() <= 1) {
                 result += "0";
             }
-            result += String.valueOf(time.hour);
-            result += Math.round((double) time.minute / (double) 6);
+            result += String.valueOf(hour);
+            result += Math.round((double) minute / (double) 6);
         }
         return result;
     }

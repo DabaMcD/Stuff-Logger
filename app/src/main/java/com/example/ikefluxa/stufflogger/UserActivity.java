@@ -40,9 +40,7 @@ public class UserActivity extends AppCompatActivity {
     }
 
     public void newUserClick(View target) {
-        Constants.users.add(new User(name.getText().toString()));
-
-
+        Constants.users.add(0, new User(name.getText().toString()));
 
         Intent myIntent = new Intent(this, LogActivity.class);
         startActivity(myIntent);

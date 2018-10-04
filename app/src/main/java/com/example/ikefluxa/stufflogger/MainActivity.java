@@ -8,15 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
     UsersListView usersListView;
     MainTopBarView mainTopBarView;
@@ -77,14 +68,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
         Constants.saveUserFiles(this);
-
-        super.onBackPressed();
     }
 
     public void setTopBarTouchListener() {
         findViewById(R.id.mainTopBarView).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                v.performClick();
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         if(Constants.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) <= mainTopBarView.rad) {
@@ -115,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.usersListView).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                v.performClick();
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         usersListView.draw(usersListView.actionDown(event.getX(), event.getY()));
@@ -141,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void usersListClick(int userIndex) {
-        Constants.moveUserToFrontIndex = userIndex;
+        Constants.moveUserToFrontIndex(userIndex);
 
         Intent myIntent = new Intent(this, LogActivity.class);
         startActivity(myIntent);

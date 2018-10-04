@@ -5,22 +5,18 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-/**
- * Created by Ike&Fluxa on 3/23/2018.
- */
-
 public class CircleShadow extends Shadows {
+    CircleShadow() {
+        this.shadowDiam = Shadows.standardShadowDiam;
+        this.shadowXshift = Shadows.standardShadowXshift;
+        this.shadowYshift = Shadows.standardShadowYshift;
+        this.shadowDarkness = Shadows.standardShadowDarkness;
+    }
     public CircleShadow(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
         this.shadowDiam = shadowDiam;
         this.shadowXshift = shadowXshift;
         this.shadowYshift = shadowYshift;
         this.shadowDarkness = shadowDarkness;
-    }
-    public CircleShadow() {
-        this.shadowDiam = Shadows.standardShadowDiam;
-        this.shadowXshift = Shadows.standardShadowXshift;
-        this.shadowYshift = Shadows.standardShadowYshift;
-        this.shadowDarkness = Shadows.standardShadowDarkness;
     }
 
     public void draw(float x, float y, float radius, Canvas canvas, Paint paint) {
@@ -28,7 +24,7 @@ public class CircleShadow extends Shadows {
         eraseAndAddAndEliminatePoints(x, y);
 
         // Save the original color for later
-        origcolor = paint.getColor();
+        origColor = paint.getColor();
 
         // Calculate the opacity based on number of points & the darkness
         paint.setColor(Color.argb((int) shadowDarkness, 0, 0, 0));
@@ -43,7 +39,7 @@ public class CircleShadow extends Shadows {
         }
 
         // Draw the initial rect
-        paint.setColor(origcolor);
+        paint.setColor(origColor);
         canvas.drawCircle(x, y, radius, paint);
     }
 }

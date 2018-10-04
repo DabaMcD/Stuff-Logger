@@ -9,8 +9,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class MainTopBarShadowView extends View {
-    Paint paint = new Paint();
-    RectShadow topBar = new RectShadow();
     MainTopBarView mainTopBarView;
 
     public MainTopBarShadowView(Context context) {

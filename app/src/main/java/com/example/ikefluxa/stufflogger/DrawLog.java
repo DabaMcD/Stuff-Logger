@@ -9,10 +9,6 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-/**
- * Created by Ike&Fluxa on 2/22/2018.
- */
-
 public class DrawLog extends View {
     public Paint paint = new Paint();
     public Log log;
@@ -39,7 +35,7 @@ public class DrawLog extends View {
         // Draw lines making a 1D grid
         lineGap = (int) (Constants.SCREEN_HEIGHT / 10f);
         // Tweak lineGap
-        tweakLinegap();
+        tweakLineGap();
         // Draw lines
         paint.setColor(Color.LTGRAY);
         paint.setStrokeWidth(Math.max(lineGap / 20, 2));
@@ -56,38 +52,30 @@ public class DrawLog extends View {
         paint.setTextAlign(Paint.Align.LEFT);
         canvas.drawText(log.date, leftLimit, TopBar.standardHeight + lineGap + paint.getTextSize() / 3, paint);
 
-        // Get some bounds
-        float dashWidth = paint.measureText("N-N");
-        float nWidth = paint.measureText("N");
-        float eightWidth = paint.measureText("8");
-
         // Draw loglines
         for(int i = 0; i < log.logLines.size(); i ++) {
             float txtYpos = (float) ((TopBar.standardHeight + lineGap * 1.5) + (lineGap * (i + 0.5)) + (paint.getTextSize() / 3));
-            canvas.drawText(log.logLines.get(i).subject.name, leftLimit + eightWidth * 3 + dashWidth, txtYpos, paint);
-            canvas.drawText("-", leftLimit + eightWidth * 3 + nWidth, txtYpos, paint);
-            String dadTime = MyTime.getDadTime(log.logLines.get(i).startTime);
+            canvas.drawText(log.logLines.get(i).subject.name, leftLimit + paint.measureText("8") * 3 + paint.measureText("N:N"), txtYpos, paint);
+            canvas.drawText("-", leftLimit + paint.measureText("8") * 3 + paint.measureText("N"), txtYpos, paint);
+            String dadTime = MyTime.getDadTime(log.logLines.get(i).startTime.hour, log.logLines.get(i).startTime.minute);
             canvas.drawText(String.valueOf(dadTime.charAt(0)), leftLimit, txtYpos, paint);
-            canvas.drawText(String.valueOf(dadTime.charAt(1)), leftLimit + eightWidth, txtYpos, paint);
-            canvas.drawText(String.valueOf(dadTime.charAt(2)), leftLimit + eightWidth * 2, txtYpos, paint);
+            canvas.drawText(String.valueOf(dadTime.charAt(1)), leftLimit + paint.measureText("8"), txtYpos, paint);
+            canvas.drawText(String.valueOf(dadTime.charAt(2)), leftLimit + paint.measureText("8") * 2, txtYpos, paint);
         }
 
         super.onDraw(canvas);
     }
 
-    private void tweakLinegap() {
+    private void tweakLineGap() {
         int longestLoglineIndex = -1;
         leftLimit = lineGap / 2;
         paint.setTextSize((float) (lineGap * 0.8));
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
-        float dateWidth = paint.measureText(log.date) + leftLimit * 2;
-        float eightWidth = paint.measureText("8");
-        float dashWidth = paint.measureText("N:N");
-        float recordLineWidth = dateWidth;
+        float recordLineWidth = paint.measureText(log.date) + leftLimit * 2;
         for(int i = 0; i < log.logLines.size(); i ++) {
             // Get the length of a log line (without left and right margins)
             float logLineNameWidth = paint.measureText(log.logLines.get(i).subject.name);
-            float thisLogLineLength = logLineNameWidth + dashWidth + eightWidth * 3 + leftLimit * 2;
+            float thisLogLineLength = logLineNameWidth + paint.measureText("N:N") + paint.measureText("8") * 3 + leftLimit * 2;
 
             if(thisLogLineLength > recordLineWidth) { // If it breaks the line length record
                 longestLoglineIndex = i;
@@ -100,16 +88,13 @@ public class DrawLog extends View {
             leftLimit = lineGap / 2;
 
             if(longestLoglineIndex == -1) {
-                dateWidth = paint.measureText(log.date);
-                recordLineWidth = dateWidth + leftLimit * 2;
+                recordLineWidth = paint.measureText(log.date) + leftLimit * 2 + leftLimit * 2;
             } else {
                 String logLineSubjectName = log.logLines.get(longestLoglineIndex).subject.name;
 
                 // logLineNameBounds = bounds of subject name
                 float logLineNameWidth = paint.measureText(logLineSubjectName);
-                dashWidth = paint.measureText("N:N");
-                eightWidth = paint.measureText("8");
-                recordLineWidth = (int) (leftLimit * 2.5 + logLineNameWidth + dashWidth + eightWidth * 3);
+                recordLineWidth = (int) (leftLimit * 2.5 + logLineNameWidth + paint.measureText("N:N") + paint.measureText("8") * 3);
             }
         }
         while(log.logLines.size() * lineGap + (Constants.SCREEN_HEIGHT / 10 + lineGap * 3) > Constants.SCREEN_HEIGHT) {

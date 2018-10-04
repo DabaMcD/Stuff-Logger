@@ -9,24 +9,15 @@ public class Log implements Serializable {
 
     // Date stuff
     public String date;
-    public int weekdayInt; // Zero-indexed
-    public int monthInt; // 1-indexed, starting at Sunday
-    public String weekday; // First three letters
-    public String month; // First three letters
-    public int day;
-    public int year;
 
-    public Log() {
+    Log() {
         // Set date vals
         Calendar cal = Calendar.getInstance();
-        monthInt = cal.get(Calendar.MONTH);
-        month = monthFromInt(monthInt);
-        day = cal.get(Calendar.DAY_OF_MONTH);
-        weekdayInt = cal.get(Calendar.DAY_OF_WEEK);
-        weekday = weekdayFromInt(weekdayInt);
-        year = cal.get(Calendar.YEAR);
-        date = weekday + ", " + month + " " + day + ", " + year;
-
+        date = // Wed, Feb 10, 2018
+                weekdayFromInt(cal.get(Calendar.DAY_OF_WEEK)) + ", " + // Wed
+                monthFromInt(cal.get(Calendar.MONTH)) + " " + // Feb
+                cal.get(Calendar.DAY_OF_MONTH) + ", " + // 10
+                cal.get(Calendar.YEAR); // 2018
         logLines = new ArrayList<>();
     }
     

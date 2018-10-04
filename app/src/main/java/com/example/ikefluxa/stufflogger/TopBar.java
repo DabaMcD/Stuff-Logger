@@ -11,9 +11,9 @@ public class TopBar {
     public static float standardHeight;
     public static Paint paint = new Paint();
     public static TextShadow textShadow = new TextShadow();
-    public static RectShadow rectShadow = new RectShadow();
-    public static Rect tBounds = new Rect();
-    public static RectF rainbowRect = new RectF();
+    private static RectShadow rectShadow = new RectShadow();
+    private static Rect tBounds = new Rect();
+    private static RectF rainbowRect = new RectF();
     public static int color; // Color of rect is rainbow until defined
 
     public static void drawRectTextAndShadows(Canvas canvas, int color12345ForRainbow, boolean textHasShadow, String text) {

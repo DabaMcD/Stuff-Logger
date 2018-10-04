@@ -74,7 +74,7 @@ public class UsersListView extends View{
             paint.setTextSize(Constants.SCREEN_HEIGHT / 17);
             canvas.drawText(getLongestName(user.name), Constants.SCREEN_WIDTH / 28, top + (Constants.SCREEN_HEIGHT / 20) + (paint.getTextSize() / 3), paint);
 
-            // See whether I have to use bitmap instead of vector (bitmap is depricated)
+            // See whether I have to use bitmap instead of vector (bitmap is deprecated)
             int spaceY = (int) (bottom - top);
             int centerX = (int) (Constants.SCREEN_WIDTH * 0.85);
             int trashHeight = (spaceY * 2) / 3;
@@ -115,23 +115,17 @@ public class UsersListView extends View{
         super.onDraw(canvas);
     }
 
-    @Override
-    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-        System.out.println("SCROLL CHANGED");
-        super.onScrollChanged(l, t, oldl, oldt);
-    }
-
     private String getLongestName(String name) {
-        Boolean dotdotdot = false;
+        Boolean dotDotDot = false;
         String result = name;
         int maxRight = (Constants.SCREEN_WIDTH / 3) * 2;
         paint.getTextBounds(result, 0, name.length(), userNameBounds);
         while(userNameBounds.width() + (Constants.SCREEN_WIDTH / 28) > maxRight) {
             result = result.substring(0, result.length() - 1);
             paint.getTextBounds(result + "...", 0, result.length() + 3, userNameBounds);
-            dotdotdot = true;
+            dotDotDot = true;
         }
-        return result + (dotdotdot ? "..." : "");
+        return result + (dotDotDot ? "..." : "");
     }
 
     public int actionDown(float x, float y) {

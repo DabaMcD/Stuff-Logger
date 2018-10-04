@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 
 public class Constants {
-    public static int moveUserToFrontIndex = -1;
     public static int mainClickingUserIndex = -1;
     public static int STATUS_BAR_HEIGHT; // Status bar is a
     public static int ORIG_LONGER_SCREEN_DIM; // With status bar and always the longer dimension
@@ -35,6 +34,10 @@ public class Constants {
             Color.rgb(255, 255, 0), // Yellow
             Color.rgb(180, 80, 0) // Brown
     ));
+    public static void moveUserToFrontIndex(int index) {
+        users.add(0, users.get(index));
+        users.remove(index + 1);
+    }
     public static double getDist(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }

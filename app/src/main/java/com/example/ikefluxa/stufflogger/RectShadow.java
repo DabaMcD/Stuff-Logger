@@ -5,22 +5,18 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-/**
- * Created by Ike&Fluxa on 3/18/2018.
- */
-
 public class RectShadow extends Shadows {
+    RectShadow() {
+        this.shadowDiam = Shadows.standardShadowDiam;
+        this.shadowXshift = Shadows.standardShadowXshift;
+        this.shadowYshift = Shadows.standardShadowYshift;
+        this.shadowDarkness = Shadows.standardShadowDarkness;
+    }
     public RectShadow(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
         this.shadowDiam = shadowDiam;
         this.shadowXshift = shadowXshift;
         this.shadowYshift = shadowYshift;
         this.shadowDarkness = shadowDarkness;
-    }
-    public RectShadow() {
-        this.shadowDiam = Shadows.standardShadowDiam;
-        this.shadowXshift = Shadows.standardShadowXshift;
-        this.shadowYshift = Shadows.standardShadowYshift;
-        this.shadowDarkness = Shadows.standardShadowDarkness;
     }
 
     public void draw(float left, float top, float right, float bottom, Canvas canvas, Paint paint) {
@@ -28,7 +24,7 @@ public class RectShadow extends Shadows {
         eraseAndAddAndEliminatePoints((left + right) / 2, (top + bottom) / 2);
 
         // Save the original color for later
-        origcolor = paint.getColor();
+        origColor = paint.getColor();
 
         // Set very translucent color
         paint.setColor(Color.argb((int) shadowDarkness, 0, 0, 0));
@@ -43,7 +39,7 @@ public class RectShadow extends Shadows {
         }
 
         // Draw the initial rect
-        paint.setColor(origcolor);
+        paint.setColor(origColor);
         canvas.drawRect(left, top, right, bottom, paint);
     }
 }

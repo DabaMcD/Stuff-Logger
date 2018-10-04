@@ -46,13 +46,16 @@ public class ConfirmUserDeleteActivity extends AppCompatActivity {
         text.setText(spannableString);
     }
 
-    public void cancel(View view) {
-        startActivity(new Intent(this, MainActivity.class));
+    public void cancel(View v) {
+        onBackPressed();
     }
 
-    public void delete(View view) {
+    public void delete(View v) {
         Constants.deletedUser = Constants.users.get(userIndex);
         Constants.users.remove(userIndex);
+        if(Constants.users.size() == 0) {
+            deleteFile("User0.txt");
+        }
         startActivity(new Intent(this, MainActivity.class));
     }
 }

@@ -9,10 +9,6 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-/**
- * Created by Ike&Fluxa on 3/29/2018.
- */
-
 public class NewLoglineButtonView extends View {
     Paint paint = new Paint();
     RectShadow loglineAdderPlus1 = new RectShadow();

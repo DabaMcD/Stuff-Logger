@@ -1,17 +1,11 @@
 package com.example.ikefluxa.stufflogger;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 
 public class LogActivity extends AppCompatActivity {
     DrawLog drawLog;
@@ -25,37 +19,19 @@ public class LogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
 
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.flags |= WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
-        params.screenBrightness = 0;
-        getWindow().setAttributes(params);
-
         Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
 
         drawLog = findViewById(R.id.drawLog);
-
         drawLog.draw();
 
         newLoglineButton = findViewById(R.id.newLoglineButton);
-
         newLoglineButton.draw(false);
 
         logTopBarView = findViewById(R.id.logTopBarView);
-
         logTopBarView.draw();
 
         clearLogButtonView = findViewById(R.id.clearLogButtonView);
-
         clearLogButtonView.draw(false);
-
-        // Stuff for previous activity
-        if(Constants.moveUserToFrontIndex != -1) {
-            // Move the user clicked to the front of the users list,
-            // effectively putting it as the most recent.
-            Constants.users.add(0, Constants.users.get(Constants.moveUserToFrontIndex));
-            Constants.users.remove(Constants.moveUserToFrontIndex + 1);
-            Constants.moveUserToFrontIndex = -1;
-        }
 
         // Set up click listener
         setTouchListeners();
@@ -71,6 +47,7 @@ public class LogActivity extends AppCompatActivity {
         findViewById(R.id.LayoutBackground).setOnTouchListener(new RelativeLayout.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                v.performClick();
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         // Add logline button
@@ -126,6 +103,5 @@ public class LogActivity extends AppCompatActivity {
     public void newLogline() {
         Intent myIntent = new Intent(this, NewLoglineActivity.class);
         startActivity(myIntent);
-
     }
 }
