@@ -1,9 +1,11 @@
 package com.example.ikefluxa.stufflogger;
 
-class Subject {
-    String name;
+import java.io.Serializable;
 
-    Subject(String name) {
+public class Subject implements Serializable {
+    public String name;
+
+    public Subject(String name) {
         this.name = name;
     }
 }

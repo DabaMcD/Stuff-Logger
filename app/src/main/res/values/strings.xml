@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Stuff Logger</string>
     <string name="title_activity_user">UserActivity</string>
-    <string name="joe_you_know">Joe-You-Know</string>
-    <string name="nickname">Nickname</string>
-    <string name="add_user">Add user</string>
-    <string name="back">Back</string>
-    <string name="add_log_line">Add Log Line</string>
-    <string name="subject">Subject</string>
-    <string name="add_logline">ADD LOGLINE</string>
+    <string name="AddLogline">Add Logline</string>
+    <string name="Back">Back</string>
+    <string name="Subject">Subject</string>
+    <string name="Nickname">Nickname</string>
+    <string name="AddUser">Add User</string>
+    <string name="Yes">Yes</string>
+    <string name="Cancel">Cancel</string>
 </resources>

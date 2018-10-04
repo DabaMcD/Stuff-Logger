@@ -1,6 +1,9 @@
 package com.example.ikefluxa.stufflogger;
 
-public class LogLine {
+
+import java.io.Serializable;
+
+public class LogLine implements Serializable {
     public MyTime startTime;
     public Subject subject;
 

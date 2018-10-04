@@ -6,23 +6,26 @@
     android:layout_height="match_parent"
     tools:context="com.example.ikefluxa.stufflogger.UserActivity">
 
+    <com.example.ikefluxa.stufflogger.UserTopBarView
+        android:id="@+id/userTopBarView"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
+
     <EditText
         android:id="@+id/name"
         android:maxLines="1"
-        android:inputType="text"
+        android:inputType="textCapSentences"
         android:layout_width="316dp"
         android:layout_height="47dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:hint="@string/joe_you_know"
+        android:hint="@string/Nickname"
         app:layout_constraintBottom_toTopOf="@+id/createUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
-        <requestFocus/>
-    </EditText>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/createUser"
@@ -32,7 +35,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/add_user"
+        android:text="@string/AddUser"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +53,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/nickname"
+        android:text="@string/Nickname"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/createUser"
         app:layout_constraintEnd_toEndOf="parent"
