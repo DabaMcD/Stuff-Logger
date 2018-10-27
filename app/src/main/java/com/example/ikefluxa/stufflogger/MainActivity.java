@@ -9,10 +9,9 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 
 public class MainActivity extends AppCompatActivity {
-    UsersListView usersListView;
-    MainTopBarView mainTopBarView;
-    Boolean clickingOnAddUser;
-    MainTopBarShadowView mainTopBarShadowView;
+    private UsersListView usersListView;
+    private MainTopBarView mainTopBarView;
+    private Boolean clickingOnAddUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
         Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
 
         // Define all the things in the xml code
-        mainTopBarShadowView = findViewById(R.id.mainTopBarShadowView);
+        MainTopBarShadowView mainTopBarShadowView = findViewById(R.id.mainTopBarShadowView);
         mainTopBarView = findViewById(R.id.mainTopBarView);
         usersListView = findViewById(R.id.usersListView);
 
         // Draw the stuff in the xml code
-        mainTopBarShadowView.draw(mainTopBarView);
+        mainTopBarShadowView.draw();
         mainTopBarView.draw(false);
         usersListView.draw(-1); // -1 if no index
 
@@ -59,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -69,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
 
         Constants.saveUserFiles(this);
     }
-
     public void setTopBarTouchListener() {
         findViewById(R.id.mainTopBarView).setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -100,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void setUserListTouchListener() {
         findViewById(R.id.usersListView).setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -130,19 +126,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void usersListClick(int userIndex) {
         Constants.moveUserToFrontIndex(userIndex);
 
         Intent myIntent = new Intent(this, LogActivity.class);
         startActivity(myIntent);
     }
-
     public void trashUsersListClick(int clickIndex) {
         ConfirmUserDeleteActivity.userIndex = clickIndex;
         startActivity(new Intent(this, ConfirmUserDeleteActivity.class));
     }
-
     public void defineConstantsStuff() {
         // Status bar height
         int result = 0;
@@ -160,7 +153,6 @@ public class MainActivity extends AppCompatActivity {
         Constants.ORIG_LONGER_SCREEN_DIM = Math.max(ht, wd);
         Constants.ORIG_SHORTER_SCREEN_DIM = Math.min(ht, wd);
     }
-
     public void newUserClick() {
         Intent myIntent = new Intent(this, UserActivity.class);
         startActivity(myIntent);

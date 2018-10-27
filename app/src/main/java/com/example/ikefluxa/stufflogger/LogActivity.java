@@ -8,11 +8,10 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 public class LogActivity extends AppCompatActivity {
-    DrawLog drawLog;
-    NewLoglineButtonView newLoglineButton;
-    Boolean clicking = false;
-    LogTopBarView logTopBarView;
-    ClearLogButtonView clearLogButtonView;
+    private DrawLog drawLog;
+    private NewLoglineButtonView newLoglineButton;
+    private Boolean clicking = false;
+    private ClearLogButtonView clearLogButtonView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +26,7 @@ public class LogActivity extends AppCompatActivity {
         newLoglineButton = findViewById(R.id.newLoglineButton);
         newLoglineButton.draw(false);
 
+        LogTopBarView logTopBarView;
         logTopBarView = findViewById(R.id.logTopBarView);
         logTopBarView.draw();
 
@@ -36,14 +36,12 @@ public class LogActivity extends AppCompatActivity {
         // Set up click listener
         setTouchListeners();
     }
-
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, MainActivity.class));
         super.onBackPressed();
     }
-
-    public void setTouchListeners() {
+    private void setTouchListeners() {
         findViewById(R.id.LayoutBackground).setOnTouchListener(new RelativeLayout.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -99,8 +97,7 @@ public class LogActivity extends AppCompatActivity {
             }
         });
     }
-
-    public void newLogline() {
+    private void newLogline() {
         Intent myIntent = new Intent(this, NewLoglineActivity.class);
         startActivity(myIntent);
     }

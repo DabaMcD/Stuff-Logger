@@ -10,15 +10,12 @@ public class LogTopBarView extends View {
     public LogTopBarView(Context context) {
         super(context);
     }
-
     public LogTopBarView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
-
     public LogTopBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
     @Override
     protected void onDraw(Canvas canvas) {
         User user = Constants.users.get(0);
@@ -26,8 +23,7 @@ public class LogTopBarView extends View {
 
         super.onDraw(canvas);
     }
-
-    public void draw() {
+    void draw() {
         invalidate();
         requestLayout();
     }

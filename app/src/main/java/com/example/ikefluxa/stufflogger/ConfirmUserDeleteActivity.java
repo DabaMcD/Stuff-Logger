@@ -10,14 +10,10 @@ import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
 
 public class ConfirmUserDeleteActivity extends AppCompatActivity {
-    public static int userIndex;
-
-    Button delete, cancel;
-    TextView text;
+    static int userIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +28,7 @@ public class ConfirmUserDeleteActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         getWindow().setAttributes(layoutParams);
 
-        delete = findViewById(R.id.delete);
-        cancel = findViewById(R.id.cancel);
-        text = findViewById(R.id.text);
+        TextView text = findViewById(R.id.text);
 
         // Set text
         User user = Constants.users.get(userIndex);
@@ -45,11 +39,9 @@ public class ConfirmUserDeleteActivity extends AppCompatActivity {
         spannableString.setSpan(foregroundSpan, 32, 32 + user.name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         text.setText(spannableString);
     }
-
     public void cancel(View v) {
         onBackPressed();
     }
-
     public void delete(View v) {
         Constants.deletedUser = Constants.users.get(userIndex);
         Constants.users.remove(userIndex);

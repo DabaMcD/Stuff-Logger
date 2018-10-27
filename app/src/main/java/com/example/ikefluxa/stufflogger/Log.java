@@ -4,11 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Log implements Serializable {
-    public ArrayList<LogLine> logLines;
-
-    // Date stuff
-    public String date;
+class Log implements Serializable {
+    ArrayList<LogLine> logLines;
+    String date;
 
     Log() {
         // Set date vals
@@ -20,7 +18,6 @@ public class Log implements Serializable {
                 cal.get(Calendar.YEAR); // 2018
         logLines = new ArrayList<>();
     }
-    
     private String monthFromInt(int month) {
         switch(month) {
             case 0:
@@ -51,7 +48,6 @@ public class Log implements Serializable {
                 return "Invalid input";
         }
     }
-
     private String weekdayFromInt(int day) {
         switch(day) {
             case Calendar.MONDAY:
@@ -69,7 +65,7 @@ public class Log implements Serializable {
             case Calendar.SUNDAY:
                 return "Sun";
             default:
-                return "Invaid number";
+                return "Invalid number";
         }
     }
 }

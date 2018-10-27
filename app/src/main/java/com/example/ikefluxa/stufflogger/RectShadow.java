@@ -5,21 +5,20 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-public class RectShadow extends Shadows {
+class RectShadow extends Shadows {
     RectShadow() {
         this.shadowDiam = Shadows.standardShadowDiam;
         this.shadowXshift = Shadows.standardShadowXshift;
         this.shadowYshift = Shadows.standardShadowYshift;
         this.shadowDarkness = Shadows.standardShadowDarkness;
     }
-    public RectShadow(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
+    RectShadow(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
         this.shadowDiam = shadowDiam;
         this.shadowXshift = shadowXshift;
         this.shadowYshift = shadowYshift;
         this.shadowDarkness = shadowDarkness;
     }
-
-    public void draw(float left, float top, float right, float bottom, Canvas canvas, Paint paint) {
+    void draw(float left, float top, float right, float bottom, Canvas canvas, Paint paint) {
         // I think the function name explains it
         eraseAndAddAndEliminatePoints((left + right) / 2, (top + bottom) / 2);
 

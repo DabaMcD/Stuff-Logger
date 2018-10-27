@@ -5,8 +5,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-public class TextShadow extends Shadows {
-    public TextShadow(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
+class TextShadow extends Shadows {
+    TextShadow(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
         this.shadowDiam = shadowDiam;
         this.shadowXshift = shadowXshift;
         this.shadowYshift = shadowYshift;
@@ -18,8 +18,7 @@ public class TextShadow extends Shadows {
         this.shadowYshift = Shadows.standardShadowYshift;
         this.shadowDarkness = Shadows.standardShadowDarkness;
     }
-
-    public void draw(String txt, float x, float y, Canvas canvas, Paint paint) {
+    void draw(String txt, float x, float y, Canvas canvas, Paint paint) {
         // I think the function name explains it
         eraseAndAddAndEliminatePoints(x, y);
 

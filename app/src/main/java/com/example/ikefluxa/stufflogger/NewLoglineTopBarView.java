@@ -10,15 +10,12 @@ public class NewLoglineTopBarView extends View {
     public NewLoglineTopBarView(Context context) {
         super(context);
     }
-
     public NewLoglineTopBarView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
-
     public NewLoglineTopBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
     @Override
     protected void onDraw(Canvas canvas) {
         User user = Constants.users.get(0);
@@ -26,7 +23,6 @@ public class NewLoglineTopBarView extends View {
 
         super.onDraw(canvas);
     }
-
     public void draw() {
         invalidate();
         requestLayout();

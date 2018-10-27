@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 public class UserActivity extends AppCompatActivity {
-    Button createUser;
-    EditText name;
-    UserTopBarView userTopBarView;
+    private EditText name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +16,8 @@ public class UserActivity extends AppCompatActivity {
 
         Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
 
-        createUser = findViewById(R.id.createUser);
         name = findViewById(R.id.name);
-        userTopBarView = findViewById(R.id.userTopBarView);
+        UserTopBarView userTopBarView = findViewById(R.id.userTopBarView);
         userTopBarView.draw();
 
         String[] nicknames = new String[] {
@@ -38,8 +34,7 @@ public class UserActivity extends AppCompatActivity {
         };
         name.setHint(nicknames[(int) (Math.random() * nicknames.length)]);
     }
-
-    public void newUserClick(View target) {
+    public void newUserClick(View v) {
         Constants.users.add(0, new User(name.getText().toString()));
 
         Intent myIntent = new Intent(this, LogActivity.class);

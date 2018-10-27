@@ -17,21 +17,17 @@ public class NewLoglineButtonView extends View {
     public float x;
     public float y;
     public float rad;
-
     private boolean hovering;
 
     public NewLoglineButtonView(Context context) {
         super(context);
     }
-
     public NewLoglineButtonView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
-
     public NewLoglineButtonView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
     @Override
     protected void onDraw(Canvas canvas) {
         // Define vars
@@ -66,8 +62,7 @@ public class NewLoglineButtonView extends View {
 
         super.onDraw(canvas);
     }
-
-    public void draw(Boolean hovering) {
+    void draw(Boolean hovering) {
         this.hovering = hovering;
         invalidate();
         requestLayout();

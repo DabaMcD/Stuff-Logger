@@ -19,15 +19,12 @@ public class ClearLogButtonView extends View {
     public ClearLogButtonView(Context context) {
         super(context);
     }
-
     public ClearLogButtonView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
-
     public ClearLogButtonView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
     @Override
     protected void onDraw(Canvas canvas) {
         // Define vars
@@ -52,7 +49,6 @@ public class ClearLogButtonView extends View {
 
         super.onDraw(canvas);
     }
-
     private void tweakClearTextSize() {
         paint.setTextSize(0);
         while(paint.measureText("CLEAR") < rad * 2) {
@@ -62,8 +58,7 @@ public class ClearLogButtonView extends View {
             paint.setTextSize(paint.getTextSize() - 1);
         }
     }
-
-    public void draw(boolean hovering) {
+    void draw(boolean hovering) {
         this.hovering = hovering;
         invalidate();
         requestLayout();

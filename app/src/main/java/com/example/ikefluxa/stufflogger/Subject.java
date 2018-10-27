@@ -2,10 +2,10 @@ package com.example.ikefluxa.stufflogger;
 
 import java.io.Serializable;
 
-public class Subject implements Serializable {
-    public String name;
+class Subject implements Serializable {
+    String name;
 
-    public Subject(String name) {
+    Subject(String name) {
         this.name = name;
     }
 }

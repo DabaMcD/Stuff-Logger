@@ -10,11 +10,9 @@ public class UserTopBarView extends View {
     public UserTopBarView(Context context) {
         super(context);
     }
-
     public UserTopBarView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
-
     public UserTopBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
@@ -25,8 +23,7 @@ public class UserTopBarView extends View {
 
         super.onDraw(canvas);
     }
-
-    public void draw() {
+    void draw() {
         invalidate();
         requestLayout();
     }

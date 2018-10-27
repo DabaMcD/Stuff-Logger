@@ -15,37 +15,33 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class UsersListView extends View{
-    Paint paint = new Paint();
-    float lineThk = Constants.SCREEN_HEIGHT / 200;
-    float userButtonHt = (float) (Constants.SCREEN_HEIGHT / 10.0);
-    Rect userNameBounds = new Rect();
+    private Paint paint = new Paint();
+    private float lineThk = Constants.SCREEN_HEIGHT / 200;
+    private float userButtonHt = (float) (Constants.SCREEN_HEIGHT / 10.0);
+    private Rect userNameBounds = new Rect();
 
-    Drawable trashCan = getResources().getDrawable(R.drawable.ic_trashcan);
-    VectorDrawable vectorTrashCan;
-    BitmapDrawable bitmapTrashCan;
-
-    float trashX;
-    float trashRad;
-    int trashClickingIndex = -1;
+    private Drawable trashCan = getResources().getDrawable(R.drawable.ic_trashcan);
+    private VectorDrawable vectorTrashCan;
+    private BitmapDrawable bitmapTrashCan;
+    private float trashX;
+    private float trashRad;
+    private int trashClickingIndex = -1;
 
     public UsersListView(Context context) {
         super(context);
         setVerticalScrollBarEnabled(true);
         setMinimumHeight((int) (((Constants.SCREEN_HEIGHT / 10) + lineThk) * Constants.users.size()));
     }
-
     public UsersListView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setVerticalScrollBarEnabled(true);
         setMinimumHeight((int) (((Constants.SCREEN_HEIGHT / 10) + lineThk) * Constants.users.size()));
     }
-
     public UsersListView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setVerticalScrollBarEnabled(true);
         setMinimumHeight((int) (((Constants.SCREEN_HEIGHT / 10) + lineThk) * Constants.users.size()));
     }
-
     @Override
     protected void onDraw(Canvas canvas) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -114,7 +110,6 @@ public class UsersListView extends View{
 
         super.onDraw(canvas);
     }
-
     private String getLongestName(String name) {
         Boolean dotDotDot = false;
         String result = name;
@@ -127,8 +122,7 @@ public class UsersListView extends View{
         }
         return result + (dotDotDot ? "..." : "");
     }
-
-    public int actionDown(float x, float y) {
+    int actionDown(float x, float y) {
         // If they touch down inside one of the boxes,
         // activate the touchedUserIndex and set it to that user.
         Constants.mainClickingUserIndex = -1;
@@ -150,8 +144,7 @@ public class UsersListView extends View{
         }
         return Constants.mainClickingUserIndex;
     } // Triggers on scroll start
-
-    public int actionMove(float x, float y) {
+    int actionMove(float x, float y) {
         // Trash can button part
         float top = userButtonHt * trashClickingIndex + lineThk * (trashClickingIndex + 1);
         float bottom = top + userButtonHt;
@@ -173,8 +166,7 @@ public class UsersListView extends View{
             return -1;
         }
     } // Triggers on scroll move
-
-    public int actionUpTrashButton(float x, float y) {
+    int actionUpTrashButton(float x, float y) {
         float top = userButtonHt * trashClickingIndex + lineThk * (trashClickingIndex + 1);
         float bottom = top + userButtonHt;
         if (Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
@@ -184,8 +176,7 @@ public class UsersListView extends View{
             return trashClickingIndex;
         }
     }
-
-    public int actionUpUserButton(float x, float y) {
+    int actionUpUserButton(float x, float y) {
         // If they're still inside the box when their finger lets up,
         // and the touchedUserIndex is still activated, return the user index.
         float top = userButtonHt * Constants.mainClickingUserIndex + lineThk * (Constants.mainClickingUserIndex + 1);
@@ -199,8 +190,7 @@ public class UsersListView extends View{
             return -1;
         }
     } // Does not trigger after scrolling
-
-    public void draw(int clickingUserIndex) {
+    void draw(int clickingUserIndex) {
         Constants.mainClickingUserIndex = clickingUserIndex;
         invalidate();
         requestLayout();

@@ -3,7 +3,7 @@ package com.example.ikefluxa.stufflogger;
 import android.graphics.Point;
 import java.util.ArrayList;
 
-public class Shadows {
+class Shadows {
     int origColor;
     ArrayList<Point> points = new ArrayList<>();
     float shadowDiam;
@@ -14,6 +14,8 @@ public class Shadows {
     final static float standardShadowXshift = 3;
     final static float standardShadowYshift = 3;
     final static int standardShadowDarkness = 2;
+
+    // todo: add constructor and call the super function from children instead of making constructor over and over
 
     void eraseAndAddAndEliminatePoints(float shapeCenterX, float shapeCenterY) {
         // Reset array of points
@@ -30,7 +32,6 @@ public class Shadows {
 
         eliminatePoints(shapeCenterX + shadowXshift, shapeCenterY + shadowYshift);
     }
-
     private void eliminatePoints(float shadeCenterX, float shadeCenterY) {
         for(int i = 0; i < points.size(); i ++) {
             if (Constants.getDist(shadeCenterX, shadeCenterY, points.get(i).x, points.get(i).y) > shadowDiam / 2) {

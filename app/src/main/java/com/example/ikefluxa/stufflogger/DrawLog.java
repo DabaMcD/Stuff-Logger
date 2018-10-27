@@ -10,23 +10,20 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class DrawLog extends View {
-    public Paint paint = new Paint();
-    public Log log;
+    Paint paint = new Paint();
+    Log log;
     int leftLimit;
     int lineGap;
 
     public DrawLog(Context context) {
         super(context);
     }
-
     public DrawLog(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
-
     public DrawLog(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
     @Override
     protected void onDraw(Canvas canvas) {
         // Shorten user name
@@ -65,7 +62,6 @@ public class DrawLog extends View {
 
         super.onDraw(canvas);
     }
-
     private void tweakLineGap() {
         int longestLoglineIndex = -1;
         leftLimit = lineGap / 2;
@@ -101,8 +97,7 @@ public class DrawLog extends View {
             lineGap -= 0.1;
         }
     }
-
-    public void draw() {
+    void draw() {
         invalidate();
         requestLayout();
     }

@@ -10,12 +10,12 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class MainTopBarView extends View {
-    Paint paint = new Paint();
+    private Paint paint = new Paint();
 
-    // Unique to button stuff
-    Boolean hovering;
-    RectShadow userAdderV = new RectShadow();
-    RectShadow userAdderH = new RectShadow();
+    // Button stuff
+    private Boolean hovering;
+    private RectShadow userAdderV = new RectShadow();
+    private RectShadow userAdderH = new RectShadow();
     public float buttonDistFromCorner;
     public float x;
     public float y;
@@ -24,15 +24,12 @@ public class MainTopBarView extends View {
     public MainTopBarView(Context context) {
         super(context);
     }
-
     public MainTopBarView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
-
     public MainTopBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
     @Override
     protected void onDraw(Canvas canvas) {
         TopBar.drawRainbowRect(canvas);
@@ -46,7 +43,6 @@ public class MainTopBarView extends View {
 
         super.onDraw(canvas);
     }
-
     private void drawButton(Canvas canvas) {
         // Define vars
         buttonDistFromCorner = (float) ((this.getHeight() / 2) * 1.2);
@@ -76,8 +72,7 @@ public class MainTopBarView extends View {
         // Vertical rect
         canvas.drawRect(x - sideOfRectRelToCircle, y - endOfRectRelToCircle, x + sideOfRectRelToCircle, y + endOfRectRelToCircle, paint);
     }
-
-    public void draw(Boolean hovering) {
+    void draw(Boolean hovering) {
         this.hovering = hovering;
         invalidate();
         requestLayout();
