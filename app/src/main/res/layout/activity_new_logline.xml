@@ -22,7 +22,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.984" />
-
     <Button
         android:id="@+id/addLogline"
         android:layout_width="0dp"
@@ -36,7 +35,6 @@
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.792" />
-
     <EditText
         android:id="@+id/subjectName"
         android:layout_width="0dp"
@@ -53,31 +51,26 @@
 
         <requestFocus />
     </EditText>
-
     <com.example.ikefluxa.stufflogger.NewLoglineTopBarView
         android:id="@+id/newLoglineTopBarView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.125" />
-
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.875" />
-
     <android.support.constraint.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" />
-
 </android.support.constraint.ConstraintLayout>

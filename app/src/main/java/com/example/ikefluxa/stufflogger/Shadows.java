@@ -10,13 +10,23 @@ class Shadows {
     float shadowXshift;
     float shadowYshift;
     float shadowDarkness;
-    final static float standardShadowDiam = 13;
-    final static float standardShadowXshift = 3;
-    final static float standardShadowYshift = 3;
-    final static int standardShadowDarkness = 2;
+    private final static float standardShadowDiam = 13;
+    private final static float standardShadowXshift = 3;
+    private final static float standardShadowYshift = 3;
+    private final static int standardShadowDarkness = 2;
 
-    // todo: add constructor and call the super function from children instead of making constructor over and over
-
+    Shadows() {
+        this.shadowDiam = Shadows.standardShadowDiam;
+        this.shadowXshift = Shadows.standardShadowXshift;
+        this.shadowYshift = Shadows.standardShadowYshift;
+        this.shadowDarkness = Shadows.standardShadowDarkness;
+    }
+    Shadows(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
+        this.shadowDiam = shadowDiam;
+        this.shadowXshift = shadowXshift;
+        this.shadowYshift = shadowYshift;
+        this.shadowDarkness = shadowDarkness;
+    }
     void eraseAndAddAndEliminatePoints(float shapeCenterX, float shapeCenterY) {
         // Reset array of points
         points = new ArrayList<>();

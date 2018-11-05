@@ -6,17 +6,11 @@ import android.graphics.Paint;
 import android.graphics.Point;
 
 class TextShadow extends Shadows {
-    TextShadow(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
-        this.shadowDiam = shadowDiam;
-        this.shadowXshift = shadowXshift;
-        this.shadowYshift = shadowYshift;
-        this.shadowDarkness = shadowDarkness;
-    }
     TextShadow() {
-        this.shadowDiam = Shadows.standardShadowDiam;
-        this.shadowXshift = Shadows.standardShadowXshift;
-        this.shadowYshift = Shadows.standardShadowYshift;
-        this.shadowDarkness = Shadows.standardShadowDarkness;
+        super();
+    }
+    TextShadow(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
+        super(shadowDiam, shadowXshift, shadowYshift, shadowDarkness);
     }
     void draw(String txt, float x, float y, Canvas canvas, Paint paint) {
         // I think the function name explains it

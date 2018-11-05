@@ -7,16 +7,10 @@ import android.graphics.Point;
 
 class CircleShadow extends Shadows {
     CircleShadow() {
-        this.shadowDiam = Shadows.standardShadowDiam;
-        this.shadowXshift = Shadows.standardShadowXshift;
-        this.shadowYshift = Shadows.standardShadowYshift;
-        this.shadowDarkness = Shadows.standardShadowDarkness;
+        super();
     }
     CircleShadow(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
-        this.shadowDiam = shadowDiam;
-        this.shadowXshift = shadowXshift;
-        this.shadowYshift = shadowYshift;
-        this.shadowDarkness = shadowDarkness;
+        super(shadowDiam, shadowXshift, shadowYshift, shadowDarkness);
     }
     void draw(float x, float y, float radius, Canvas canvas, Paint paint) {
         // I think the function name explains it

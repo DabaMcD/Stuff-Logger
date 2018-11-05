@@ -7,16 +7,10 @@ import android.graphics.Point;
 
 class RectShadow extends Shadows {
     RectShadow() {
-        this.shadowDiam = Shadows.standardShadowDiam;
-        this.shadowXshift = Shadows.standardShadowXshift;
-        this.shadowYshift = Shadows.standardShadowYshift;
-        this.shadowDarkness = Shadows.standardShadowDarkness;
+        super();
     }
     RectShadow(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
-        this.shadowDiam = shadowDiam;
-        this.shadowXshift = shadowXshift;
-        this.shadowYshift = shadowYshift;
-        this.shadowDarkness = shadowDarkness;
+        super(shadowDiam, shadowXshift, shadowYshift, shadowDarkness);
     }
     void draw(float left, float top, float right, float bottom, Canvas canvas, Paint paint) {
         // I think the function name explains it
