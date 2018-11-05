@@ -32,6 +32,7 @@ public class NewLoglineActivity extends AppCompatActivity {
     public void addLogline(View view) {
         Constants.users.get(0).logs.get(Constants.users.get(0).logs.size() - 1).logLines.add(new LogLine(new MyTime(Constants.getHour(), Constants.getMinute(), Constants.getSecond()), new Subject(subjectName.getText().toString())));
         Intent myIntent = new Intent(this, LogActivity.class);
+        Constants.saveUserFiles(this);
         startActivity(myIntent);
     }
 }
