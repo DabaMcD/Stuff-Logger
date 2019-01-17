@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Need the line below in the startup activity
-        defineConstantsStuff();
+        Screen.setDims(getWindowManager(), getResources());
         // Need the line below in every other activity
-        Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
+        Screen.correctDims(getResources());
 
         // Define all the things in the xml code
         MainTopBarShadowView mainTopBarShadowView = findViewById(R.id.mainTopBarShadowView);
@@ -135,23 +135,6 @@ public class MainActivity extends AppCompatActivity {
     public void trashUsersListClick(int clickIndex) {
         ConfirmUserDeleteActivity.userIndex = clickIndex;
         startActivity(new Intent(this, ConfirmUserDeleteActivity.class));
-    }
-    public void defineConstantsStuff() {
-        // Status bar height
-        int result = 0;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = getResources().getDimensionPixelSize(resourceId);
-        }
-        Constants.STATUS_BAR_HEIGHT = result;
-
-        // Screen dimensions
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int wd = displayMetrics.widthPixels;
-        int ht = displayMetrics.heightPixels;
-        Constants.ORIG_LONGER_SCREEN_DIM = Math.max(ht, wd);
-        Constants.ORIG_SHORTER_SCREEN_DIM = Math.min(ht, wd);
     }
     public void newUserClick() {
         Intent myIntent = new Intent(this, UserActivity.class);
