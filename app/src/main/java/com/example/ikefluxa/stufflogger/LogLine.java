@@ -1,6 +1,5 @@
 package com.example.ikefluxa.stufflogger;
 
-
 import java.io.Serializable;
 
 class LogLine implements Serializable {

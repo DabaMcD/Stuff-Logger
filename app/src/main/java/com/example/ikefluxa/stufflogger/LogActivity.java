@@ -18,7 +18,7 @@ public class LogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
 
-        Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
+        Screen.correctDims(getResources());
 
         drawLog = findViewById(R.id.drawLog);
         drawLog.draw();

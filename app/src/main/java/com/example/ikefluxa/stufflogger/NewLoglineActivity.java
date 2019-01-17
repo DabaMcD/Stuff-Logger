@@ -17,7 +17,7 @@ public class NewLoglineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_logline);
 
-        Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
+        Screen.correctDims(getResources());
 
         subjectName = findViewById(R.id.subjectName);
         subjectName.setTextColor(Color.DKGRAY);

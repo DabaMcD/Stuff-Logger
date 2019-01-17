@@ -28,9 +28,9 @@ public class ClearLogButtonView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         // Define vars
-        buttonDistFromCorner = (float) (Math.min(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT) / 4.5);
-        x = (float) (Constants.SCREEN_WIDTH - buttonDistFromCorner / 1.2);
-        y = (float) (Constants.SCREEN_HEIGHT - buttonDistFromCorner / 0.4);
+        buttonDistFromCorner = (float) (Math.min(Screen.width, Screen.height) / 4.5);
+        x = (float) (Screen.width - buttonDistFromCorner / 1.2);
+        y = (float) (Screen.height - buttonDistFromCorner / 0.4);
         rad = buttonDistFromCorner / 2;
 
         // Button

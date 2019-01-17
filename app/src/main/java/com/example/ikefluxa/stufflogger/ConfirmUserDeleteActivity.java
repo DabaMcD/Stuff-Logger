@@ -20,7 +20,9 @@ public class ConfirmUserDeleteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_user_delete);
 
-        getWindow().setLayout((int) (Constants.SCREEN_WIDTH * 0.75), Constants.SCREEN_HEIGHT + Constants.STATUS_BAR_HEIGHT - (Constants.SCREEN_WIDTH / 4));
+        Screen.correctDims(getResources());
+
+        getWindow().setLayout((int) (Screen.width * 0.75), Screen.height + Screen.statusBarHeight - (Screen.width / 4));
 
         // Dim window
         WindowManager.LayoutParams layoutParams = getWindow().getAttributes();

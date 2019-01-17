@@ -3,7 +3,7 @@ package com.example.ikefluxa.stufflogger;
 import java.io.Serializable;
 import java.util.ArrayList;
 
- class User implements Serializable {
+class User implements Serializable {
     String name;
     ArrayList<Subject> subjects = new ArrayList<>();
     int color;

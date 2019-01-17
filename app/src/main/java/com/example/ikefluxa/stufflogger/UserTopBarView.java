@@ -16,7 +16,6 @@ public class UserTopBarView extends View {
     public UserTopBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
     @Override
     protected void onDraw(Canvas canvas) {
         TopBar.drawRectTextAndShadows(canvas, 12345, true, "ADD NEW USER");

@@ -16,8 +16,8 @@ import android.view.View;
 
 public class UsersListView extends View{
     private Paint paint = new Paint();
-    private float lineThk = Constants.SCREEN_HEIGHT / 200;
-    private float userButtonHt = (float) (Constants.SCREEN_HEIGHT / 10.0);
+    private float lineThk = Screen.height / 200;
+    private float userButtonHt = (float) (Screen.height / 10.0);
     private Rect userNameBounds = new Rect();
 
     private Drawable trashCan = getResources().getDrawable(R.drawable.ic_trashcan);
@@ -30,17 +30,17 @@ public class UsersListView extends View{
     public UsersListView(Context context) {
         super(context);
         setVerticalScrollBarEnabled(true);
-        setMinimumHeight((int) (((Constants.SCREEN_HEIGHT / 10) + lineThk) * Constants.users.size()));
+        setMinimumHeight((int) (((Screen.height / 10) + lineThk) * Constants.users.size()));
     }
     public UsersListView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setVerticalScrollBarEnabled(true);
-        setMinimumHeight((int) (((Constants.SCREEN_HEIGHT / 10) + lineThk) * Constants.users.size()));
+        setMinimumHeight((int) (((Screen.height / 10) + lineThk) * Constants.users.size()));
     }
     public UsersListView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setVerticalScrollBarEnabled(true);
-        setMinimumHeight((int) (((Constants.SCREEN_HEIGHT / 10) + lineThk) * Constants.users.size()));
+        setMinimumHeight((int) (((Screen.height / 10) + lineThk) * Constants.users.size()));
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -57,22 +57,22 @@ public class UsersListView extends View{
 
             // Draw the line in between the users
             paint.setColor(Color.DKGRAY);
-            canvas.drawRect(-1, top - lineThk, Constants.SCREEN_WIDTH + 1, top, paint);
+            canvas.drawRect(-1, top - lineThk, Screen.width + 1, top, paint);
 
             // Draw the user's box
             paint.setColor(Color.LTGRAY);
-            canvas.drawRect(-1, top, Constants.SCREEN_WIDTH + 1, bottom, paint);
+            canvas.drawRect(-1, top, Screen.width + 1, bottom, paint);
 
             // Draw the user's name
-            paint.setColor(Constants.darkenColor(user.color));
+            paint.setColor(Constants.darkenColor(user.color, 0.67));
             paint.setTextAlign(Paint.Align.LEFT);
             paint.setTypeface(Typeface.DEFAULT_BOLD);
-            paint.setTextSize(Constants.SCREEN_HEIGHT / 17);
-            canvas.drawText(getLongestName(user.name), Constants.SCREEN_WIDTH / 28, top + (Constants.SCREEN_HEIGHT / 20) + (paint.getTextSize() / 3), paint);
+            paint.setTextSize(Screen.height / 17);
+            canvas.drawText(getLongestName(user.name), Screen.width / 28, top + (Screen.height / 20) + (paint.getTextSize() / 3), paint);
 
             // See whether I have to use bitmap instead of vector (bitmap is deprecated)
             int spaceY = (int) (bottom - top);
-            int centerX = (int) (Constants.SCREEN_WIDTH * 0.85);
+            int centerX = (int) (Screen.width * 0.85);
             int trashHeight = (spaceY * 2) / 3;
             int trashWidth = (int) (trashHeight * (7 / 10.0));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -98,7 +98,7 @@ public class UsersListView extends View{
             // Draw dark rectangle over the box (only if being clicked)
             if(Constants.mainClickingUserIndex == i) {
                 paint.setColor(Color.argb(30, 0, 0, 0));
-                canvas.drawRect(-1, top, Constants.SCREEN_WIDTH + 1, bottom, paint);
+                canvas.drawRect(-1, top, Screen.width + 1, bottom, paint);
             }
 
             // Draw dark circle over trash can (only if being clicked)
@@ -113,9 +113,9 @@ public class UsersListView extends View{
     private String getLongestName(String name) {
         Boolean dotDotDot = false;
         String result = name;
-        int maxRight = (Constants.SCREEN_WIDTH / 3) * 2;
+        int maxRight = (Screen.width / 3) * 2;
         paint.getTextBounds(result, 0, name.length(), userNameBounds);
-        while(userNameBounds.width() + (Constants.SCREEN_WIDTH / 28) > maxRight) {
+        while(userNameBounds.width() + (Screen.width / 28) > maxRight) {
             result = result.substring(0, result.length() - 1);
             paint.getTextBounds(result + "...", 0, result.length() + 3, userNameBounds);
             dotDotDot = true;

@@ -30,14 +30,14 @@ public class DrawLog extends View {
         log = Constants.users.get(0).logs.get(Constants.users.get(0).logs.size() - 1);
 
         // Draw lines making a 1D grid
-        lineGap = (int) (Constants.SCREEN_HEIGHT / 10f);
+        lineGap = (int) (Screen.height / 10f);
         // Tweak lineGap
         tweakLineGap();
         // Draw lines
         paint.setColor(Color.LTGRAY);
         paint.setStrokeWidth(Math.max(lineGap / 20, 2));
-        for(int i = (int) (TopBar.standardHeight + lineGap * 1.5); i <= Constants.SCREEN_HEIGHT; i += lineGap) {
-            canvas.drawLine(0, i, Constants.SCREEN_WIDTH, i, paint);
+        for(int i = (int) (TopBar.standardHeight + lineGap * 1.5); i <= Screen.height; i += lineGap) {
+            canvas.drawLine(0, i, Screen.width, i, paint);
         }
 
         leftLimit = lineGap / 2;
@@ -78,7 +78,7 @@ public class DrawLog extends View {
                 recordLineWidth = (int) thisLogLineLength;
             }
         }
-        while(recordLineWidth > Constants.SCREEN_WIDTH) {
+        while(recordLineWidth > Screen.width) {
             lineGap -= 0.1;
             paint.setTextSize((float) (lineGap * 0.8));
             leftLimit = lineGap / 2;
@@ -93,7 +93,7 @@ public class DrawLog extends View {
                 recordLineWidth = (int) (leftLimit * 2.5 + logLineNameWidth + paint.measureText("N:N") + paint.measureText("8") * 3);
             }
         }
-        while(log.logLines.size() * lineGap + (Constants.SCREEN_HEIGHT / 10 + lineGap * 3) > Constants.SCREEN_HEIGHT) {
+        while(log.logLines.size() * lineGap + (Screen.height / 10 + lineGap * 3) > Screen.height) {
             lineGap -= 0.1;
         }
     }

@@ -14,7 +14,7 @@ public class UserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
-        Constants.correctScreenDims(this.getResources().getConfiguration().orientation);
+        Screen.correctDims(getResources());
 
         name = findViewById(R.id.name);
         UserTopBarView userTopBarView = findViewById(R.id.userTopBarView);

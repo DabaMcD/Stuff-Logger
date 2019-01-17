@@ -35,9 +35,9 @@ public class MainTopBarView extends View {
         TopBar.drawRainbowRect(canvas);
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.DEFAULT_BOLD);
-        paint.setTextSize(Constants.SCREEN_HEIGHT / 14);
+        paint.setTextSize(Screen.height / 14);
         paint.setColor(Color.BLACK);
-        TopBar.textShadow.draw("Stuff Logger", Constants.SCREEN_HEIGHT / 40, TopBar.standardHeight / 2 + paint.getTextSize() / 3, canvas, paint);
+        TopBar.textShadow.draw("Stuff Logger", Screen.height / 40, TopBar.standardHeight / 2 + paint.getTextSize() / 3, canvas, paint);
 
         drawButton(canvas);
 
@@ -46,7 +46,7 @@ public class MainTopBarView extends View {
     private void drawButton(Canvas canvas) {
         // Define vars
         buttonDistFromCorner = (float) ((this.getHeight() / 2) * 1.2);
-        x = (float) (Constants.SCREEN_WIDTH - buttonDistFromCorner / 1.2);
+        x = (float) (Screen.width - buttonDistFromCorner / 1.2);
         y = (float) (buttonDistFromCorner / 1.2);
         rad = (float) (buttonDistFromCorner / 1.5);
 

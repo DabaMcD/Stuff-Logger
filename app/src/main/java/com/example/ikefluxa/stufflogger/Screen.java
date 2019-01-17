@@ -35,6 +35,11 @@ class Screen {
         shorterDim = Math.min(ht, wd);
     }
     static void correctDims(Resources resources) {
+        // This method should be called in the onCreate method of every activity.
+
+        // Whenever you call this method, it should look like the below:
+        // Screen.correctDims(getResources());
+
         if (resources.getConfiguration().orientation == 2) { // 2 = landscape
             width = longerDim;
             height = shorterDim - statusBarHeight;

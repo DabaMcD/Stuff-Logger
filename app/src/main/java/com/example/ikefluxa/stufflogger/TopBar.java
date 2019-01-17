@@ -35,38 +35,38 @@ class TopBar {
         paint.setColor(Color.BLACK);
         paint.setTypeface(Typeface.DEFAULT_BOLD);
         paint.setTextAlign(Paint.Align.CENTER);
-        textShadow.draw(text, Constants.SCREEN_WIDTH / 2, standardHeight / 2 + paint.getTextSize() / 3, canvas, paint);
+        textShadow.draw(text, Screen.width / 2, standardHeight / 2 + paint.getTextSize() / 3, canvas, paint);
     }
     static void drawTextWithoutShadow(Canvas canvas, String text) {
         paint.setColor(Color.BLACK);
         paint.setTypeface(Typeface.DEFAULT_BOLD);
         paint.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText(text, Constants.SCREEN_WIDTH / 2, standardHeight / 2 + paint.getTextSize() / 3, paint);
+        canvas.drawText(text, Screen.width / 2, standardHeight / 2 + paint.getTextSize() / 3, paint);
     }
     static void tweakTopBarTextSize(String text) {
-        paint.setTextSize(Constants.SCREEN_HEIGHT / 10);
+        paint.setTextSize(Screen.height / 10);
         paint.getTextBounds(text, 0, text.length(), tBounds);
-        while(tBounds.width() > (Constants.SCREEN_WIDTH / 2) * 1.7) {
+        while(tBounds.width() > (Screen.width / 2) * 1.7) {
             paint.setTextSize(paint.getTextSize() - 1);
             paint.getTextBounds(text, 0, text.length(), tBounds);
         }
     }
     static void drawRectWithShadow(Canvas canvas, int color) {
         paint.setColor(color);
-        rectShadow.draw(-20, -1, Constants.SCREEN_WIDTH + 1, standardHeight, canvas, paint);
+        rectShadow.draw(-20, -1, Screen.width + 1, standardHeight, canvas, paint);
     }
     static void drawRainbowRect(Canvas canvas) {
         rainbowRect.top = 0;
         rainbowRect.bottom = standardHeight;
-        for(int i = 0; i < Constants.SCREEN_WIDTH; i ++) {
+        for(int i = 0; i < Screen.width; i ++) {
             rainbowRect.left = i;
             rainbowRect.right = i + 1;
-            paint.setColor(Color.HSVToColor(new float[] {(float) ((360.000 / Constants.SCREEN_WIDTH) * i), 1, 1}));
+            paint.setColor(Color.HSVToColor(new float[] {(float) ((360.000 / Screen.width) * i), 1, 1}));
             canvas.drawRect(rainbowRect, paint);
         }
     }
     static void drawRectShadow(Canvas canvas) {
         paint.setColor(Color.BLACK);
-        rectShadow.draw((float) -100, 0, Constants.SCREEN_WIDTH, standardHeight, canvas, paint);
+        rectShadow.draw((float) -100, 0, Screen.width, standardHeight, canvas, paint);
     }
 }

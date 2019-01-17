@@ -30,9 +30,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // Need the line below in the startup activity
+        // We need the line below in the startup activity. Shouldn't need it anywhere else
         Screen.setDims(getWindowManager(), getResources());
-        // Need the line below in every other activity
+
+        // We need the line below in every other activity
         Screen.correctDims(getResources());
 
         // Define all the things in the xml code
@@ -60,14 +61,16 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
+        Constants.saveUserFiles(this);
+
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-
-        Constants.saveUserFiles(this);
     }
-    public void setTopBarTouchListener() {
+
+    // Touch listeners
+    private void setTopBarTouchListener() {
         findViewById(R.id.mainTopBarView).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -97,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void setUserListTouchListener() {
+    private void setUserListTouchListener() {
         findViewById(R.id.usersListView).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -126,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    // Touch action methods
+    // todo: change the names from "[something] click" to "on [something] touch"
     public void usersListClick(int userIndex) {
         Constants.moveUserToFrontIndex(userIndex);
 
