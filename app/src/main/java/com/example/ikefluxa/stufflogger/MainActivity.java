@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case MotionEvent.ACTION_UP:
                         if(Constants.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) <= mainTopBarView.rad && clickingOnAddUser) {
-                            newUserClick();
+                            onNewUserTouch();
                         }
                         mainTopBarView.draw(false);
                         clickingOnAddUser = false;
@@ -115,13 +115,13 @@ public class MainActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                         int clickedIndex = usersListView.actionUpUserButton(event.getX(), event.getY());
                         if(clickedIndex != -1) {
-                            usersListClick(clickedIndex);
+                            onUsersListTouch(clickedIndex);
                         }
                         usersListView.draw(clickedIndex);
 
                         int trashClickedIndex = usersListView.actionUpTrashButton(event.getX(), event.getY());
                         if(trashClickedIndex != -1) {
-                            trashUsersListClick(trashClickedIndex);
+                            onTrashUsersListTouch(trashClickedIndex);
                         }
                         break;
                 }
@@ -131,18 +131,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Touch action methods
-    // todo: change the names from "[something] click" to "on [something] touch"
-    public void usersListClick(int userIndex) {
+    private void onUsersListTouch(int userIndex) {
         Constants.moveUserToFrontIndex(userIndex);
 
         Intent myIntent = new Intent(this, LogActivity.class);
         startActivity(myIntent);
     }
-    public void trashUsersListClick(int clickIndex) {
+    private void onTrashUsersListTouch(int clickIndex) {
         ConfirmUserDeleteActivity.userIndex = clickIndex;
         startActivity(new Intent(this, ConfirmUserDeleteActivity.class));
     }
-    public void newUserClick() {
+    private void onNewUserTouch() {
         Intent myIntent = new Intent(this, UserActivity.class);
         startActivity(myIntent);
     }
