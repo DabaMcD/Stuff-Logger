@@ -3,7 +3,6 @@ package com.example.ikefluxa.stufflogger;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -12,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
     private UsersListView usersListView;
     private MainTopBarView mainTopBarView;
     private Boolean clickingOnAddUser;
+    // todo: when you click the clear button on the log page, you need to save the files again
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +19,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if(Constants.users.size() > 0) {
-            Constants.saveUserFiles(this);
+            Files.save(this);
         } else {
-            Constants.retrieveUserFiles(this);
+            Files.retrieve(this);
 
             // If there was something in the saved files
             if(Constants.users.size() > 0) {
@@ -61,8 +61,9 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Constants.saveUserFiles(this);
+        Files.save(this);
 
+        // Open the apps page
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
