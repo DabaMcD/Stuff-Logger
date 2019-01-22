@@ -18,7 +18,7 @@ public class LogTopBarView extends View {
     }
     @Override
     protected void onDraw(Canvas canvas) {
-        User user = Constants.users.get(0);
+        User user = Globals.users.get(0);
         TopBar.drawRectTextAndShadows(canvas, user.color, true, user.name);
 
         super.onDraw(canvas);

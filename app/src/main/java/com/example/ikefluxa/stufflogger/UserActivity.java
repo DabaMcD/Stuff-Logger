@@ -35,7 +35,7 @@ public class UserActivity extends AppCompatActivity {
         name.setHint(nicknames[(int) (Math.random() * nicknames.length)]);
     }
     public void newUserClick(View v) {
-        Constants.users.add(0, new User(name.getText().toString()));
+        Globals.users.add(0, new User(name.getText().toString()));
 
         Intent myIntent = new Intent(this, LogActivity.class);
         startActivity(myIntent);

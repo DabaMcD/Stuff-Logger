@@ -33,7 +33,7 @@ public class ConfirmUserDeleteActivity extends AppCompatActivity {
         TextView text = findViewById(R.id.text);
 
         // Set text
-        User user = Constants.users.get(userIndex);
+        User user = Globals.users.get(userIndex);
         SpannableString spannableString = new SpannableString("Are you sure you want to delete " + user.name + "'s user from this app?");
         BackgroundColorSpan backgroundSpan = new BackgroundColorSpan(user.color);
         ForegroundColorSpan foregroundSpan = new ForegroundColorSpan(Color.DKGRAY);
@@ -41,13 +41,13 @@ public class ConfirmUserDeleteActivity extends AppCompatActivity {
         spannableString.setSpan(foregroundSpan, 32, 32 + user.name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         text.setText(spannableString);
     }
-    public void cancel(View v) {
+    public void cancelTouch(View v) {
         onBackPressed();
     }
-    public void delete(View v) {
-        Constants.deletedUser = Constants.users.get(userIndex);
-        Constants.users.remove(userIndex);
-        if(Constants.users.size() == 0) {
+    public void deleteTouch(View v) {
+        Globals.deletedUser = Globals.users.get(userIndex);
+        Globals.users.remove(userIndex);
+        if(Globals.users.size() == 0) {
             deleteFile("User0.txt");
         }
         startActivity(new Intent(this, MainActivity.class));

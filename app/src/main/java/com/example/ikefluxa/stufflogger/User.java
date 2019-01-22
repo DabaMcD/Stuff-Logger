@@ -11,7 +11,7 @@ class User implements Serializable {
 
     User(String name) {
         this.name = name;
-        color = Constants.colors.get((int) Math.floor(Math.random() * Constants.colors.size()));
+        color = Globals.colors.get((int) Math.floor(Math.random() * Globals.colors.size()));
         logs.add(new Log());
     }
     User(String name, int color) {

@@ -17,13 +17,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(Constants.users.size() > 0) {
+        if(Globals.users.size() > 0) {
             Files.reSave(this);
         } else {
             Files.retrieve(this);
 
             // If there was something in the saved files
-            if(Constants.users.size() > 0) {
+            if(Globals.users.size() > 0) {
                 // Restart activity
                 startActivity(new Intent(this, MainActivity.class));
             }
@@ -77,19 +77,19 @@ public class MainActivity extends AppCompatActivity {
                 v.performClick();
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        if(Constants.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) <= mainTopBarView.rad) {
+                        if(Globals.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) <= mainTopBarView.rad) {
                             clickingOnAddUser = true;
                             mainTopBarView.draw(true);
                         }
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        if(Constants.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) > mainTopBarView.rad) {
+                        if(Globals.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) > mainTopBarView.rad) {
                             clickingOnAddUser = false;
                             mainTopBarView.draw(false);
                         }
                         break;
                     case MotionEvent.ACTION_UP:
-                        if(Constants.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) <= mainTopBarView.rad && clickingOnAddUser) {
+                        if(Globals.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) <= mainTopBarView.rad && clickingOnAddUser) {
                             onNewUserTouch();
                         }
                         mainTopBarView.draw(false);
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Touch action methods
     private void onUsersListTouch(int userIndex) {
-        Constants.moveUserToFrontIndex(userIndex);
+        Globals.moveUserToFrontIndex(userIndex);
 
         Intent myIntent = new Intent(this, LogActivity.class);
         startActivity(myIntent);

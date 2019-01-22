@@ -26,21 +26,22 @@ public class UsersListView extends View{
     private float trashX;
     private float trashRad;
     private int trashClickingIndex = -1;
+    private int touchingUserIndex = -1;
 
     public UsersListView(Context context) {
         super(context);
         setVerticalScrollBarEnabled(true);
-        setMinimumHeight((int) (((Screen.height / 10) + lineThk) * Constants.users.size()));
+        setMinimumHeight((int) (((Screen.height / 10) + lineThk) * Globals.users.size()));
     }
     public UsersListView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setVerticalScrollBarEnabled(true);
-        setMinimumHeight((int) (((Screen.height / 10) + lineThk) * Constants.users.size()));
+        setMinimumHeight((int) (((Screen.height / 10) + lineThk) * Globals.users.size()));
     }
     public UsersListView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setVerticalScrollBarEnabled(true);
-        setMinimumHeight((int) (((Screen.height / 10) + lineThk) * Constants.users.size()));
+        setMinimumHeight((int) (((Screen.height / 10) + lineThk) * Globals.users.size()));
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -49,9 +50,9 @@ public class UsersListView extends View{
         } else {
             bitmapTrashCan = (BitmapDrawable) trashCan;
         }
-        for(int i = 0; i < Constants.users.size(); i ++) {
+        for(int i = 0; i < Globals.users.size(); i ++) {
             // Define some helpful stuff
-            User user = Constants.users.get(i);
+            User user = Globals.users.get(i);
             float top = userButtonHt * i + lineThk * (i + 1);
             float bottom = top + userButtonHt;
 
@@ -64,7 +65,7 @@ public class UsersListView extends View{
             canvas.drawRect(-1, top, Screen.width + 1, bottom, paint);
 
             // Draw the user's name
-            paint.setColor(Constants.darkenColor(user.color, 0.67));
+            paint.setColor(Globals.darkenColor(user.color, 0.67));
             paint.setTextAlign(Paint.Align.LEFT);
             paint.setTypeface(Typeface.DEFAULT_BOLD);
             paint.setTextSize(Screen.height / 17);
@@ -96,7 +97,7 @@ public class UsersListView extends View{
             trashRad = (float) (trashHeight * 0.65);
 
             // Draw dark rectangle over the box (only if being clicked)
-            if(Constants.mainClickingUserIndex == i) {
+            if(touchingUserIndex == i) {
                 paint.setColor(Color.argb(30, 0, 0, 0));
                 canvas.drawRect(-1, top, Screen.width + 1, bottom, paint);
             }
@@ -125,51 +126,51 @@ public class UsersListView extends View{
     int actionDown(float x, float y) {
         // If they touch down inside one of the boxes,
         // activate the touchedUserIndex and set it to that user.
-        Constants.mainClickingUserIndex = -1;
-        for(int i = 0; i < Constants.users.size(); i ++) {
+        touchingUserIndex = -1;
+        for(int i = 0; i < Globals.users.size(); i ++) {
             // Trash can button part
             float top = userButtonHt * i + lineThk * (i + 1);
             float bottom = top + userButtonHt;
 
-            if (Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) < trashRad) {
+            if (Globals.getDist(x, y, trashX, top + ((bottom - top) / 2)) < trashRad) {
                 trashClickingIndex = i;
                 break;
             }
 
             // User button part
-            if(y > top && y < bottom && Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
-                Constants.mainClickingUserIndex = i;
+            if(y > top && y < bottom && Globals.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
+                touchingUserIndex = i;
                 break;
             }
         }
-        return Constants.mainClickingUserIndex;
+        return touchingUserIndex;
     } // Triggers on scroll start
     int actionMove(float x, float y) {
         // Trash can button part
         float top = userButtonHt * trashClickingIndex + lineThk * (trashClickingIndex + 1);
         float bottom = top + userButtonHt;
 
-        if (Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
+        if (Globals.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
             trashClickingIndex = -1;
         }
 
         // User button part
         // If they go outside the box, deactivate the touchedUserIndex
-        top = userButtonHt * Constants.mainClickingUserIndex + lineThk * (Constants.mainClickingUserIndex + 1);
+        top = userButtonHt * touchingUserIndex + lineThk * (touchingUserIndex + 1);
         bottom = top + userButtonHt;
-        if (y > top && y < bottom && Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
+        if (y > top && y < bottom && Globals.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
             // Return the user clicked
-            return Constants.mainClickingUserIndex;
+            return touchingUserIndex;
         } else {
             // Reset things
-            Constants.mainClickingUserIndex = -1;
+            touchingUserIndex = -1;
             return -1;
         }
     } // Triggers on scroll move
     int actionUpTrashButton(float x, float y) {
         float top = userButtonHt * trashClickingIndex + lineThk * (trashClickingIndex + 1);
         float bottom = top + userButtonHt;
-        if (Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
+        if (Globals.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
             trashClickingIndex = -1;
             return -1;
         } else {
@@ -179,19 +180,19 @@ public class UsersListView extends View{
     int actionUpUserButton(float x, float y) {
         // If they're still inside the box when their finger lets up,
         // and the touchedUserIndex is still activated, return the user index.
-        float top = userButtonHt * Constants.mainClickingUserIndex + lineThk * (Constants.mainClickingUserIndex + 1);
+        float top = userButtonHt * touchingUserIndex + lineThk * (touchingUserIndex + 1);
         float bottom = top + userButtonHt;
-        if (y > top && y < bottom && Constants.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
+        if (y > top && y < bottom && Globals.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
             // Return the user clicked
-            return Constants.mainClickingUserIndex;
+            return touchingUserIndex;
         } else {
             // Reset things
-            Constants.mainClickingUserIndex = -1;
+            touchingUserIndex = -1;
             return -1;
         }
     } // Does not trigger after scrolling
     void draw(int clickingUserIndex) {
-        Constants.mainClickingUserIndex = clickingUserIndex;
+        touchingUserIndex = clickingUserIndex;
         invalidate();
         requestLayout();
     }

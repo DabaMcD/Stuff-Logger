@@ -35,7 +35,7 @@ public class ClearLogButtonView extends View {
         rad = buttonDistFromCorner / 2;
 
         // Button
-        paint.setColor(Constants.inverseColor(Constants.users.get(0).color));
+        paint.setColor(Globals.inverseColor(Globals.users.get(0).color));
         loglineAdder.draw(x, y, rad, canvas, paint);
         if(hovering) {
             paint.setColor(Color.argb(30, 0, 0, 0));
@@ -65,22 +65,22 @@ public class ClearLogButtonView extends View {
     }
     void actionDown(float touchX, float touchY) {
         // If touching inside button
-        if(Constants.getDist(touchX, touchY, x, y) <= rad) {
+        if(Globals.getDist(touchX, touchY, x, y) <= rad) {
             touching = true;
             draw();
         }
     }
     void actionMove(float touchX, float touchY) {
         // If touching outside button
-        if(Constants.getDist(touchX, touchY, x, y) > rad && hovering) {
+        if(Globals.getDist(touchX, touchY, x, y) > rad && hovering) {
             touching = false;
             draw();
         }
     }
     void actionUp(float touchX, float touchY, Context context, DrawLog drawLog) {
         if(touching) {
-            if (Constants.getDist(touchX, touchY, x, y) <= rad) {
-                Constants.users.get(0).newLog();
+            if (Globals.getDist(touchX, touchY, x, y) <= rad) {
+                Globals.users.get(0).newLog();
                 Files.reSave(context);
                 drawLog.draw();
             }

@@ -27,7 +27,7 @@ public class DrawLog extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         // Make a nice short word (log) to represent the hash below
-        log = Constants.users.get(0).logs.get(Constants.users.get(0).logs.size() - 1);
+        log = Globals.users.get(0).logs.get(Globals.users.get(0).logs.size() - 1);
 
         // Draw lines making a 1D grid
         lineGap = (int) (Screen.height / 10f);

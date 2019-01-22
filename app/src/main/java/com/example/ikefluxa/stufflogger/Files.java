@@ -24,11 +24,11 @@ class Files {
 
         // Create new files
         int i = 0;
-        while(i < Constants.users.size()) {
+        while(i < Globals.users.size()) {
             try {
                 File outputFile = new File(context.getFilesDir(), "User" + String.valueOf(i) + ".txt");
                 ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(outputFile));
-                oos.writeObject(Constants.users.get(i));
+                oos.writeObject(Globals.users.get(i));
                 oos.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -37,13 +37,13 @@ class Files {
         }
     }
     static void retrieve(Context context) {
-        if(Constants.users.size() == 0) {
+        if(Globals.users.size() == 0) {
             int i = 0;
             File inputFile = new File(context.getFilesDir(), "User" + String.valueOf(i) + ".txt");
             while (inputFile.exists() && !inputFile.isDirectory()) {
                 try {
                     ObjectInputStream ois = new ObjectInputStream(new FileInputStream(inputFile));
-                    Constants.users.add((User) ois.readObject());
+                    Globals.users.add((User) ois.readObject());
                     ois.close();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -53,7 +53,7 @@ class Files {
             }
         } else {
             System.out.println("Oops, and error has occurred when retrieving user files. Users was:");
-            System.out.println(Constants.users);
+            System.out.println(Globals.users);
         }
     }
 }

@@ -1,13 +1,18 @@
 package com.example.ikefluxa.stufflogger;
 
 import android.graphics.Color;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
-class Constants {
-    static int mainClickingUserIndex = -1;
+class Globals {
     static ArrayList<User> users = new ArrayList<>();
     static User deletedUser;
+    static void moveUserToFrontIndex(int index) {
+        users.add(0, users.get(index));
+        users.remove(index + 1);
+    }
+
     static ArrayList<Integer> colors = new ArrayList<>(Arrays.asList(
             Color.rgb(255, 0, 0), // Red
             Color.rgb(0, 0, 255), // Blue
@@ -20,22 +25,18 @@ class Constants {
             Color.rgb(255, 255, 0), // Yellow
             Color.rgb(180, 80, 0) // Brown
     ));
-    static void moveUserToFrontIndex(int index) {
-        users.add(0, users.get(index));
-        users.remove(index + 1);
-    }
-    static double getDist(double x1, double y1, double x2, double y2) {
-        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+    static int darkenColor(int color, double factor) {
+        return Color.rgb((int) (Color.red(color) * factor),
+                (int) (Color.green(color) * factor),
+                (int) (Color.blue(color) * factor)
+        );
     }
     static int inverseColor(int color) {
         return Color.rgb(255-Color.red(color),
                 255-Color.green(color),
                 255-Color.blue(color));
     }
-    static int darkenColor(int color, double factor) {
-        return Color.rgb((int) (Color.red(color) * factor),
-                (int) (Color.green(color) * factor),
-                (int) (Color.blue(color) * factor)
-        );
+    static double getDist(double x1, double y1, double x2, double y2) {
+        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 }

@@ -44,7 +44,7 @@ class Shadows {
     }
     private void eliminatePoints(float shadeCenterX, float shadeCenterY) {
         for(int i = 0; i < points.size(); i ++) {
-            if (Constants.getDist(shadeCenterX, shadeCenterY, points.get(i).x, points.get(i).y) > shadowDiam / 2) {
+            if (Globals.getDist(shadeCenterX, shadeCenterY, points.get(i).x, points.get(i).y) > shadowDiam / 2) {
                 points.remove(i);
                 i --;
             }
