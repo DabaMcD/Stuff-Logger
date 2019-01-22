@@ -28,7 +28,7 @@ public class NewLoglineActivity extends AppCompatActivity {
         startActivity(myIntent);
     }
     public void addLogline(View view) {
-        Constants.users.get(0).logs.get(Constants.users.get(0).logs.size() - 1).logLines.add(new LogLine(new MyTime(Constants.getHour(), Constants.getMinute(), Constants.getSecond()), new Subject(subjectName.getText().toString())));
+        Constants.users.get(0).logs.get(Constants.users.get(0).logs.size() - 1).logLines.add(new LogLine(new MyTime(), new Subject(subjectName.getText().toString())));
         Intent myIntent = new Intent(this, LogActivity.class);
         Files.save(this);
         startActivity(myIntent);

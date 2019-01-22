@@ -1,16 +1,8 @@
 package com.example.ikefluxa.stufflogger;
 
-import android.content.Context;
 import android.graphics.Color;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 
 class Constants {
     static int mainClickingUserIndex = -1;
@@ -34,15 +26,6 @@ class Constants {
     }
     static double getDist(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
-    }
-    static int getHour() {
-        return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-    }
-    static int getMinute() {
-        return Calendar.getInstance().get(Calendar.MINUTE);
-    }
-    static int getSecond() {
-        return Calendar.getInstance().get(Calendar.SECOND);
     }
     static int inverseColor(int color) {
         return Color.rgb(255-Color.red(color),

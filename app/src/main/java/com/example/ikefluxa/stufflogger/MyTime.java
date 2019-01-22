@@ -1,6 +1,7 @@
 package com.example.ikefluxa.stufflogger;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 class MyTime implements Serializable {
     int hour;
@@ -11,6 +12,24 @@ class MyTime implements Serializable {
         this.hour = hour;
         this.minute = minute;
         this.second = second;
+    }
+    MyTime() {
+        hour = getHour();
+        minute = getMinute();
+        second = getSecond();
+    }
+    static int getHour() {
+        return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+    }
+    static int getMinute() {
+        return Calendar.getInstance().get(Calendar.MINUTE);
+    }
+    static int getSecond() {
+        return Calendar.getInstance().get(Calendar.SECOND);
+    }
+    // todo: test the below somehow
+    static int getMillis() {
+        return Calendar.getInstance().get(Calendar.MILLISECOND);
     }
     static String getDadTime(int hour, int minute) {
         String result = "";
