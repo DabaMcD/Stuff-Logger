@@ -14,7 +14,7 @@ class TopBar {
     private static RectShadow rectShadow = new RectShadow();
     private static Rect tBounds = new Rect();
     private static RectF rainbowRect = new RectF();
-    public static int color; // Color of rect is rainbow until defined
+    static int color; // Color of rect is rainbow until defined
 
     static void drawRectTextAndShadows(Canvas canvas, int color12345ForRainbow, boolean textHasShadow, String text) {
         if(color12345ForRainbow == 12345) {

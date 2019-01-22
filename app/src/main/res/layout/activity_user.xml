@@ -10,7 +10,6 @@
         android:id="@+id/userTopBarView"
         android:layout_height="match_parent"
         android:layout_width="match_parent" />
-
     <EditText
         android:id="@+id/name"
         android:maxLines="1"
@@ -25,8 +24,8 @@
         app:layout_constraintBottom_toTopOf="@+id/createUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="Autofill" />
     <Button
         android:id="@+id/createUser"
         android:layout_width="187dp"
@@ -44,7 +43,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.858"
         android:onClick="newUserClick"/>
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="90dp"
