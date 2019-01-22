@@ -11,7 +11,6 @@ public class MainActivity extends AppCompatActivity {
     private UsersListView usersListView;
     private MainTopBarView mainTopBarView;
     private Boolean clickingOnAddUser;
-    // todo: when you click the clear button on the log page, you need to save the files again
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if(Constants.users.size() > 0) {
-            Files.save(this);
+            Files.reSave(this);
         } else {
             Files.retrieve(this);
 
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Files.save(this);
+        Files.reSave(this);
 
         // Open the apps page
         Intent intent = new Intent(Intent.ACTION_MAIN);

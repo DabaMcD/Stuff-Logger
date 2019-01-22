@@ -10,8 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 class Files {
-    static void save(Context context) {
-        // Erase previous files
+    static void eraseFiles(Context context) {
         int i = 0;
         File file = new File(context.getFilesDir(), "User" + String.valueOf(i) + ".txt");
         while(file.getAbsoluteFile().exists() && !file.isDirectory()) {
@@ -19,9 +18,12 @@ class Files {
             i ++;
             file = new File(context.getFilesDir(), "User" + String.valueOf(i) + ".txt");
         }
+    }
+    static void reSave(Context context) {
+        eraseFiles(context);
 
         // Create new files
-        i = 0;
+        int i = 0;
         while(i < Constants.users.size()) {
             try {
                 File outputFile = new File(context.getFilesDir(), "User" + String.valueOf(i) + ".txt");

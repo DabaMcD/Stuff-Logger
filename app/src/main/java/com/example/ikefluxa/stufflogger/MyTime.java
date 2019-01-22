@@ -27,7 +27,6 @@ class MyTime implements Serializable {
     static int getSecond() {
         return Calendar.getInstance().get(Calendar.SECOND);
     }
-    // todo: test the below somehow
     static int getMillis() {
         return Calendar.getInstance().get(Calendar.MILLISECOND);
     }

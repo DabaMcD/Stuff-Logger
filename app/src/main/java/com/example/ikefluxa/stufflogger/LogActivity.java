@@ -87,6 +87,7 @@ public class LogActivity extends AppCompatActivity {
                         if(clearLogButtonView.hovering) {
                             if (Constants.getDist(event.getX(), event.getY(), clearLogButtonView.x, clearLogButtonView.y) <= newLoglineButton.rad) {
                                 Constants.users.get(0).newLog();
+                                Files.reSave(getApplicationContext());
                                 drawLog.draw();
                             }
                             clearLogButtonView.draw(false);
