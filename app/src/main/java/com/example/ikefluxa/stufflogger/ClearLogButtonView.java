@@ -15,6 +15,7 @@ public class ClearLogButtonView extends View {
     public float buttonDistFromCorner, x, y, rad;
     CircleShadow loglineAdder = new CircleShadow();
     TextShadow clearText = new TextShadow();
+    boolean touching = false;
 
     public ClearLogButtonView(Context context) {
         super(context);
@@ -58,9 +59,32 @@ public class ClearLogButtonView extends View {
             paint.setTextSize(paint.getTextSize() - 1);
         }
     }
-    void draw(boolean hovering) {
-        this.hovering = hovering;
+    void draw() {
         invalidate();
         requestLayout();
+    }
+    void actionDown(float touchX, float touchY) {
+        // If touching inside button
+        if(Constants.getDist(touchX, touchY, x, y) <= rad) {
+            touching = true;
+            draw();
+        }
+    }
+    void actionMove(float touchX, float touchY) {
+        // If touching outside button
+        if(Constants.getDist(touchX, touchY, x, y) > rad && hovering) {
+            touching = false;
+            draw();
+        }
+    }
+    void actionUp(float touchX, float touchY, Context context, DrawLog drawLog) {
+        if(touching) {
+            if (Constants.getDist(touchX, touchY, x, y) <= rad) {
+                Constants.users.get(0).newLog();
+                Files.reSave(context);
+                drawLog.draw();
+            }
+            draw();
+        }
     }
 }

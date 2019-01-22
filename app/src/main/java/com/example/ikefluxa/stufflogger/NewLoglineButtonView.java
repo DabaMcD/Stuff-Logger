@@ -1,6 +1,7 @@
 package com.example.ikefluxa.stufflogger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -17,16 +18,24 @@ public class NewLoglineButtonView extends View {
     public float x;
     public float y;
     public float rad;
-    private boolean hovering;
+    private boolean touching;
+
+    private Context context;
 
     public NewLoglineButtonView(Context context) {
         super(context);
+        init(context);
     }
     public NewLoglineButtonView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init(context);
     }
     public NewLoglineButtonView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(context);
+    }
+    private void init(Context context) {
+        this.context = context;
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -39,7 +48,7 @@ public class NewLoglineButtonView extends View {
         // Button
         paint.setColor(Constants.inverseColor(Constants.users.get(0).color));
         loglineAdder.draw(x, y, rad, canvas, paint);
-        if(hovering) {
+        if(touching) {
             paint.setColor(Color.argb(30, 0, 0, 0));
             canvas.drawCircle(x, y, rad, paint);
         }
@@ -62,9 +71,35 @@ public class NewLoglineButtonView extends View {
 
         super.onDraw(canvas);
     }
-    void draw(Boolean hovering) {
-        this.hovering = hovering;
+    void draw() {
         invalidate();
         requestLayout();
+    }
+    void actionDown(float touchX, float touchY) {
+        // If touching inside button
+        if(Constants.getDist(touchX, touchY, x, y) <= rad) {
+            touching = true;
+            draw();
+        }
+    }
+    void actionMove(float touchX, float touchY) {
+        // If touching outside button
+        if(Constants.getDist(touchX, touchY, x, y) > rad && touching) {
+            touching = false;
+            draw();
+        }
+    }
+    void actionUp(float touchX, float touchY, Context context) {
+        if(touching) {
+            if (Constants.getDist(touchX, touchY, x, y) <= rad) {
+                startNewLoglineActivity(context);
+            } else {
+                draw();
+            }
+        }
+    }
+    private void startNewLoglineActivity(Context context) {
+        Intent myIntent = new Intent(context, NewLoglineActivity.class);
+        context.startActivity(myIntent);
     }
 }

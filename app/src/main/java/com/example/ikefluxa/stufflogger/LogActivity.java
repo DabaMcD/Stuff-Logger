@@ -10,8 +10,8 @@ import android.widget.RelativeLayout;
 public class LogActivity extends AppCompatActivity {
     private DrawLog drawLog;
     private NewLoglineButtonView newLoglineButton;
-    private Boolean clicking = false;
     private ClearLogButtonView clearLogButtonView;
+    private LogTopBarView logTopBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +24,13 @@ public class LogActivity extends AppCompatActivity {
         drawLog.draw();
 
         newLoglineButton = findViewById(R.id.newLoglineButton);
-        newLoglineButton.draw(false);
+        newLoglineButton.draw();
 
-        LogTopBarView logTopBarView;
         logTopBarView = findViewById(R.id.logTopBarView);
         logTopBarView.draw();
 
         clearLogButtonView = findViewById(R.id.clearLogButtonView);
-        clearLogButtonView.draw(false);
+        clearLogButtonView.draw();
 
         // Set up click listener
         setTouchListeners();
@@ -48,58 +47,20 @@ public class LogActivity extends AppCompatActivity {
                 v.performClick();
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        // Add logline button
-                        if(Constants.getDist(event.getX(), event.getY(), newLoglineButton.x, newLoglineButton.y) <= newLoglineButton.rad) {
-                            newLoglineButton.draw(true);
-                            clicking = true;
-                        }
-
-                        // Clear log button
-                        if(Constants.getDist(event.getX(), event.getY(), clearLogButtonView.x, clearLogButtonView.y) <= clearLogButtonView.rad) {
-                            clearLogButtonView.draw(true);
-                            clicking = true;
-                        }
+                        newLoglineButton.actionDown(event.getX(), event.getY());
+                        clearLogButtonView.actionDown(event.getX(), event.getY());
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        // Add logline button
-                        if(Constants.getDist(event.getX(), event.getY(), newLoglineButton.x, newLoglineButton.y) > newLoglineButton.rad && clicking) {
-                            clicking = false;
-                            newLoglineButton.draw(false);
-                        }
-
-                        // Clear log button
-                        if(Constants.getDist(event.getX(), event.getY(), clearLogButtonView.x, clearLogButtonView.y) > clearLogButtonView.rad && clearLogButtonView.hovering) {
-                            clearLogButtonView.hovering = false;
-                            clearLogButtonView.draw(false);
-                        }
+                        newLoglineButton.actionMove(event.getX(), event.getY());
+                        clearLogButtonView.actionMove(event.getX(), event.getY());
                         break;
                     case MotionEvent.ACTION_UP:
-                        // Add logline button
-                        if(clicking) {
-                            if (Constants.getDist(event.getX(), event.getY(), newLoglineButton.x, newLoglineButton.y) <= newLoglineButton.rad) {
-                                newLogline();
-                            } else {
-                                newLoglineButton.draw(false);
-                            }
-                        }
-
-                        // Clear log button
-                        if(clearLogButtonView.hovering) {
-                            if (Constants.getDist(event.getX(), event.getY(), clearLogButtonView.x, clearLogButtonView.y) <= newLoglineButton.rad) {
-                                Constants.users.get(0).newLog();
-                                Files.reSave(getApplicationContext());
-                                drawLog.draw();
-                            }
-                            clearLogButtonView.draw(false);
-                        }
+                        newLoglineButton.actionUp(event.getX(), event.getY(), getApplicationContext());
+                        clearLogButtonView.actionUp(event.getX(), event.getY(), getApplicationContext(), drawLog);
                         break;
                 }
                 return true;
             }
         });
-    }
-    private void newLogline() {
-        Intent myIntent = new Intent(this, NewLoglineActivity.class);
-        startActivity(myIntent);
     }
 }
