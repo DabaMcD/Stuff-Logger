@@ -9,19 +9,19 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class DrawLog extends View {
+public class LogView extends View {
     Paint paint = new Paint();
     Log log;
     int leftLimit;
     int lineGap;
 
-    public DrawLog(Context context) {
+    public LogView(Context context) {
         super(context);
     }
-    public DrawLog(Context context, @Nullable AttributeSet attrs) {
+    public LogView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
-    public DrawLog(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public LogView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
     @Override

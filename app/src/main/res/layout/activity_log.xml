@@ -10,17 +10,14 @@
         android:id="@+id/logTopBarView"
         android:layout_height="match_parent"
         android:layout_width="match_parent" />
-
-    <com.example.ikefluxa.stufflogger.DrawLog
-        android:id="@+id/drawLog"
+    <com.example.ikefluxa.stufflogger.LogView
+        android:id="@+id/logView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
     <com.example.ikefluxa.stufflogger.NewLoglineButtonView
         android:id="@+id/newLoglineButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
     <com.example.ikefluxa.stufflogger.ClearLogButtonView
         android:id="@+id/clearLogButtonView"
         android:layout_width="match_parent"
