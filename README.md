@@ -8,7 +8,7 @@ This app will be used for keeping yourself on task, having your priorities in or
 
 This app is currently on Version 0.1.2
 
-// [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+[//]: # (Learn Markdown here: https://bitbucket.org/tutorials/markdowndemo)
 
 ### Who do I talk to? ###
 
