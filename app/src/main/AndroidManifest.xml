@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ikefluxa.stufflogger">
+    package="com.stuff.log.ger">
 
     <application
         android:allowBackup="true"
@@ -10,19 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:fullBackupContent="false">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.stuff.log.ger.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LogActivity" />
-        <activity android:name=".UserActivity"
+        <activity android:name="com.stuff.log.ger.LogActivity" />
+        <activity android:name="com.stuff.log.ger.UserActivity"
             android:windowSoftInputMode="stateVisible" />
-        <activity android:name=".NewLoglineActivity"
+        <activity android:name="com.stuff.log.ger.NewLoglineActivity"
             android:windowSoftInputMode="stateVisible" />
-        <activity android:name=".ConfirmUserDeleteActivity"
+        <activity android:name="com.stuff.log.ger.ConfirmUserDeleteActivity"
             android:theme="@style/AppTheme.PopupTheme">
         </activity>
     </application>

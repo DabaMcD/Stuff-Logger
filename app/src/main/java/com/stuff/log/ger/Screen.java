@@ -1,4 +1,4 @@
-package com.example.ikefluxa.stufflogger;
+package com.stuff.log.ger;
 
 import android.content.res.Resources;
 import android.util.DisplayMetrics;

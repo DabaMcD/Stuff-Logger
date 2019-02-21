@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    tools:context="com.example.ikefluxa.stufflogger.MainActivity">
+    tools:context="com.stuff.log.ger.MainActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -17,18 +17,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/topBarHorizontalGuideline">
 
-        <com.example.ikefluxa.stufflogger.UsersListView
+        <com.stuff.log.ger.UsersListView
             android:id="@+id/usersListView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </ScrollView>
-    <com.example.ikefluxa.stufflogger.MainTopBarShadowView
+    <com.stuff.log.ger.MainTopBarShadowView
         android:id="@+id/mainTopBarShadowView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <com.example.ikefluxa.stufflogger.MainTopBarView
+    <com.stuff.log.ger.MainTopBarView
         android:id="@+id/mainTopBarView"
         android:layout_width="match_parent"
         android:layout_height="0dp"

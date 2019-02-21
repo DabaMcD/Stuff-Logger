@@ -1,4 +1,4 @@
-package com.example.ikefluxa.stufflogger;
+package com.stuff.log.ger;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

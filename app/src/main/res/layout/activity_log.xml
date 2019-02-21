@@ -3,22 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ikefluxa.stufflogger.LogActivity"
+    tools:context="com.stuff.log.ger.LogActivity"
     android:id="@+id/LayoutBackground">
 
-    <com.example.ikefluxa.stufflogger.LogTopBarView
+    <com.stuff.log.ger.LogTopBarView
         android:id="@+id/logTopBarView"
         android:layout_height="match_parent"
         android:layout_width="match_parent" />
-    <com.example.ikefluxa.stufflogger.LogView
+    <com.stuff.log.ger.LogView
         android:id="@+id/logView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <com.example.ikefluxa.stufflogger.NewLoglineButtonView
+    <com.stuff.log.ger.NewLoglineButtonView
         android:id="@+id/newLoglineButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <com.example.ikefluxa.stufflogger.ClearLogButtonView
+    <com.stuff.log.ger.ClearLogButtonView
         android:id="@+id/clearLogButtonView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

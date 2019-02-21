@@ -1,25 +1,25 @@
-package com.example.ikefluxa.stufflogger;
+package com.stuff.log.ger;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-class RectShadow extends Shadows {
-    RectShadow() {
+class CircleShadow extends Shadows {
+    CircleShadow() {
         super();
     }
-    RectShadow(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
+    CircleShadow(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
         super(shadowDiam, shadowXshift, shadowYshift, shadowDarkness);
     }
-    void draw(float left, float top, float right, float bottom, Canvas canvas, Paint paint) {
+    void draw(float x, float y, float radius, Canvas canvas, Paint paint) {
         // I think the function name explains it
-        eraseAndAddAndEliminatePoints((left + right) / 2, (top + bottom) / 2);
+        eraseAndAddAndEliminatePoints(x, y);
 
         // Save the original color for later
         origColor = paint.getColor();
 
-        // Set very translucent color
+        // Calculate the opacity based on number of points & the darkness
         paint.setColor(Color.argb((int) shadowDarkness, 0, 0, 0));
 
         // Loop through all the points
@@ -27,12 +27,12 @@ class RectShadow extends Shadows {
             // Draw a little bit of shade at each point
             // Remember, the points represent the center of the shape.
             if (Math.random() > 0.5) {
-                canvas.drawRect(point.x - (right - left) / 2, point.y - (bottom - top) / 2, point.x + (right - left) / 2, point.y + (bottom - top) / 2, paint);
+                canvas.drawCircle(point.x, point.y, radius, paint);
             }
         }
 
         // Draw the initial rect
         paint.setColor(origColor);
-        canvas.drawRect(left, top, right, bottom, paint);
+        canvas.drawCircle(x, y, radius, paint);
     }
 }

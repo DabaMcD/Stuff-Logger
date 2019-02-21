@@ -1,28 +1,28 @@
-package com.example.ikefluxa.stufflogger;
+package com.stuff.log.ger;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class MainTopBarShadowView extends View {
-    public MainTopBarShadowView(Context context) {
+public class UserTopBarView extends View {
+    public UserTopBarView(Context context) {
         super(context);
     }
-    public MainTopBarShadowView(Context context, @Nullable AttributeSet attrs) {
+    public UserTopBarView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
-    public MainTopBarShadowView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public UserTopBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
     @Override
     protected void onDraw(Canvas canvas) {
-        TopBar.drawRectWithShadow(canvas, Color.BLACK);
+        TopBar.drawRectTextAndShadows(canvas, 12345, true, "ADD NEW USER");
+
         super.onDraw(canvas);
     }
-    public void draw() {
+    void draw() {
         invalidate();
         requestLayout();
     }

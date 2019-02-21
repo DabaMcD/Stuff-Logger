@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ikefluxa.stufflogger.NewLoglineActivity">
+    tools:context="com.stuff.log.ger.NewLoglineActivity">
 
     <Button
         android:id="@+id/back"
@@ -52,7 +52,7 @@
 
         <requestFocus />
     </EditText>
-    <com.example.ikefluxa.stufflogger.NewLoglineTopBarView
+    <com.stuff.log.ger.NewLoglineTopBarView
         android:id="@+id/newLoglineTopBarView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

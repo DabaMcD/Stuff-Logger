@@ -1,18 +1,18 @@
-package com.example.ikefluxa.stufflogger;
+package com.stuff.log.ger;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-class CircleShadow extends Shadows {
-    CircleShadow() {
+class TextShadow extends Shadows {
+    TextShadow() {
         super();
     }
-    CircleShadow(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
+    TextShadow(float shadowDiam, float shadowXshift, float shadowYshift, int shadowDarkness) {
         super(shadowDiam, shadowXshift, shadowYshift, shadowDarkness);
     }
-    void draw(float x, float y, float radius, Canvas canvas, Paint paint) {
+    void draw(String txt, float x, float y, Canvas canvas, Paint paint) {
         // I think the function name explains it
         eraseAndAddAndEliminatePoints(x, y);
 
@@ -27,12 +27,12 @@ class CircleShadow extends Shadows {
             // Draw a little bit of shade at each point
             // Remember, the points represent the center of the shape.
             if (Math.random() > 0.5) {
-                canvas.drawCircle(point.x, point.y, radius, paint);
+                canvas.drawText(txt, point.x, point.y, paint);
             }
         }
 
         // Draw the initial rect
         paint.setColor(origColor);
-        canvas.drawCircle(x, y, radius, paint);
+        canvas.drawText(txt, x, y, paint);
     }
 }
