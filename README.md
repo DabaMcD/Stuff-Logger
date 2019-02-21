@@ -8,16 +8,8 @@ This app will be used for keeping yourself on task, having your priorities in or
 
 This app is currently on Version 0.1.2
 
-[Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-No help is wanted for now. If you want to help or test out this app, please talk to the admin (see below the below)
-
-### Contribution guidelines ###
-
-No help is wanted for now. If you want to help or test out this app, please talk to the admin (see below)
+[//]: # (Learn Markdown here: https://bitbucket.org/tutorials/markdowndemo)
 
 ### Who do I talk to? ###
 
-If you wish to help out in this project, you can make a comment on this repo.
+If you wish to help out in this project, you can simply make a comment on this repo.
