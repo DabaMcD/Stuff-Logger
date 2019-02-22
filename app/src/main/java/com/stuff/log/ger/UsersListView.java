@@ -25,7 +25,7 @@ public class UsersListView extends View{
     private BitmapDrawable bitmapTrashCan;
     private float trashX;
     private float trashRad;
-    private int trashClickingIndex = -1;
+    int trashClickingIndex = -1;
     private int touchingUserIndex = -1;
 
     public UsersListView(Context context) {
@@ -193,8 +193,11 @@ public class UsersListView extends View{
             return -1;
         }
     } // Does not trigger after scrolling
+    void deleteTrashClickingIndex() {
+        trashClickingIndex = -1;
+    }
     void draw(int clickingUserIndex) {
-        touchingUserIndex = clickingUserIndex;
+        touchingUserIndex = clickingUserIndex; // todo: fix this hackeddy thing and do it the right way
         invalidate();
         requestLayout();
     }

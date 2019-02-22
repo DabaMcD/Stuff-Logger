@@ -62,6 +62,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     @Override
+    protected void onResume() { // Should be called when coming off of ConfirmUserDelete activity
+        usersListView.deleteTrashClickingIndex();
+        usersListView.draw(-1);
+        super.onResume();
+    }
+    @Override
     public void onBackPressed() {
         Files.reSave(this);
 
