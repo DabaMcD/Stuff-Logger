@@ -16,7 +16,7 @@ import android.view.View;
 
 public class UsersListView extends View{
     private Paint paint = new Paint();
-    private float lineThk = Screen.height / 200;
+    private float lineThk;
     private float userButtonHt = (float) (Screen.height / 10.0);
     private Rect userNameBounds = new Rect();
 
@@ -30,21 +30,23 @@ public class UsersListView extends View{
 
     public UsersListView(Context context) {
         super(context);
-        setVerticalScrollBarEnabled(true);
-        setMinimumHeight((int) (((Screen.height / 10) + lineThk) * Globals.users.size()));
+        init();
     }
     public UsersListView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        setVerticalScrollBarEnabled(true);
-        setMinimumHeight((int) (((Screen.height / 10) + lineThk) * Globals.users.size()));
+        init();
     }
     public UsersListView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
+    }
+    private void init() {
         setVerticalScrollBarEnabled(true);
         setMinimumHeight((int) (((Screen.height / 10) + lineThk) * Globals.users.size()));
     }
     @Override
     protected void onDraw(Canvas canvas) {
+        lineThk = Screen.height / 200f;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             vectorTrashCan = (VectorDrawable) trashCan;
         } else {
@@ -68,8 +70,8 @@ public class UsersListView extends View{
             paint.setColor(Globals.darkenColor(user.color, 0.67));
             paint.setTextAlign(Paint.Align.LEFT);
             paint.setTypeface(Typeface.DEFAULT_BOLD);
-            paint.setTextSize(Screen.height / 17);
-            canvas.drawText(getLongestName(user.name), Screen.width / 28, top + (Screen.height / 20) + (paint.getTextSize() / 3), paint);
+            paint.setTextSize(Screen.height / 17f);
+            canvas.drawText(getLongestName(user.name), Screen.width / 28f, top + (Screen.height / 20f) + (paint.getTextSize() / 3), paint);
 
             // See whether I have to use bitmap instead of vector (bitmap is deprecated)
             int spaceY = (int) (bottom - top);
@@ -105,14 +107,14 @@ public class UsersListView extends View{
             // Draw dark circle over trash can (only if being clicked)
             if(trashClickingIndex == i) {
                 paint.setColor(Color.argb(30, 0, 0, 0));
-                canvas.drawCircle(trashX, top + (spaceY / 2), trashRad, paint);
+                canvas.drawCircle(trashX, top + (spaceY / 2f), trashRad, paint);
             }
         }
 
         super.onDraw(canvas);
     }
     private String getLongestName(String name) {
-        Boolean dotDotDot = false;
+        boolean dotDotDot = false;
         String result = name;
         int maxRight = (Screen.width / 3) * 2;
         paint.getTextBounds(result, 0, name.length(), userNameBounds);

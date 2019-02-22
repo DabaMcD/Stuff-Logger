@@ -17,17 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(Globals.users.size() > 0) {
-            Files.reSave(this);
-        } else {
-            Files.retrieve(this);
-
-            // If there was something in the saved files
-            if(Globals.users.size() > 0) {
-                // Restart activity
-                startActivity(new Intent(this, MainActivity.class));
-            }
-        }
+        doFileStuff();
 
         // We need the line below in the startup activity. Shouldn't need it anywhere else
         Screen.setDims(getWindowManager(), getResources());
@@ -57,6 +47,19 @@ public class MainActivity extends AppCompatActivity {
                 usersListView.draw(-1);
             }
         });
+    }
+    private void doFileStuff() {
+        if(Globals.users.size() > 0) {
+            Files.reSave(this);
+        } else {
+            Files.retrieve(this);
+
+            // If there was something in the saved files
+            if(Globals.users.size() > 0) {
+                // Restart activity
+                startActivity(new Intent(this, MainActivity.class));
+            }
+        }
     }
     @Override
     public void onBackPressed() {
