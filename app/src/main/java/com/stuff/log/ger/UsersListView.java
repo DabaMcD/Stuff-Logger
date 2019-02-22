@@ -177,21 +177,17 @@ public class UsersListView extends View{
         if (Globals.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
             trashClickingIndex = -1;
         } else {
-            startConfirmUserDeleteActivity();
+            onTrashTouch();
         }
     }
-    int actionUpUserButton(float x, float y) {
+    void actionUpUserButton(float x, float y) {
         // If they're still inside the box when their finger lets up,
         // and the touchedUserIndex is still activated, return the user index.
         float top = userButtonHt * touchingUserIndex + lineThk * (touchingUserIndex + 1);
         float bottom = top + userButtonHt;
         if (y > top && y < bottom && Globals.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
             // Return the user clicked
-            return touchingUserIndex;
-        } else {
-            // Reset things
-            touchingUserIndex = -1;
-            return -1;
+            onUsersListTouch();
         }
     } // Does not trigger after scrolling
     void setTrashClickingIndex(int value) {
@@ -204,9 +200,16 @@ public class UsersListView extends View{
         invalidate();
         requestLayout();
     }
-    private void startConfirmUserDeleteActivity() {
+    private void onTrashTouch() {
         ConfirmUserDeleteActivity.userIndex = trashClickingIndex;
+
         Intent myIntent = new Intent(context, ConfirmUserDeleteActivity.class);
+        context.startActivity(myIntent);
+    }
+    private void onUsersListTouch() {
+        Globals.moveUserToFrontIndex(touchingUserIndex);
+
+        Intent myIntent = new Intent(context, LogActivity.class);
         context.startActivity(myIntent);
     }
 }

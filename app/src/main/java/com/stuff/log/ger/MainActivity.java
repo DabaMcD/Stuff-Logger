@@ -129,10 +129,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         usersListView.draw(clickedIndex);
 
-                        int trashClickedIndex = usersListView.actionUpTrashButton(event.getX(), event.getY());
-                        if(trashClickedIndex != -1) {
-                            onTrashUsersListTouch(trashClickedIndex);
-                        }
+                        usersListView.actionUp(event.getX(), event.getY());
                         break;
                 }
                 usersListView.draw();
@@ -142,16 +139,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Touch action methods
-    private void onUsersListTouch(int userIndex) {
-        Globals.moveUserToFrontIndex(userIndex);
 
-        Intent myIntent = new Intent(this, LogActivity.class);
-        startActivity(myIntent);
-    }
-    private void onTrashUsersListTouch(int clickIndex) {
-        ConfirmUserDeleteActivity.userIndex = clickIndex;
-        startActivity(new Intent(this, ConfirmUserDeleteActivity.class));
-    }
     private void onNewUserTouch() {
         Intent myIntent = new Intent(this, UserActivity.class);
         startActivity(myIntent);
