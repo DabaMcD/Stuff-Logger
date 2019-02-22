@@ -1,6 +1,7 @@
 package com.stuff.log.ger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -25,24 +26,26 @@ public class UsersListView extends View{
     private BitmapDrawable bitmapTrashCan;
     private float trashX;
     private float trashRad;
-    int trashClickingIndex = -1;
+    private int trashClickingIndex = -1;
     private int touchingUserIndex = -1;
+    private Context context;
 
     public UsersListView(Context context) {
         super(context);
-        init();
+        init(context);
     }
     public UsersListView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context);
     }
     public UsersListView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(context);
     }
-    private void init() {
+    private void init(Context context) {
         setVerticalScrollBarEnabled(true);
         setMinimumHeight((int) (((Screen.height / 10) + lineThk) * Globals.users.size()));
+        this.context = context;
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -125,7 +128,7 @@ public class UsersListView extends View{
         }
         return result + (dotDotDot ? "..." : "");
     }
-    int actionDown(float x, float y) {
+    void actionDown(float x, float y) {
         // If they touch down inside one of the boxes,
         // activate the touchedUserIndex and set it to that user.
         touchingUserIndex = -1;
@@ -145,9 +148,8 @@ public class UsersListView extends View{
                 break;
             }
         }
-        return touchingUserIndex;
     } // Triggers on scroll start
-    int actionMove(float x, float y) {
+    void actionMove(float x, float y) {
         // Trash can button part
         float top = userButtonHt * trashClickingIndex + lineThk * (trashClickingIndex + 1);
         float bottom = top + userButtonHt;
@@ -160,23 +162,22 @@ public class UsersListView extends View{
         // If they go outside the box, deactivate the touchedUserIndex
         top = userButtonHt * touchingUserIndex + lineThk * (touchingUserIndex + 1);
         bottom = top + userButtonHt;
-        if (y > top && y < bottom && Globals.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
-            // Return the user clicked
-            return touchingUserIndex;
-        } else {
+        if (y < top || y > bottom || Globals.getDist(x, y, trashX, top + ((bottom - top) / 2)) < trashRad) {
             // Reset things
             touchingUserIndex = -1;
-            return -1;
         }
     } // Triggers on scroll move
-    int actionUpTrashButton(float x, float y) {
+    void actionUp(float x, float y) {
+        actionUpTrashButton(x, y);
+        actionUpUserButton(x, y);
+    }
+    void actionUpTrashButton(float x, float y) {
         float top = userButtonHt * trashClickingIndex + lineThk * (trashClickingIndex + 1);
         float bottom = top + userButtonHt;
         if (Globals.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
             trashClickingIndex = -1;
-            return -1;
         } else {
-            return trashClickingIndex;
+            startConfirmUserDeleteActivity();
         }
     }
     int actionUpUserButton(float x, float y) {
@@ -193,12 +194,19 @@ public class UsersListView extends View{
             return -1;
         }
     } // Does not trigger after scrolling
-    void deleteTrashClickingIndex() {
-        trashClickingIndex = -1;
+    void setTrashClickingIndex(int value) {
+        trashClickingIndex = value;
     }
-    void draw(int clickingUserIndex) {
-        touchingUserIndex = clickingUserIndex; // todo: fix this hackeddy thing and do it the right way
+    void setTouchingUserIndex(int value) {
+        touchingUserIndex = value;
+    }
+    void draw() {
         invalidate();
         requestLayout();
+    }
+    private void startConfirmUserDeleteActivity() {
+        ConfirmUserDeleteActivity.userIndex = trashClickingIndex;
+        Intent myIntent = new Intent(context, ConfirmUserDeleteActivity.class);
+        context.startActivity(myIntent);
     }
 }

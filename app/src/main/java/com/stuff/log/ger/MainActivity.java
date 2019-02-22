@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         // Draw the stuff in the xml code
         mainTopBarShadowView.draw();
         mainTopBarView.draw(false);
-        usersListView.draw(-1); // -1 if no index
+        usersListView.draw(); // -1 if no index
 
         clickingOnAddUser = false;
 
@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
         usersListView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
             @Override
             public void onScrollChanged() {
-                usersListView.draw(-1);
+                usersListView.setTouchingUserIndex(-1);
+                usersListView.draw();
             }
         });
     }
@@ -63,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onResume() { // Should be called when coming off of ConfirmUserDelete activity
-        usersListView.deleteTrashClickingIndex();
-        usersListView.draw(-1);
+        usersListView.setTrashClickingIndex(-1);
+        usersListView.draw();
         super.onResume();
     }
     @Override
@@ -116,10 +117,10 @@ public class MainActivity extends AppCompatActivity {
                 v.performClick();
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        usersListView.draw(usersListView.actionDown(event.getX(), event.getY()));
+                        usersListView.actionDown(event.getX(), event.getY());
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        usersListView.draw(usersListView.actionMove(event.getX(), event.getY()));
+                        usersListView.actionMove(event.getX(), event.getY());
                         break;
                     case MotionEvent.ACTION_UP:
                         int clickedIndex = usersListView.actionUpUserButton(event.getX(), event.getY());
@@ -134,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                 }
+                usersListView.draw();
                 return true;
             }
         });
