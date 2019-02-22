@@ -7,7 +7,6 @@ import java.util.Arrays;
 
 class Globals {
     static ArrayList<User> users = new ArrayList<>();
-    static User deletedUser;
     static void moveUserToFrontIndex(int index) {
         users.add(0, users.get(index));
         users.remove(index + 1);

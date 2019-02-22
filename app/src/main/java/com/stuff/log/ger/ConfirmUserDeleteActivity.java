@@ -34,10 +34,8 @@ public class ConfirmUserDeleteActivity extends AppCompatActivity {
 
         // Set text
         User user = Globals.users.get(userIndex);
-        SpannableString spannableString = new SpannableString("Are you sure you want to delete " + user.name + "'s user from this app?");
-        BackgroundColorSpan backgroundSpan = new BackgroundColorSpan(user.color);
-        ForegroundColorSpan foregroundSpan = new ForegroundColorSpan(Color.DKGRAY);
-        spannableString.setSpan(backgroundSpan, 32, 32 + user.name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        SpannableString spannableString = new SpannableString("Are you sure you want to delete " + user.name + "'s user from this app?\nThis action cannot be undone.");
+        ForegroundColorSpan foregroundSpan = new ForegroundColorSpan(user.color);
         spannableString.setSpan(foregroundSpan, 32, 32 + user.name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         text.setText(spannableString);
     }
@@ -45,7 +43,6 @@ public class ConfirmUserDeleteActivity extends AppCompatActivity {
         onBackPressed();
     }
     public void deleteTouch(View v) {
-        Globals.deletedUser = Globals.users.get(userIndex);
         Globals.users.remove(userIndex);
         if(Globals.users.size() == 0) {
             deleteFile("User0.txt");
