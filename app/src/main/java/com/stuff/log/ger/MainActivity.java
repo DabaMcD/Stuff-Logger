@@ -123,12 +123,6 @@ public class MainActivity extends AppCompatActivity {
                         usersListView.actionMove(event.getX(), event.getY());
                         break;
                     case MotionEvent.ACTION_UP:
-                        int clickedIndex = usersListView.actionUpUserButton(event.getX(), event.getY());
-                        if(clickedIndex != -1) {
-                            onUsersListTouch(clickedIndex);
-                        }
-                        usersListView.draw(clickedIndex);
-
                         usersListView.actionUp(event.getX(), event.getY());
                         break;
                 }
@@ -138,8 +132,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Touch action methods
-
+    // Touch action method
     private void onNewUserTouch() {
         Intent myIntent = new Intent(this, UserActivity.class);
         startActivity(myIntent);
