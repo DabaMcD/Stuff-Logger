@@ -173,7 +173,8 @@ public class UsersListView extends View{
     } // Triggers on scroll move
     void actionUp(float x, float y) {
         actionUpTrashButton(x, y);
-        actionUpUserButton(x, y);
+        draw();
+        actionUpUserButton(x, y); // Important that the user button must be called last
     }
     void actionUpTrashButton(float x, float y) {
         float top = userButtonHt * trashClickingIndex + lineThk * (trashClickingIndex + 1);
@@ -183,8 +184,6 @@ public class UsersListView extends View{
         } else {
             onTrashTouch();
         }
-
-        draw();
     }
     void actionUpUserButton(float x, float y) {
         // If they're still inside the box when their finger lets up,
@@ -213,9 +212,9 @@ public class UsersListView extends View{
         context.startActivity(myIntent);
     }
     private void onUsersListTouch() {
-        Globals.moveUserToFrontIndex(touchingUserIndex);
-
         Intent myIntent = new Intent(context, LogActivity.class);
         context.startActivity(myIntent);
+
+        Globals.moveUserToFrontIndex(touchingUserIndex);
     }
 }
