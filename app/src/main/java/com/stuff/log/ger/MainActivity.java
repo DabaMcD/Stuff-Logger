@@ -10,7 +10,6 @@ import android.view.ViewTreeObserver;
 public class MainActivity extends AppCompatActivity {
     private UsersListView usersListView;
     private MainTopBarView mainTopBarView;
-    private Boolean clickingOnAddUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Draw the stuff in the xml code
         mainTopBarShadowView.draw();
-        mainTopBarView.draw(false);
-        usersListView.draw(); // -1 if no index
-
-        clickingOnAddUser = false;
+        mainTopBarView.draw();
+        usersListView.draw();
 
         // Touch listeners
         setTopBarTouchListener();
@@ -87,25 +84,16 @@ public class MainActivity extends AppCompatActivity {
                 v.performClick();
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        if(Globals.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) <= mainTopBarView.rad) {
-                            clickingOnAddUser = true;
-                            mainTopBarView.draw(true);
-                        }
+                        mainTopBarView.actionDown(event.getX(), event.getY());
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        if(Globals.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) > mainTopBarView.rad) {
-                            clickingOnAddUser = false;
-                            mainTopBarView.draw(false);
-                        }
+                        mainTopBarView.actionMove(event.getX(), event.getY());
                         break;
                     case MotionEvent.ACTION_UP:
-                        if(Globals.getDist(event.getX(), event.getY(), mainTopBarView.x, mainTopBarView.y) <= mainTopBarView.rad && clickingOnAddUser) {
-                            onNewUserTouch();
-                        }
-                        mainTopBarView.draw(false);
-                        clickingOnAddUser = false;
+                        mainTopBarView.actionUp(event.getX(), event.getY());
                         break;
                 }
+                mainTopBarView.draw();
                 return true;
             }
         });
@@ -126,15 +114,8 @@ public class MainActivity extends AppCompatActivity {
                         usersListView.actionUp(event.getX(), event.getY());
                         break;
                 }
-                usersListView.draw();
                 return true;
             }
         });
-    }
-
-    // Touch action method
-    private void onNewUserTouch() {
-        Intent myIntent = new Intent(this, UserActivity.class);
-        startActivity(myIntent);
     }
 }

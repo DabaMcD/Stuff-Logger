@@ -148,6 +148,8 @@ public class UsersListView extends View{
                 break;
             }
         }
+
+        draw();
     } // Triggers on scroll start
     void actionMove(float x, float y) {
         // Trash can button part
@@ -166,6 +168,8 @@ public class UsersListView extends View{
             // Reset things
             touchingUserIndex = -1;
         }
+
+        draw();
     } // Triggers on scroll move
     void actionUp(float x, float y) {
         actionUpTrashButton(x, y);
@@ -179,6 +183,8 @@ public class UsersListView extends View{
         } else {
             onTrashTouch();
         }
+
+        draw();
     }
     void actionUpUserButton(float x, float y) {
         // If they're still inside the box when their finger lets up,

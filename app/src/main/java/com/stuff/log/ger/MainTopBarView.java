@@ -1,6 +1,7 @@
 package com.stuff.log.ger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,9 +12,10 @@ import android.view.View;
 
 public class MainTopBarView extends View {
     private Paint paint = new Paint();
+    private Context context;
 
     // Button stuff
-    private Boolean hovering;
+    private boolean hovering = false;
     private RectShadow userAdderV = new RectShadow();
     private RectShadow userAdderH = new RectShadow();
     public float buttonDistFromCorner;
@@ -23,21 +25,27 @@ public class MainTopBarView extends View {
 
     public MainTopBarView(Context context) {
         super(context);
+        init(context);
     }
     public MainTopBarView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init(context);
     }
     public MainTopBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(context);
+    }
+    private void init(Context context) {
+        this.context = context;
     }
     @Override
     protected void onDraw(Canvas canvas) {
         TopBar.drawRainbowRect(canvas);
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.DEFAULT_BOLD);
-        paint.setTextSize(Screen.height / 14);
+        paint.setTextSize(Screen.height / 14f);
         paint.setColor(Color.BLACK);
-        TopBar.textShadow.draw("Stuff Logger", Screen.height / 40, TopBar.standardHeight / 2 + paint.getTextSize() / 3, canvas, paint);
+        TopBar.textShadow.draw("Stuff Logger", Screen.height / 40f, TopBar.standardHeight / 2 + paint.getTextSize() / 3, canvas, paint);
 
         drawButton(canvas);
 
@@ -72,9 +80,28 @@ public class MainTopBarView extends View {
         // Vertical rect
         canvas.drawRect(x - sideOfRectRelToCircle, y - endOfRectRelToCircle, x + sideOfRectRelToCircle, y + endOfRectRelToCircle, paint);
     }
-    void draw(Boolean hovering) {
-        this.hovering = hovering;
+    void draw() {
         invalidate();
         requestLayout();
+    }
+    void actionDown(float touchX, float touchY) {
+        if(Globals.getDist(touchX, touchY, x, y) <= rad) {
+            hovering = true;
+        }
+    }
+    void actionMove(float touchX, float touchY) {
+        if(Globals.getDist(touchX, touchY, x, y) > rad) {
+            hovering = false;
+        }
+    }
+    void actionUp(float touchX, float touchY) {
+        if(Globals.getDist(touchX, touchY, x, y) <= rad && hovering) {
+            onNewUserTouch();
+        }
+        hovering = false;
+    }
+    private void onNewUserTouch() {
+        Intent myIntent = new Intent(context, UserActivity.class);
+        context.startActivity(myIntent);
     }
 }

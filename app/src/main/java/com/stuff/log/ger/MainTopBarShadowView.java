@@ -8,6 +8,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class MainTopBarShadowView extends View {
+    private boolean hovering;
+
     public MainTopBarShadowView(Context context) {
         super(context);
     }
