@@ -215,6 +215,6 @@ public class UsersListView extends View{
         Intent myIntent = new Intent(context, LogActivity.class);
         context.startActivity(myIntent);
 
-        Globals.moveUserToFrontIndex(touchingUserIndex);
+        Globals.logActivityFromMainActivityUserIndex = touchingUserIndex;
     }
 }

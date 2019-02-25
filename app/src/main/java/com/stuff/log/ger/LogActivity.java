@@ -18,6 +18,12 @@ public class LogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
 
+        // Cleaning up after previous activity (if MainActivity)
+        if(Globals.logActivityFromMainActivityUserIndex > 0) {
+            Globals.moveUserToFrontIndex(Globals.logActivityFromMainActivityUserIndex);
+            Globals.logActivityFromMainActivityUserIndex = -1;
+        }
+
         Screen.correctDims(getResources());
 
         logView = findViewById(R.id.logView);

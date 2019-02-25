@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 class Globals {
+    static int logActivityFromMainActivityUserIndex = -1;
+
     static ArrayList<User> users = new ArrayList<>();
     static void moveUserToFrontIndex(int index) {
         users.add(0, users.get(index));
