@@ -11,7 +11,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class MainTopBarView extends View {
-    private Paint paint = new Paint();
+    private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Context context;
 
     // Button stuff

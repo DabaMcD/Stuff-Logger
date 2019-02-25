@@ -9,7 +9,7 @@ import android.graphics.Typeface;
 
 class TopBar {
     static float standardHeight;
-    private static Paint paint = new Paint();
+    private static Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     static TextShadow textShadow = new TextShadow();
     private static RectShadow rectShadow = new RectShadow();
     private static Rect tBounds = new Rect();
@@ -58,10 +58,10 @@ class TopBar {
     static void drawRainbowRect(Canvas canvas) {
         rainbowRect.top = 0;
         rainbowRect.bottom = standardHeight;
-        for(int i = 0; i < Screen.width; i ++) {
+        for(int i = 0; i < Screen.width; i += 5) {
             rainbowRect.left = i;
-            rainbowRect.right = i + 1;
-            paint.setColor(Color.HSVToColor(new float[] {(float) ((360.000 / Screen.width) * i), 1, 1}));
+            rainbowRect.right = i + 5;
+            paint.setColor(Color.HSVToColor(new float[] {(360f / Screen.width) * i, 1, 1}));
             canvas.drawRect(rainbowRect, paint);
         }
     }

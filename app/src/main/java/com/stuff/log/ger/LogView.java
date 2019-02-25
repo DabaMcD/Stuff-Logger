@@ -10,10 +10,10 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class LogView extends View {
-    Paint paint = new Paint();
-    Log log;
-    int leftLimit;
-    int lineGap;
+    private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Log log;
+    private int leftLimit;
+    private int lineGap;
 
     public LogView(Context context) {
         super(context);

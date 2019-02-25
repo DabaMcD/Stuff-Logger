@@ -11,7 +11,7 @@ import android.view.View;
 
 public class ClearLogButtonView extends View {
     Boolean hovering = false;
-    Paint paint = new Paint();
+    Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     public float buttonDistFromCorner, x, y, rad;
     CircleShadow loglineAdder = new CircleShadow();
     TextShadow clearText = new TextShadow();

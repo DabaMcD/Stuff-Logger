@@ -11,7 +11,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class NewLoglineButtonView extends View {
-    private Paint paint = new Paint();
+    private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private RectShadow loglineAdderPlus1 = new RectShadow();
     private RectShadow loglineAdderPlus2 = new RectShadow();
     private CircleShadow loglineAdder = new CircleShadow();
@@ -89,16 +89,16 @@ public class NewLoglineButtonView extends View {
             draw();
         }
     }
-    void actionUp(float touchX, float touchY, Context context) {
+    void actionUp(float touchX, float touchY) {
         if(touching) {
             if (Globals.getDist(touchX, touchY, x, y) <= rad) {
-                startNewLoglineActivity(context);
+                startNewLoglineActivity();
             } else {
                 draw();
             }
         }
     }
-    private void startNewLoglineActivity(Context context) {
+    private void startNewLoglineActivity() {
         Intent myIntent = new Intent(context, NewLoglineActivity.class);
         context.startActivity(myIntent);
     }

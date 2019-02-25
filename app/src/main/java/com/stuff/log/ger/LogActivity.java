@@ -61,7 +61,7 @@ public class LogActivity extends AppCompatActivity {
                         clearLogButtonView.actionMove(event.getX(), event.getY());
                         break;
                     case MotionEvent.ACTION_UP:
-                        newLoglineButton.actionUp(event.getX(), event.getY(), getApplicationContext());
+                        newLoglineButton.actionUp(event.getX(), event.getY());
                         clearLogButtonView.actionUp(event.getX(), event.getY(), getApplicationContext(), logView);
                         break;
                 }
