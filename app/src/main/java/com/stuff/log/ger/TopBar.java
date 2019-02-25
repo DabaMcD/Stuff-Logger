@@ -35,16 +35,16 @@ class TopBar {
         paint.setColor(Color.BLACK);
         paint.setTypeface(Typeface.DEFAULT_BOLD);
         paint.setTextAlign(Paint.Align.CENTER);
-        textShadow.draw(text, Screen.width / 2, standardHeight / 2 + paint.getTextSize() / 3, canvas, paint);
+        textShadow.draw(text, Screen.width / 2f, standardHeight / 2 + paint.getTextSize() / 3, canvas, paint);
     }
     static void drawTextWithoutShadow(Canvas canvas, String text) {
         paint.setColor(Color.BLACK);
         paint.setTypeface(Typeface.DEFAULT_BOLD);
         paint.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText(text, Screen.width / 2, standardHeight / 2 + paint.getTextSize() / 3, paint);
+        canvas.drawText(text, Screen.width / 2f, standardHeight / 2 + paint.getTextSize() / 3, paint);
     }
     static void tweakTopBarTextSize(String text) {
-        paint.setTextSize(Screen.height / 10);
+        paint.setTextSize(Screen.height / 10f);
         paint.getTextBounds(text, 0, text.length(), tBounds);
         while(tBounds.width() > (Screen.width / 2) * 1.7) {
             paint.setTextSize(paint.getTextSize() - 1);
