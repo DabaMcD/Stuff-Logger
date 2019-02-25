@@ -31,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
         usersListView = findViewById(R.id.usersListView);
 
         // Draw the stuff in the xml code
-        mainTopBarView.draw();
         usersListView.init(this);
         usersListView.draw();
         mainTopBarShadowView.draw();
+        mainTopBarView.draw();
 
         // Touch listeners
         setTopBarTouchListener();

@@ -46,7 +46,7 @@ public class UsersListView extends View{
         userButtonHt = Screen.height / 10f;
         lineThk = Screen.height / 200f;
         setVerticalScrollBarEnabled(true);
-        setMinimumHeight((int) (((Screen.height / 10f) + lineThk) * Globals.users.size()));
+        setMinimumHeight((int) (((Screen.height / 10f) + lineThk) * Globals.users.size() - lineThk));
         this.context = context;
     }
     @Override
@@ -59,12 +59,14 @@ public class UsersListView extends View{
         for(int i = 0; i < Globals.users.size(); i ++) {
             // Define some helpful stuff
             User user = Globals.users.get(i);
-            float top = userButtonHt * i + lineThk * (i + 1);
+            float top = userButtonHt * i + lineThk;
             float bottom = top + userButtonHt;
 
             // Draw the line in between the users
-            paint.setColor(Color.DKGRAY);
-            canvas.drawRect(-1, top - lineThk, Screen.width + 1, top, paint);
+            if(i > 0) { // We don't want a line above the top user
+                paint.setColor(Color.DKGRAY);
+                canvas.drawRect(-1, top - lineThk, Screen.width + 1, top, paint);
+            }
 
             // Draw the user's box
             paint.setColor(Color.LTGRAY);
@@ -139,7 +141,7 @@ public class UsersListView extends View{
         touchingUserIndex = -1;
         for(int i = 0; i < Globals.users.size(); i ++) {
             // Trash can button part
-            float top = userButtonHt * i + lineThk * (i + 1);
+            float top = (userButtonHt + lineThk) * i;
             float bottom = top + userButtonHt;
 
             if (Globals.getDist(x, y, trashX, top + ((bottom - top) / 2)) < trashRad) {
@@ -158,7 +160,7 @@ public class UsersListView extends View{
     } // Triggers on scroll start
     void actionMove(float x, float y) {
         // Trash can button part
-        float top = userButtonHt * trashClickingIndex + lineThk * (trashClickingIndex + 1);
+        float top = (userButtonHt + lineThk) * trashClickingIndex;
         float bottom = top + userButtonHt;
 
         if (Globals.getDist(x, y, trashX, top + ((bottom - top) / 2)) >= trashRad) {
@@ -167,7 +169,7 @@ public class UsersListView extends View{
 
         // User button part
         // If they go outside the box, deactivate the touchedUserIndex
-        top = userButtonHt * touchingUserIndex + lineThk * (touchingUserIndex + 1);
+        top = (userButtonHt + lineThk) * touchingUserIndex;
         bottom = top + userButtonHt;
         if (y < top || y > bottom || Globals.getDist(x, y, trashX, top + ((bottom - top) / 2)) < trashRad) {
             // Reset things
