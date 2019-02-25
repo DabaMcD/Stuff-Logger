@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 
 public class MainActivity extends AppCompatActivity {
+    private MainTopBarShadowView mainTopBarShadowView;
     private UsersListView usersListView;
     private MainTopBarView mainTopBarView;
 
@@ -25,14 +26,15 @@ public class MainActivity extends AppCompatActivity {
         Screen.correctDims(getResources());
 
         // Define all the things in the xml code
-        MainTopBarShadowView mainTopBarShadowView = findViewById(R.id.mainTopBarShadowView);
+        mainTopBarShadowView = findViewById(R.id.mainTopBarShadowView);
         mainTopBarView = findViewById(R.id.mainTopBarView);
         usersListView = findViewById(R.id.usersListView);
 
         // Draw the stuff in the xml code
-        mainTopBarShadowView.draw();
         mainTopBarView.draw();
+        usersListView.init(this);
         usersListView.draw();
+        mainTopBarShadowView.draw();
 
         // Touch listeners
         setTopBarTouchListener();

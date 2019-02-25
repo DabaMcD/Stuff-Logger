@@ -18,7 +18,7 @@ import android.view.View;
 public class UsersListView extends View{
     private Paint paint = new Paint();
     private float lineThk;
-    private float userButtonHt = (float) (Screen.height / 10.0);
+    private float userButtonHt;
     private Rect userNameBounds = new Rect();
 
     private Drawable trashCan = getResources().getDrawable(R.drawable.ic_trashcan);
@@ -42,14 +42,15 @@ public class UsersListView extends View{
         super(context, attrs, defStyleAttr);
         init(context);
     }
-    private void init(Context context) {
+    void init(Context context) { // This function is called in MainActivity. That's how come it can use Screen.height
+        userButtonHt = Screen.height / 10f;
+        lineThk = Screen.height / 200f;
         setVerticalScrollBarEnabled(true);
-        setMinimumHeight((int) (((Screen.height / 10) + lineThk) * Globals.users.size()));
+        setMinimumHeight((int) (((Screen.height / 10f) + lineThk) * Globals.users.size()));
         this.context = context;
     }
     @Override
     protected void onDraw(Canvas canvas) {
-        lineThk = Screen.height / 200f;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             vectorTrashCan = (VectorDrawable) trashCan;
         } else {
@@ -115,6 +116,10 @@ public class UsersListView extends View{
         }
 
         super.onDraw(canvas);
+    }
+    void draw() {
+        invalidate();
+        requestLayout();
     }
     private String getLongestName(String name) {
         boolean dotDotDot = false;
@@ -200,10 +205,6 @@ public class UsersListView extends View{
     }
     void setTouchingUserIndex(int value) {
         touchingUserIndex = value;
-    }
-    void draw() {
-        invalidate();
-        requestLayout();
     }
     private void onTrashTouch() {
         ConfirmUserDeleteActivity.userIndex = trashClickingIndex;
