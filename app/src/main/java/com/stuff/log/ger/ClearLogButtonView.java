@@ -10,21 +10,28 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class ClearLogButtonView extends View {
-    Boolean hovering = false;
-    Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    public float buttonDistFromCorner, x, y, rad;
-    CircleShadow loglineAdder = new CircleShadow();
-    TextShadow clearText = new TextShadow();
-    boolean touching = false;
+    private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    float buttonDistFromCorner, x, y, rad;
+    private CircleShadow loglineAdder = new CircleShadow();
+    private TextShadow clearText = new TextShadow();
+    private boolean touching = false;
+
+    private Context context;
 
     public ClearLogButtonView(Context context) {
         super(context);
+        init(context);
     }
     public ClearLogButtonView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init(context);
     }
     public ClearLogButtonView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(context);
+    }
+    private void init(Context context) {
+        this.context = context;
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -37,7 +44,7 @@ public class ClearLogButtonView extends View {
         // Button
         paint.setColor(Globals.inverseColor(Globals.users.get(0).color));
         loglineAdder.draw(x, y, rad, canvas, paint);
-        if(hovering) {
+        if(touching) {
             paint.setColor(Color.argb(30, 0, 0, 0));
             canvas.drawCircle(x, y, rad, paint);
         }
@@ -72,12 +79,12 @@ public class ClearLogButtonView extends View {
     }
     void actionMove(float touchX, float touchY) {
         // If touching outside button
-        if(Globals.getDist(touchX, touchY, x, y) > rad && hovering) {
+        if(Globals.getDist(touchX, touchY, x, y) > rad && touching) {
             touching = false;
             draw();
         }
     }
-    void actionUp(float touchX, float touchY, Context context, LogView logView) {
+    void actionUp(float touchX, float touchY, LogView logView) {
         if(touching) {
             if (Globals.getDist(touchX, touchY, x, y) <= rad) {
                 Globals.users.get(0).newLog();
@@ -86,5 +93,6 @@ public class ClearLogButtonView extends View {
             }
             draw();
         }
+        touching = false;
     }
 }

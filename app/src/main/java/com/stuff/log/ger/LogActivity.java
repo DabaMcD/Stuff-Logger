@@ -46,6 +46,11 @@ public class LogActivity extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
         super.onBackPressed();
     }
+    @Override
+    protected void onResume() {
+        newLoglineButton.init(this);
+        super.onResume();
+    }
     private void setTouchListeners() {
         findViewById(R.id.LayoutBackground).setOnTouchListener(new RelativeLayout.OnTouchListener() {
             @Override
@@ -62,7 +67,7 @@ public class LogActivity extends AppCompatActivity {
                         break;
                     case MotionEvent.ACTION_UP:
                         newLoglineButton.actionUp(event.getX(), event.getY());
-                        clearLogButtonView.actionUp(event.getX(), event.getY(), getApplicationContext(), logView);
+                        clearLogButtonView.actionUp(event.getX(), event.getY(), logView);
                         break;
                 }
                 return true;

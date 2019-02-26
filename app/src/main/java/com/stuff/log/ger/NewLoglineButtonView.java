@@ -15,10 +15,8 @@ public class NewLoglineButtonView extends View {
     private RectShadow loglineAdderPlus1 = new RectShadow();
     private RectShadow loglineAdderPlus2 = new RectShadow();
     private CircleShadow loglineAdder = new CircleShadow();
-    public float x;
-    public float y;
-    public float rad;
-    private boolean touching;
+    float x, y, rad;
+    private boolean touching = false;
 
     private Context context;
 
@@ -34,8 +32,9 @@ public class NewLoglineButtonView extends View {
         super(context, attrs, defStyleAttr);
         init(context);
     }
-    private void init(Context context) {
+    void init(Context context) {
         this.context = context;
+        touching = false;
     }
     @Override
     protected void onDraw(Canvas canvas) {
