@@ -49,10 +49,14 @@ public class LogView extends View {
         paint.setTextAlign(Paint.Align.LEFT);
         canvas.drawText(log.date, leftLimit, TopBar.standardHeight + lineGap + paint.getTextSize() / 3f, paint);
 
-        // Draw loglines
+        // Draw logLines
         for(int i = 0; i < log.logLines.size(); i ++) {
-            float txtYpos = (float) ((TopBar.standardHeight + lineGap * 1.5) + (lineGap * (i + 0.5)) + (paint.getTextSize() / 3f));
-            canvas.drawText(log.logLines.get(i).subject.name, leftLimit + paint.measureText("8") * 3 + paint.measureText("N:N"), txtYpos, paint);
+            float txtYpos = (float) (
+                    (TopBar.standardHeight + lineGap * 1.5) + // The height of the top bar
+                    (lineGap * (i + 0.5)) + // Move down the log to the right spot
+                    (paint.getTextSize() / 3f) // Centering the text vertically
+            );
+            canvas.drawText(log.logLines.get(i).subject.name, leftLimit + paint.measureText("8") * 3f + paint.measureText("N:N"), txtYpos, paint);
             canvas.drawText("-", leftLimit + paint.measureText("8") * 3 + paint.measureText("N"), txtYpos, paint);
             String dadTime = MyTime.getDadTime(log.logLines.get(i).startTime.hour, log.logLines.get(i).startTime.minute);
             canvas.drawText(String.valueOf(dadTime.charAt(0)), leftLimit, txtYpos, paint);
