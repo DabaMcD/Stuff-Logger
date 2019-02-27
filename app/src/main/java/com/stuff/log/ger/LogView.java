@@ -43,7 +43,7 @@ public class LogView extends View {
         leftLimit = (int) (lineGap / 2f);
 
         // Draw date at top of log
-        paint.setTextSize((float) (lineGap * 0.8));
+        updateTextSize();
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
         paint.setColor(Color.DKGRAY);
         paint.setTextAlign(Paint.Align.LEFT);
@@ -65,7 +65,7 @@ public class LogView extends View {
     private void tweakLineGap() {
         int longestLoglineIndex = -1;
         leftLimit = (int) (lineGap / 2f);
-        paint.setTextSize((float) (lineGap * 0.8));
+        updateTextSize();
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
         float recordLineWidth = paint.measureText(log.date) + leftLimit * 2;
         for(int i = 0; i < log.logLines.size(); i ++) {
@@ -80,7 +80,7 @@ public class LogView extends View {
         }
         while(recordLineWidth > Screen.width) {
             lineGap -= 0.1;
-            paint.setTextSize((float) (lineGap * 0.8));
+            updateTextSize();
             leftLimit = (int) (lineGap / 2f);
 
             if(longestLoglineIndex == -1) {
@@ -96,6 +96,9 @@ public class LogView extends View {
         while(log.logLines.size() * lineGap + (Screen.height / 10f + lineGap * 3) > Screen.height) {
             lineGap -= 0.1;
         }
+    }
+    private void updateTextSize() {
+        paint.setTextSize((float) (lineGap * 0.8));
     }
     void draw() {
         invalidate();
