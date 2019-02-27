@@ -35,23 +35,23 @@ public class LogView extends View {
         tweakLineGap();
         // Draw lines
         paint.setColor(Color.LTGRAY);
-        paint.setStrokeWidth(Math.max(lineGap / 20, 2));
+        paint.setStrokeWidth(Math.max(lineGap / 20f, 2));
         for(int i = (int) (TopBar.standardHeight + lineGap * 1.5); i <= Screen.height; i += lineGap) {
             canvas.drawLine(0, i, Screen.width, i, paint);
         }
 
-        leftLimit = lineGap / 2;
+        leftLimit = (int) (lineGap / 2f);
 
         // Draw date at top of log
         paint.setTextSize((float) (lineGap * 0.8));
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
         paint.setColor(Color.DKGRAY);
         paint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText(log.date, leftLimit, TopBar.standardHeight + lineGap + paint.getTextSize() / 3, paint);
+        canvas.drawText(log.date, leftLimit, TopBar.standardHeight + lineGap + paint.getTextSize() / 3f, paint);
 
         // Draw loglines
         for(int i = 0; i < log.logLines.size(); i ++) {
-            float txtYpos = (float) ((TopBar.standardHeight + lineGap * 1.5) + (lineGap * (i + 0.5)) + (paint.getTextSize() / 3));
+            float txtYpos = (float) ((TopBar.standardHeight + lineGap * 1.5) + (lineGap * (i + 0.5)) + (paint.getTextSize() / 3f));
             canvas.drawText(log.logLines.get(i).subject.name, leftLimit + paint.measureText("8") * 3 + paint.measureText("N:N"), txtYpos, paint);
             canvas.drawText("-", leftLimit + paint.measureText("8") * 3 + paint.measureText("N"), txtYpos, paint);
             String dadTime = MyTime.getDadTime(log.logLines.get(i).startTime.hour, log.logLines.get(i).startTime.minute);
@@ -64,7 +64,7 @@ public class LogView extends View {
     }
     private void tweakLineGap() {
         int longestLoglineIndex = -1;
-        leftLimit = lineGap / 2;
+        leftLimit = (int) (lineGap / 2f);
         paint.setTextSize((float) (lineGap * 0.8));
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
         float recordLineWidth = paint.measureText(log.date) + leftLimit * 2;
@@ -81,7 +81,7 @@ public class LogView extends View {
         while(recordLineWidth > Screen.width) {
             lineGap -= 0.1;
             paint.setTextSize((float) (lineGap * 0.8));
-            leftLimit = lineGap / 2;
+            leftLimit = (int) (lineGap / 2f);
 
             if(longestLoglineIndex == -1) {
                 recordLineWidth = paint.measureText(log.date) + leftLimit * 2 + leftLimit * 2;
@@ -93,7 +93,7 @@ public class LogView extends View {
                 recordLineWidth = (int) (leftLimit * 2.5 + logLineNameWidth + paint.measureText("N:N") + paint.measureText("8") * 3);
             }
         }
-        while(log.logLines.size() * lineGap + (Screen.height / 10 + lineGap * 3) > Screen.height) {
+        while(log.logLines.size() * lineGap + (Screen.height / 10f + lineGap * 3) > Screen.height) {
             lineGap -= 0.1;
         }
     }
