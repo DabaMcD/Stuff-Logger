@@ -47,7 +47,7 @@ public class LogView extends View {
         for(int i = 0; i < log.logLines.size(); i ++) {
             // Get the length of a log line (without left and right margins)
             float logLineNameWidth = paint.measureText(log.logLines.get(i).subject.name);
-            float thisLogLineLength = logLineNameWidth + paint.measureText("N:N") + paint.measureText("8") * 3 + leftLimit * 2;
+            float thisLogLineLength = logLineNameWidth + paint.measureText("N-N") + paint.measureText("8") * 3 + leftLimit * 2;
 
             if(thisLogLineLength > recordLineWidth) { // If it breaks the line length record
                 longestLoglineIndex = i;
@@ -66,7 +66,7 @@ public class LogView extends View {
 
                 // logLineNameBounds = bounds of subject name
                 float logLineNameWidth = paint.measureText(logLineSubjectName);
-                recordLineWidth = (int) (leftLimit * 2.5 + logLineNameWidth + paint.measureText("N:N") + paint.measureText("8") * 3);
+                recordLineWidth = (int) (leftLimit * 2.5 + logLineNameWidth + paint.measureText("N-N") + paint.measureText("8") * 3);
             }
         }
         while(log.logLines.size() * lineGap + (Screen.height / 10f + lineGap * 3) > Screen.height) {
@@ -93,6 +93,13 @@ public class LogView extends View {
         canvas.drawText(log.date, leftLimit, TopBar.standardHeight + lineGap + paint.getTextSize() / 3f, paint);
     }
     private void drawLoglines(Canvas canvas) {
+        /* Log lines are drawn in the following manner:
+         *               137 - Code
+         *<= leftLimit =>888N-NCode<= leftLimit =>
+         *
+         * Do you follow the above? The upper text is what will actually be shown on the log. The lower text is the spacing I use to get everything aligned.
+         */
+
         for(int i = 0; i < log.logLines.size(); i ++) {
             float txtYpos = (float) (
                     (TopBar.standardHeight + lineGap * 1.5) + // The height of the top bar
@@ -101,7 +108,7 @@ public class LogView extends View {
             );
             canvas.drawText(
                     log.logLines.get(i).subject.name,
-                    leftLimit + paint.measureText("8") * 3f + paint.measureText("N:N"),
+                    leftLimit + paint.measureText("8") * 3f + paint.measureText("N-N"),
                     txtYpos,
                     paint
             );
