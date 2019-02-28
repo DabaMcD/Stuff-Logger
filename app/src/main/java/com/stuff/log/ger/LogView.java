@@ -72,7 +72,8 @@ public class LogView extends View {
                 recordLineWidth = (int) (sideLimit * 2f + logLineNameWidth + paint.measureText("888N-N"));
             }
         }
-        while(log.logLines.size() * lineGap + firstLineYpos /* and just for extra buffer at the bottom, */ + lineGap * 1.5d> Screen.height) {
+        updateFirstLineYpos();
+        while(log.logLines.size() * lineGap + firstLineYpos /* and just for extra buffer at the bottom: */ + lineGap * 1.5d > Screen.height) {
             decreaseLineGap();
             updateFirstLineYpos();
         }
