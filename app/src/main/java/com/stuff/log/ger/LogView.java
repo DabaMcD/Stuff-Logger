@@ -14,6 +14,7 @@ public class LogView extends View {
     private Log log;
     private int sideLimit;
     private float lineGap;
+    private float firstLineYpos;
 
     public LogView(Context context) {
         super(context);
@@ -32,18 +33,18 @@ public class LogView extends View {
         log = Globals.users.get(0).logs.get(Globals.users.get(0).logs.size() - 1);
         lineGap = Screen.height / 10f; // Set min line gap
         tweakLineGap();
+        updateSideLimit();
+        setFirstLineYpos();
+        updateTextSize();
         drawHorizontalGridLines(canvas);
-        updateLeftLimit();
-        updateTextSize();
         drawDate(canvas);
-        updateTextSize();
         drawLoglines(canvas);
 
         super.onDraw(canvas);
     }
     private void tweakLineGap() {
         int longestLoglineIndex = -1;
-        updateLeftLimit();
+        updateSideLimit();
         updateTextSize();
         float recordLineWidth = paint.measureText(log.date) + sideLimit * 2f;
         for(int i = 0; i < log.logLines.size(); i ++) {
@@ -59,7 +60,7 @@ public class LogView extends View {
         while(recordLineWidth > Screen.width) {
             decreaseLineGap();
             updateTextSize();
-            updateLeftLimit();
+            updateSideLimit();
 
             if(longestLoglineIndex == -1) {
                 recordLineWidth = paint.measureText(log.date) + sideLimit * 2f; // sideLimit * 2 because you gotta account for both sides
@@ -81,13 +82,16 @@ public class LogView extends View {
     private void updateTextSize() {
         paint.setTextSize((float) (lineGap * 0.8));
     }
-    private void updateLeftLimit() {
+    private void updateSideLimit() {
         sideLimit = (int) (lineGap / 2f);
+    }
+    private void setFirstLineYpos() {
+        firstLineYpos = (float) (TopBar.standardHeight + lineGap * 1.5);
     }
     private void drawHorizontalGridLines(Canvas canvas) {
         paint.setColor(Color.LTGRAY);
         paint.setStrokeWidth(Math.max(lineGap / 20f, 2));
-        for(int i = (int) (TopBar.standardHeight + lineGap * 1.5); i <= Screen.height; i += lineGap) {
+        for(float i = firstLineYpos; i <= Screen.height; i += lineGap) {
             canvas.drawLine(0, i, Screen.width, i, paint);
         }
     }
@@ -109,9 +113,9 @@ public class LogView extends View {
 
         for(int i = 0; i < log.logLines.size(); i ++) {
             float txtYpos = (float) (
-                    (TopBar.standardHeight + lineGap * 1.5) + // The height of the top bar
-                            (lineGap * (i + 0.5)) + // Move down the log to the right spot
-                            (paint.getTextSize() / 3f) // Centering the text vertically
+                    firstLineYpos + // The height of the top bar
+                    (lineGap * (i + 0.5d)) + // Move down the log to the right spot
+                    (paint.getTextSize() / 3d) // Centering the text vertically
             );
 
             String dadTime = MyTime.getDadTime(
