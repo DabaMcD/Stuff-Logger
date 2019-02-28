@@ -12,7 +12,7 @@ import android.view.View;
 public class LogView extends View {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Log log;
-    private int sideLimit;
+    private float sideLimit;
     private float lineGap;
     private float firstLineYpos;
 
@@ -34,7 +34,7 @@ public class LogView extends View {
         lineGap = Screen.height / 10f; // Set min line gap
         tweakLineGap();
         updateSideLimit();
-        setFirstLineYpos();
+        updateFirstLineYpos();
         updateTextSize();
         drawHorizontalGridLines(canvas);
         drawDate(canvas);
@@ -72,20 +72,21 @@ public class LogView extends View {
                 recordLineWidth = (int) (sideLimit * 2f + logLineNameWidth + paint.measureText("888N-N"));
             }
         }
-        while(log.logLines.size() * lineGap + (Screen.height / 10f + lineGap * 3f) > Screen.height) {
+        while(log.logLines.size() * lineGap + firstLineYpos /* and just for extra buffer at the bottom, */ + lineGap * 1.5d> Screen.height) {
             decreaseLineGap();
+            updateFirstLineYpos();
         }
     }
     private void decreaseLineGap() {
         lineGap /= 1.01d;
     }
     private void updateTextSize() {
-        paint.setTextSize((float) (lineGap * 0.8));
+        paint.setTextSize((float) (lineGap * 0.8d));
     }
     private void updateSideLimit() {
-        sideLimit = (int) (lineGap / 2f);
+        sideLimit = (float) (lineGap / 2d);
     }
-    private void setFirstLineYpos() {
+    private void updateFirstLineYpos() {
         firstLineYpos = (float) (TopBar.standardHeight + lineGap * 1.5);
     }
     private void drawHorizontalGridLines(Canvas canvas) {
