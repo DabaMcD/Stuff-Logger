@@ -12,9 +12,9 @@ import android.view.View;
 
 public class NewLoglineButtonView extends View {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private RectShadow loglineAdderPlus1 = new RectShadow();
-    private RectShadow loglineAdderPlus2 = new RectShadow();
-    private CircleShadow loglineAdder = new CircleShadow();
+    private RectShadow logLineAdderPlus1 = new RectShadow();
+    private RectShadow logLineAdderPlus2 = new RectShadow();
+    private CircleShadow logLineAdder = new CircleShadow();
     float x, y, rad;
     private boolean touching = false;
 
@@ -46,7 +46,7 @@ public class NewLoglineButtonView extends View {
 
         // Button
         paint.setColor(Globals.inverseColor(Globals.users.get(0).color));
-        loglineAdder.draw(x, y, rad, canvas, paint);
+        logLineAdder.draw(x, y, rad, canvas, paint);
         if(touching) {
             paint.setColor(Color.argb(30, 0, 0, 0));
             canvas.drawCircle(x, y, rad, paint);
@@ -62,9 +62,9 @@ public class NewLoglineButtonView extends View {
         float sideOfRectRelToCircle = rad / 15;
 
         // Vertical rect
-        loglineAdderPlus1.draw(x - sideOfRectRelToCircle, y - endOfRectRelToCircle, x + sideOfRectRelToCircle, y + endOfRectRelToCircle, canvas, paint);
+        logLineAdderPlus1.draw(x - sideOfRectRelToCircle, y - endOfRectRelToCircle, x + sideOfRectRelToCircle, y + endOfRectRelToCircle, canvas, paint);
         // Horizontal rect
-        loglineAdderPlus2.draw(x - endOfRectRelToCircle, y - sideOfRectRelToCircle, x + endOfRectRelToCircle, y + sideOfRectRelToCircle, canvas, paint);
+        logLineAdderPlus2.draw(x - endOfRectRelToCircle, y - sideOfRectRelToCircle, x + endOfRectRelToCircle, y + sideOfRectRelToCircle, canvas, paint);
         // Vertical rect
         canvas.drawRect(x - sideOfRectRelToCircle, y - endOfRectRelToCircle, x + sideOfRectRelToCircle, y + endOfRectRelToCircle, paint);
 

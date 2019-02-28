@@ -12,7 +12,7 @@ import android.view.View;
 public class ClearLogButtonView extends View {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     float buttonDistFromCorner, x, y, rad;
-    private CircleShadow loglineAdder = new CircleShadow();
+    private CircleShadow logClearer = new CircleShadow();
     private TextShadow clearText = new TextShadow();
     private boolean touching = false;
 
@@ -43,7 +43,7 @@ public class ClearLogButtonView extends View {
 
         // Button
         paint.setColor(Globals.inverseColor(Globals.users.get(0).color));
-        loglineAdder.draw(x, y, rad, canvas, paint);
+        logClearer.draw(x, y, rad, canvas, paint);
         if(touching) {
             paint.setColor(Color.argb(30, 0, 0, 0));
             canvas.drawCircle(x, y, rad, paint);
