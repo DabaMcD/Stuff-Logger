@@ -26,6 +26,8 @@ public class LogView extends View {
     }
     @Override
     protected void onDraw(Canvas canvas) {
+        paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
+
         // Make a nice short word (log) to represent the hash below
         log = Globals.users.get(0).logs.get(Globals.users.get(0).logs.size() - 1);
         lineGap = Screen.height / 10f; // Set min line gap
@@ -34,6 +36,7 @@ public class LogView extends View {
         updateLeftLimit();
         updateTextSize();
         drawDate(canvas);
+        updateTextSize();
         drawLoglines(canvas);
 
         super.onDraw(canvas);
@@ -42,7 +45,6 @@ public class LogView extends View {
         int longestLoglineIndex = -1;
         updateLeftLimit();
         updateTextSize();
-        paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
         float recordLineWidth = paint.measureText(log.date) + sideLimit * 2f;
         for(int i = 0; i < log.logLines.size(); i ++) {
             // Get the length of a log line (without left and right margins)
@@ -55,7 +57,7 @@ public class LogView extends View {
             }
         }
         while(recordLineWidth > Screen.width) {
-            lineGap -= 0.1;
+            decreaseLineGap();
             updateTextSize();
             updateLeftLimit();
 
@@ -70,8 +72,11 @@ public class LogView extends View {
             }
         }
         while(log.logLines.size() * lineGap + (Screen.height / 10f + lineGap * 3f) > Screen.height) {
-            lineGap -= 0.1;
+            decreaseLineGap();
         }
+    }
+    private void decreaseLineGap() {
+        lineGap /= 1.01d;
     }
     private void updateTextSize() {
         paint.setTextSize((float) (lineGap * 0.8));
@@ -87,7 +92,6 @@ public class LogView extends View {
         }
     }
     private void drawDate(Canvas canvas) {
-        paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
         paint.setColor(Color.DKGRAY);
         paint.setTextAlign(Paint.Align.LEFT);
         canvas.drawText(log.date, sideLimit, TopBar.standardHeight + lineGap + paint.getTextSize() / 3f, paint);
