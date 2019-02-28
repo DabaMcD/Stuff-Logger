@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 
 public class NewLoglineActivity extends AppCompatActivity {
+    private boolean clickedBefore;
     private EditText subjectName;
 
     @Override
@@ -16,6 +17,8 @@ public class NewLoglineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_logline);
 
         Screen.correctDims(getResources());
+
+        clickedBefore = false;
 
         subjectName = findViewById(R.id.subjectName);
         subjectName.setTextColor(Color.DKGRAY);
@@ -28,9 +31,12 @@ public class NewLoglineActivity extends AppCompatActivity {
         startActivity(myIntent);
     }
     public void addLogline(View view) {
-        Globals.users.get(0).logs.get(Globals.users.get(0).logs.size() - 1).logLines.add(new LogLine(new MyTime(), new Subject(subjectName.getText().toString())));
-        Intent myIntent = new Intent(this, LogActivity.class);
-        Files.reSave(this);
-        startActivity(myIntent);
+        if(subjectName.getText().toString().length() > 0 && !clickedBefore) {
+            clickedBefore = true;
+            Globals.users.get(0).logs.get(Globals.users.get(0).logs.size() - 1).logLines.add(new LogLine(new MyTime(), new Subject(subjectName.getText().toString())));
+            Intent myIntent = new Intent(this, LogActivity.class);
+            Files.reSave(this);
+            startActivity(myIntent);
+        }
     }
 }
