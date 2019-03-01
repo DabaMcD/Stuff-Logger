@@ -15,6 +15,7 @@ public class LogView extends View {
     private float sideLimit;
     private float lineGap;
     private float firstLineYpos;
+    private float width;
 
     public LogView(Context context) {
         super(context);
@@ -24,6 +25,9 @@ public class LogView extends View {
     }
     public LogView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+    void init(float width) {
+        this.width = width;
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -57,7 +61,7 @@ public class LogView extends View {
                 recordLineWidth = (int) thisLogLineLength;
             }
         }
-        while(recordLineWidth > Screen.width) {
+        while(recordLineWidth > width) {
             decreaseLineGap();
             updateTextSize();
             updateSideLimit();
@@ -94,7 +98,7 @@ public class LogView extends View {
         paint.setColor(Color.LTGRAY);
         paint.setStrokeWidth(Math.max(lineGap / 20f, 2));
         for(float i = firstLineYpos; i <= Screen.height; i += lineGap) {
-            canvas.drawLine(0, i, Screen.width, i, paint);
+            canvas.drawLine(0, i, width, i, paint);
         }
     }
     private void drawDate(Canvas canvas) {

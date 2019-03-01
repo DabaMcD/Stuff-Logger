@@ -1,25 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LayoutBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.stuff.log.ger.LogActivity"
-    android:id="@+id/LayoutBackground">
+    tools:context="com.stuff.log.ger.LogActivity">
 
     <com.stuff.log.ger.LogTopBarView
         android:id="@+id/logTopBarView"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <com.stuff.log.ger.LogView
         android:id="@+id/logView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
     <com.stuff.log.ger.NewLoglineButtonView
         android:id="@+id/newLoglineButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
     <com.stuff.log.ger.ClearLogButtonView
         android:id="@+id/clearLogButtonView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="62dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.175" />
+
 </android.support.constraint.ConstraintLayout>
