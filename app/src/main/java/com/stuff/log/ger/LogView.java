@@ -29,7 +29,6 @@ public class LogView extends View {
         super(context, attrs, defStyleAttr);
     }
     void init(float width) {
-        // todo: run code. If it don't work, switch the onDraw() and init() calls in LogActivity
         setVerticalScrollBarEnabled(true);
         setMinimumHeight((int) (firstLineYpos - TopBar.standardHeight + lineGap * log.logLines.size() + lineGap * bufferAtBottom));
         this.width = width;
