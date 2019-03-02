@@ -49,6 +49,6 @@ class Screen {
         }
 
         // Just to re-define the top bar height
-        TopBar.standardHeight = (float) (height  * 0.175);
+        TopBar.setStandardHeight();
     }
 }

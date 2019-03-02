@@ -16,6 +16,11 @@ class TopBar {
     private static RectF rainbowRect = new RectF();
     static int color; // Color of rect is rainbow until defined
 
+    static void setStandardHeight() {
+        // Any time when you change the formula below, you need to update at the other place in the project with keyword MATHED_POTATOES
+        standardHeight = (float) (Screen.height  * 0.175);
+    }
+
     static void drawRectTextAndShadows(Canvas canvas, int color12345ForRainbow, boolean textHasShadow, String text) {
         if(color12345ForRainbow == 12345) {
             drawRectShadow(canvas);
