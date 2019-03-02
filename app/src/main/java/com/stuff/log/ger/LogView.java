@@ -10,13 +10,14 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ScrollView;
 
-public class LogView extends ScrollView {
+public class LogView extends View {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Log log;
     private float sideLimit;
     private float lineGap;
     private float firstLineYpos;
     private float width;
+    private final float bufferAtBottom = 1.5f; // Measured in lineGaps
 
     public LogView(Context context) {
         super(context);
@@ -28,6 +29,9 @@ public class LogView extends ScrollView {
         super(context, attrs, defStyleAttr);
     }
     void init(float width) {
+        // todo: run code. If it don't work, switch the onDraw() and init() calls in LogActivity
+        setVerticalScrollBarEnabled(true);
+        setMinimumHeight((int) (firstLineYpos - TopBar.standardHeight + lineGap * log.logLines.size() + lineGap * bufferAtBottom));
         this.width = width;
     }
     @Override
@@ -78,7 +82,7 @@ public class LogView extends ScrollView {
             }
         }
         updateFirstLineYpos();
-        while(log.logLines.size() * lineGap + firstLineYpos /* and just for extra buffer at the bottom: */ + lineGap * 1.5d > Screen.height) {
+        while(log.logLines.size() * lineGap + firstLineYpos /* and just for extra buffer at the bottom: */ + lineGap * bufferAtBottom > Screen.height) {
             decreaseLineGap();
             updateFirstLineYpos();
         }

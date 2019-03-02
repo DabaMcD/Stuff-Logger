@@ -15,7 +15,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class UsersListView extends View{
+public class UsersListView extends View {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private float lineThk;
     private float userButtonHt;
