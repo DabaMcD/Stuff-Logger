@@ -8,8 +8,9 @@ import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ScrollView;
 
-public class LogView extends View {
+public class LogView extends ScrollView {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Log log;
     private float sideLimit;
