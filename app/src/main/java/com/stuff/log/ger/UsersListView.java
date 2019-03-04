@@ -30,6 +30,8 @@ public class UsersListView extends View {
     private int touchingUserIndex = -1;
     private Context context;
 
+    // todo: fix bugs when list is long
+
     public UsersListView(Context context) {
         super(context);
         init(context);
