@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class LogActivityDividerView extends View {
-    private float lineThk;
+    float lineThk;
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     public LogActivityDividerView(Context context) {
@@ -23,7 +23,7 @@ public class LogActivityDividerView extends View {
     }
     void init() {
         // Once the log activity calls this function, the Screen dimensions will be up-to-date
-        lineThk = Screen.width / 50f;
+        lineThk = Screen.width / 100f;
     }
     @Override
     protected void onDraw(Canvas canvas) {

@@ -27,8 +27,11 @@ public class LogActivity extends AppCompatActivity {
 
         Screen.correctDims(getResources());
 
+        logActivityDividerView = findViewById(R.id.logActivityDividerView);
+        logActivityDividerView.init();
+
         logView = findViewById(R.id.logView);
-        logView.init(Screen.width / 2f);
+        logView.init((Screen.width - logActivityDividerView.lineThk) / 2f);
         logView.draw();
 
         newLoglineButton = findViewById(R.id.newLoglineButton);
@@ -37,8 +40,6 @@ public class LogActivity extends AppCompatActivity {
         clearLogButtonView = findViewById(R.id.clearLogButtonView);
         clearLogButtonView.draw();
 
-        logActivityDividerView = findViewById(R.id.logActivityDividerView);
-        logActivityDividerView.init();
         logActivityDividerView.draw();
 
         logTopBarView = findViewById(R.id.logTopBarView);
