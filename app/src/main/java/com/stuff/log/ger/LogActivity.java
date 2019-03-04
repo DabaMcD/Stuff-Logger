@@ -12,6 +12,7 @@ public class LogActivity extends AppCompatActivity {
     private NewLoglineButtonView newLoglineButton;
     private ClearLogButtonView clearLogButtonView;
     private LogTopBarView logTopBarView;
+    private LogActivityDividerView logActivityDividerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +31,18 @@ public class LogActivity extends AppCompatActivity {
         logView.init(Screen.width / 2f);
         logView.draw();
 
-        logTopBarView = findViewById(R.id.logTopBarView);
-        logTopBarView.draw();
-
         newLoglineButton = findViewById(R.id.newLoglineButton);
         newLoglineButton.draw();
 
         clearLogButtonView = findViewById(R.id.clearLogButtonView);
         clearLogButtonView.draw();
+
+        logActivityDividerView = findViewById(R.id.logActivityDividerView);
+        logActivityDividerView.init();
+        logActivityDividerView.draw();
+
+        logTopBarView = findViewById(R.id.logTopBarView);
+        logTopBarView.draw();
 
         // Set up click listener
         setTouchListeners();
