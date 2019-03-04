@@ -8,7 +8,6 @@ import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ScrollView;
 
 public class LogView extends View {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -29,21 +28,22 @@ public class LogView extends View {
         super(context, attrs, defStyleAttr);
     }
     void init(float width) {
-        setVerticalScrollBarEnabled(true);
-        setMinimumHeight((int) (firstLineYpos - TopBar.standardHeight + lineGap * log.logLines.size() + lineGap * bufferAtBottom));
-        this.width = width;
-    }
-    @Override
-    protected void onDraw(Canvas canvas) {
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
 
         // Make a nice short word (log) to represent the hash below
         log = Globals.users.get(0).logs.get(Globals.users.get(0).logs.size() - 1);
         lineGap = Screen.height / 10f; // Set min line gap
+        setVerticalScrollBarEnabled(true);
+        setMinimumHeight((int) (firstLineYpos - TopBar.standardHeight + lineGap * log.logLines.size() + lineGap * bufferAtBottom));
+        this.width = width;
+
         tweakLineGap();
         updateSideLimit();
         updateFirstLineYpos();
         updateTextSize();
+    }
+    @Override
+    protected void onDraw(Canvas canvas) {
         drawHorizontalGridLines(canvas);
         drawDate(canvas);
         drawLoglines(canvas);

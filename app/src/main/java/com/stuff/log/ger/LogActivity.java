@@ -27,8 +27,8 @@ public class LogActivity extends AppCompatActivity {
         Screen.correctDims(getResources());
 
         logView = findViewById(R.id.logView);
-        logView.draw();
         logView.init(Screen.width / 2f);
+        logView.draw();
 
         newLoglineButton = findViewById(R.id.newLoglineButton);
         newLoglineButton.draw();
