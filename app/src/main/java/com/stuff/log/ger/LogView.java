@@ -28,19 +28,21 @@ public class LogView extends View {
         super(context, attrs, defStyleAttr);
     }
     void init(float width) {
+        this.width = width;
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
 
         // Make a nice short word (log) to represent the hash below
         log = Globals.users.get(0).logs.get(Globals.users.get(0).logs.size() - 1);
         lineGap = Screen.height / 10f; // Set min line gap
-        setVerticalScrollBarEnabled(true);
-        setMinimumHeight((int) (firstLineYpos - TopBar.standardHeight + lineGap * log.logLines.size() + lineGap * bufferAtBottom));
-        this.width = width;
 
         tweakLineGap();
         updateSideLimit();
         updateFirstLineYpos();
         updateTextSize();
+
+
+        setVerticalScrollBarEnabled(true);
+        setMinimumHeight((int) (firstLineYpos + lineGap * log.logLines.size() + lineGap * bufferAtBottom));
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -96,7 +98,7 @@ public class LogView extends View {
         sideLimit = (float) (lineGap / 2d);
     }
     private void updateFirstLineYpos() {
-        firstLineYpos = (float) (TopBar.standardHeight + lineGap * 1.5);
+        firstLineYpos = (float) (lineGap * 1.5);
     }
     private void drawHorizontalGridLines(Canvas canvas) {
         paint.setColor(Color.LTGRAY);
@@ -108,7 +110,7 @@ public class LogView extends View {
     private void drawDate(Canvas canvas) {
         paint.setColor(Color.DKGRAY);
         paint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText(log.date, sideLimit, TopBar.standardHeight + lineGap + paint.getTextSize() / 3f, paint);
+        canvas.drawText(log.date, sideLimit, lineGap + paint.getTextSize() / 3f, paint);
     }
     private void drawLoglines(Canvas canvas) {
         /* THE X-POSITIONING CHART (if you can call it a chart)

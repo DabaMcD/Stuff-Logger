@@ -30,11 +30,11 @@ public class LogActivity extends AppCompatActivity {
         logView.init(Screen.width / 2f);
         logView.draw();
 
-        newLoglineButton = findViewById(R.id.newLoglineButton);
-        newLoglineButton.draw();
-
         logTopBarView = findViewById(R.id.logTopBarView);
         logTopBarView.draw();
+
+        newLoglineButton = findViewById(R.id.newLoglineButton);
+        newLoglineButton.draw();
 
         clearLogButtonView = findViewById(R.id.clearLogButtonView);
         clearLogButtonView.draw();
