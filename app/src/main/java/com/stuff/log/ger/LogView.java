@@ -42,7 +42,9 @@ public class LogView extends View {
 
 
         setVerticalScrollBarEnabled(true);
-        setMinimumHeight((int) (firstLineYpos + lineGap * log.logLines.size() + lineGap * bufferAtBottom));
+        int bottomOfLoglines = (int) (firstLineYpos + lineGap * log.logLines.size() + lineGap * bufferAtBottom);
+        int minScrollHeight = (int) (Screen.height - TopBar.standardHeight);
+        setMinimumHeight(bottomOfLoglines > minScrollHeight ? bottomOfLoglines : minScrollHeight);
     }
     @Override
     protected void onDraw(Canvas canvas) {
