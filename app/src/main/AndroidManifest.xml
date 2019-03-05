@@ -20,7 +20,7 @@
         <activity android:name="com.stuff.log.ger.LogActivity" />
         <activity android:name="com.stuff.log.ger.UserActivity"
             android:windowSoftInputMode="stateVisible" />
-        <activity android:name="com.stuff.log.ger.NewLoglineActivity"
+        <activity android:name="com.stuff.log.ger.NewLogLineActivity"
             android:windowSoftInputMode="stateVisible" />
         <activity android:name="com.stuff.log.ger.ConfirmUserDeleteActivity"
             android:theme="@style/AppTheme.PopupTheme">

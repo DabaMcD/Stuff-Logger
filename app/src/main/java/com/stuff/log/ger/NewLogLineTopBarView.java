@@ -6,20 +6,20 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class NewLoglineTopBarView extends View {
-    public NewLoglineTopBarView(Context context) {
+public class NewLogLineTopBarView extends View {
+    public NewLogLineTopBarView(Context context) {
         super(context);
     }
-    public NewLoglineTopBarView(Context context, @Nullable AttributeSet attrs) {
+    public NewLogLineTopBarView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
-    public NewLoglineTopBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public NewLogLineTopBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
     @Override
     protected void onDraw(Canvas canvas) {
         User user = Globals.users.get(0);
-        TopBar.drawRectTextAndShadows(canvas, user.color, true, "Add Logline (for " + user.name + ")");
+        TopBar.drawRectTextAndShadows(canvas, user.color, true, "Add Log Line (for " + user.name + ")");
 
         super.onDraw(canvas);
     }

@@ -42,20 +42,20 @@ public class LogView extends View {
 
 
         setVerticalScrollBarEnabled(true);
-        int bottomOfLoglines = (int) (firstLineYpos + lineGap * log.logLines.size() + lineGap * bufferAtBottom);
+        int bottomOfLogLines = (int) (firstLineYpos + lineGap * log.logLines.size() + lineGap * bufferAtBottom);
         int minScrollHeight = (int) (Screen.height - TopBar.standardHeight);
-        setMinimumHeight(bottomOfLoglines > minScrollHeight ? bottomOfLoglines : minScrollHeight);
+        setMinimumHeight(bottomOfLogLines > minScrollHeight ? bottomOfLogLines : minScrollHeight);
     }
     @Override
     protected void onDraw(Canvas canvas) {
         drawHorizontalGridLines(canvas);
         drawDate(canvas);
-        drawLoglines(canvas);
+        drawLogLines(canvas);
 
         super.onDraw(canvas);
     }
     private void tweakLineGap() {
-        int longestLoglineIndex = -1;
+        int longestLogLineIndex = -1;
         updateSideLimit();
         updateTextSize();
         float recordLineWidth = paint.measureText(log.date) + sideLimit * 2f;
@@ -65,7 +65,7 @@ public class LogView extends View {
             float thisLogLineLength = logLineNameWidth + paint.measureText("888N-N") + sideLimit * 2f; // sideLimit * 2 because you gotta account for both sides
 
             if(thisLogLineLength > recordLineWidth) { // If it breaks the line length record
-                longestLoglineIndex = i;
+                longestLogLineIndex = i;
                 recordLineWidth = (int) thisLogLineLength;
             }
         }
@@ -74,10 +74,10 @@ public class LogView extends View {
             updateTextSize();
             updateSideLimit();
 
-            if(longestLoglineIndex == -1) {
+            if(longestLogLineIndex == -1) {
                 recordLineWidth = paint.measureText(log.date) + sideLimit * 2f; // sideLimit * 2 because you gotta account for both sides
             } else {
-                String logLineSubjectName = log.logLines.get(longestLoglineIndex).subject.name;
+                String logLineSubjectName = log.logLines.get(longestLogLineIndex).subject.name;
 
                 // logLineNameBounds = bounds of subject name
                 float logLineNameWidth = paint.measureText(logLineSubjectName);
@@ -114,7 +114,7 @@ public class LogView extends View {
         paint.setTextAlign(Paint.Align.LEFT);
         canvas.drawText(log.date, sideLimit, lineGap + paint.getTextSize() / 3f, paint);
     }
-    private void drawLoglines(Canvas canvas) {
+    private void drawLogLines(Canvas canvas) {
         /* THE X-POSITIONING CHART (if you can call it a chart)
          * Log lines are drawn in the following manner:
          *               137 - Code

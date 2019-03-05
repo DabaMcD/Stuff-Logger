@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 
 public class LogActivity extends AppCompatActivity {
     private LogView logView;
-    private NewLoglineButtonView newLoglineButton;
+    private NewLogLineButtonView newLogLineButton;
     private ClearLogButtonView clearLogButtonView;
     private LogTopBarView logTopBarView;
     private LogActivityDividerView logActivityDividerView;
@@ -37,8 +37,8 @@ public class LogActivity extends AppCompatActivity {
         logView = findViewById(R.id.logView);
         logView.init((Screen.width - logActivityDividerView.lineThk) / 2f);
         logView.draw();
-        newLoglineButton = findViewById(R.id.newLoglineButton);
-        newLoglineButton.draw();
+        newLogLineButton = findViewById(R.id.newLogLineButton);
+        newLogLineButton.draw();
         clearLogButtonView = findViewById(R.id.clearLogButtonView);
         clearLogButtonView.draw();
 
@@ -61,7 +61,7 @@ public class LogActivity extends AppCompatActivity {
     }
     @Override
     protected void onResume() {
-        newLoglineButton.init(this);
+        newLogLineButton.init(this);
         super.onResume();
     }
     private void setTouchListeners() {
@@ -71,15 +71,15 @@ public class LogActivity extends AppCompatActivity {
                 v.performClick();
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        newLoglineButton.actionDown(event.getX(), event.getY());
+                        newLogLineButton.actionDown(event.getX(), event.getY());
                         clearLogButtonView.actionDown(event.getX(), event.getY());
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        newLoglineButton.actionMove(event.getX(), event.getY());
+                        newLogLineButton.actionMove(event.getX(), event.getY());
                         clearLogButtonView.actionMove(event.getX(), event.getY());
                         break;
                     case MotionEvent.ACTION_UP:
-                        newLoglineButton.actionUp(event.getX(), event.getY());
+                        newLogLineButton.actionUp(event.getX(), event.getY());
                         clearLogButtonView.actionUp(event.getX(), event.getY(), logView);
                         break;
                 }

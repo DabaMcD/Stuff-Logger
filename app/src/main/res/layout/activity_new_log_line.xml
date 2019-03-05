@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.stuff.log.ger.NewLoglineActivity">
+    tools:context="com.stuff.log.ger.NewLogLineActivity">
 
     <Button
         android:id="@+id/back"
@@ -23,13 +23,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.984" />
     <Button
-        android:id="@+id/addLogline"
+        android:id="@+id/addLogLine"
         android:layout_width="0dp"
         android:layout_height="39dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:onClick="addLogline"
-        android:text="@string/AddLogline"
+        android:onClick="addLogLine"
+        android:text="@string/AddLogLine"
         app:layout_constraintBottom_toTopOf="@+id/back"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -52,8 +52,8 @@
 
         <requestFocus />
     </EditText>
-    <com.stuff.log.ger.NewLoglineTopBarView
-        android:id="@+id/newLoglineTopBarView"
+    <com.stuff.log.ger.NewLogLineTopBarView
+        android:id="@+id/newLogLineTopBarView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <android.support.constraint.Guideline

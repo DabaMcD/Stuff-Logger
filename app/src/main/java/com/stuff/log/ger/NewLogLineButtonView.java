@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class NewLoglineButtonView extends View {
+public class NewLogLineButtonView extends View {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private RectShadow logLineAdderPlus1 = new RectShadow();
     private RectShadow logLineAdderPlus2 = new RectShadow();
@@ -20,15 +20,15 @@ public class NewLoglineButtonView extends View {
 
     private Context context;
 
-    public NewLoglineButtonView(Context context) {
+    public NewLogLineButtonView(Context context) {
         super(context);
         init(context);
     }
-    public NewLoglineButtonView(Context context, @Nullable AttributeSet attrs) {
+    public NewLogLineButtonView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
-    public NewLoglineButtonView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public NewLogLineButtonView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
@@ -91,14 +91,14 @@ public class NewLoglineButtonView extends View {
     void actionUp(float touchX, float touchY) {
         if(touching) {
             if (Globals.getDist(touchX, touchY, x, y) <= rad) {
-                startNewLoglineActivity();
+                startNewLogLineActivity();
             } else {
                 draw();
             }
         }
     }
-    private void startNewLoglineActivity() {
-        Intent myIntent = new Intent(context, NewLoglineActivity.class);
+    private void startNewLogLineActivity() {
+        Intent myIntent = new Intent(context, NewLogLineActivity.class);
         context.startActivity(myIntent);
     }
 }

@@ -43,8 +43,8 @@
         android:id="@+id/logActivityDividerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <com.stuff.log.ger.NewLoglineButtonView
-        android:id="@+id/newLoglineButton"
+    <com.stuff.log.ger.NewLogLineButtonView
+        android:id="@+id/newLogLineButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <com.stuff.log.ger.ClearLogButtonView
