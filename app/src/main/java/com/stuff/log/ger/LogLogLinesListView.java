@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class LogView extends View {
+public class LogLogLinesListView extends View {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Log log;
     private float sideLimit;
@@ -18,13 +18,13 @@ public class LogView extends View {
     private float width;
     private final float bufferAtBottom = 1.5f; // Measured in lineGaps
 
-    public LogView(Context context) {
+    public LogLogLinesListView(Context context) {
         super(context);
     }
-    public LogView(Context context, @Nullable AttributeSet attrs) {
+    public LogLogLinesListView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
-    public LogView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public LogLogLinesListView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
     void init(float width) {

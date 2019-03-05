@@ -84,12 +84,12 @@ public class ClearLogButtonView extends View {
             draw();
         }
     }
-    void actionUp(float touchX, float touchY, LogView logView) {
+    void actionUp(float touchX, float touchY, LogLogLinesListView logLogLinesListView) {
         if(touching) {
             if (Globals.getDist(touchX, touchY, x, y) <= rad) {
                 Globals.users.get(0).newLog();
                 Files.reSave(context);
-                logView.draw();
+                logLogLinesListView.draw();
             }
             draw();
         }

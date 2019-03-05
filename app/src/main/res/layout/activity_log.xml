@@ -29,8 +29,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline14">
 
-        <com.stuff.log.ger.LogView
-            android:id="@+id/logView"
+        <com.stuff.log.ger.LogLogLinesListView
+            android:id="@+id/logLogLinesListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

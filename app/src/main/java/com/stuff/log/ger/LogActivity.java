@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 public class LogActivity extends AppCompatActivity {
-    private LogView logView;
+    private LogLogLinesListView logLogLinesListView;
     private NewLogLineButtonView newLogLineButton;
     private ClearLogButtonView clearLogButtonView;
     private LogTopBarView logTopBarView;
@@ -34,9 +34,9 @@ public class LogActivity extends AppCompatActivity {
         logActivityDividerView.init();
 
         // todo: rename some of the files and classes below
-        logView = findViewById(R.id.logView);
-        logView.init((Screen.width - logActivityDividerView.lineThk) / 2f);
-        logView.draw();
+        logLogLinesListView = findViewById(R.id.logLogLinesListView);
+        logLogLinesListView.init((Screen.width - logActivityDividerView.lineThk) / 2f);
+        logLogLinesListView.draw();
         newLogLineButton = findViewById(R.id.newLogLineButton);
         newLogLineButton.draw();
         clearLogButtonView = findViewById(R.id.clearLogButtonView);
@@ -80,7 +80,7 @@ public class LogActivity extends AppCompatActivity {
                         break;
                     case MotionEvent.ACTION_UP:
                         newLogLineButton.actionUp(event.getX(), event.getY());
-                        clearLogButtonView.actionUp(event.getX(), event.getY(), logView);
+                        clearLogButtonView.actionUp(event.getX(), event.getY(), logLogLinesListView);
                         break;
                 }
                 return true;
