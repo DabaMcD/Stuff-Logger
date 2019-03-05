@@ -28,6 +28,8 @@ public class LogActivity extends AppCompatActivity {
 
         Screen.correctDims(getResources());
 
+        // todo: switch out references to TopBar.standardHeight for an actual value from the logActivity's top bar instance
+
         logActivityDividerView = findViewById(R.id.logActivityDividerView);
         logActivityDividerView.init();
 
