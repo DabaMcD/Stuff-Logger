@@ -35,6 +35,10 @@
             android:layout_height="wrap_content" />
 
     </ScrollView>
+    <com.stuff.log.ger.LogToDoView
+        android:id="@+id/logToDoView"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
     <com.stuff.log.ger.LogActivityDividerView
         android:id="@+id/logActivityDividerView"
         android:layout_width="match_parent"

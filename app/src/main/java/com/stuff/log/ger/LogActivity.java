@@ -13,6 +13,7 @@ public class LogActivity extends AppCompatActivity {
     private ClearLogButtonView clearLogButtonView;
     private LogTopBarView logTopBarView;
     private LogActivityDividerView logActivityDividerView;
+    private LogToDoView logToDoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +31,18 @@ public class LogActivity extends AppCompatActivity {
         logActivityDividerView = findViewById(R.id.logActivityDividerView);
         logActivityDividerView.init();
 
+        // todo: rename some of the files and classes below
         logView = findViewById(R.id.logView);
         logView.init((Screen.width - logActivityDividerView.lineThk) / 2f);
         logView.draw();
-
         newLoglineButton = findViewById(R.id.newLoglineButton);
         newLoglineButton.draw();
-
         clearLogButtonView = findViewById(R.id.clearLogButtonView);
         clearLogButtonView.draw();
+
+        logToDoView = findViewById(R.id.logToDoView);
+        logToDoView.init((Screen.width - logActivityDividerView.lineThk) / 2f);
+        logToDoView.draw();
 
         logActivityDividerView.draw();
 
