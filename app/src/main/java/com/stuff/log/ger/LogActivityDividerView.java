@@ -30,6 +30,8 @@ public class LogActivityDividerView extends View {
         paint.setStrokeWidth(lineThk);
         paint.setColor(Color.DKGRAY);
         canvas.drawLine(Screen.width / 2f, 0, Screen.width / 2f, Screen.height + lineThk, paint);
+
+        super.onDraw(canvas);
     }
     void draw() {
         invalidate();
