@@ -22,8 +22,9 @@ public class UsersListView extends View {
     private Rect userNameBounds = new Rect();
 
     private Drawable trashCan = getResources().getDrawable(R.drawable.ic_trashcan);
+    private boolean useVector = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     private VectorDrawable vectorTrashCan;
-    private BitmapDrawable bitmapTrashCan;
+//    private BitmapDrawable bitmapTrashCan;
     private float trashX;
     private float trashRad;
     private int trashClickingIndex = -1;
@@ -54,7 +55,7 @@ public class UsersListView extends View {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             vectorTrashCan = (VectorDrawable) trashCan;
         } else {
-            bitmapTrashCan = (BitmapDrawable) trashCan;
+//            bitmapTrashCan = (BitmapDrawable) trashCan;
         }
         for(int i = 0; i < Globals.users.size(); i ++) {
             // Define some helpful stuff
@@ -91,8 +92,8 @@ public class UsersListView extends View {
                         centerX + (trashWidth / 2),
                         (int) ((top + (spaceY / 2)) + (trashHeight / 2))
                 );
-                vectorTrashCan.draw(canvas);
-            } else {
+                vectorTrashCan.draw(canvas); // todo: run code below
+            } /*else {
                 bitmapTrashCan.setBounds(
                         centerX - (trashWidth / 2),
                         (int) ((top + (spaceY / 2)) - (trashHeight / 2)),
@@ -100,7 +101,7 @@ public class UsersListView extends View {
                         (int) ((top + (spaceY / 2)) + (trashHeight / 2))
                 );
                 bitmapTrashCan.draw(canvas);
-            }
+            }*/
             trashX = centerX;
             trashRad = (float) (trashHeight * 0.65);
 

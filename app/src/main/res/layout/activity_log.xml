@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <com.stuff.log.ger.ClearLogButtonView
-        android:id="@+id/clearLogButtonView"
+        android:id="@+id/logClearLogButtonView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="62dp"

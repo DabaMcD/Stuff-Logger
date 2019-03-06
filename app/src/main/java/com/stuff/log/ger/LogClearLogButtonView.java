@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class ClearLogButtonView extends View {
+public class LogClearLogButtonView extends View {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     float buttonDistFromCorner, x, y, rad;
     private CircleShadow logClearer = new CircleShadow();
@@ -18,15 +18,15 @@ public class ClearLogButtonView extends View {
 
     private Context context;
 
-    public ClearLogButtonView(Context context) {
+    public LogClearLogButtonView(Context context) {
         super(context);
         init(context);
     }
-    public ClearLogButtonView(Context context, @Nullable AttributeSet attrs) {
+    public LogClearLogButtonView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
-    public ClearLogButtonView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public LogClearLogButtonView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }

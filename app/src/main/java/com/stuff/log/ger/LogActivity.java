@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 public class LogActivity extends AppCompatActivity {
     private LogLogLinesListView logLogLinesListView;
     private NewLogLineButtonView newLogLineButton;
-    private ClearLogButtonView clearLogButtonView;
+    private LogClearLogButtonView logClearLogButtonView;
     private LogTopBarView logTopBarView;
     private LogActivityDividerView logActivityDividerView;
     private LogToDoView logToDoView;
@@ -39,8 +39,8 @@ public class LogActivity extends AppCompatActivity {
         logLogLinesListView.draw();
         newLogLineButton = findViewById(R.id.newLogLineButton);
         newLogLineButton.draw();
-        clearLogButtonView = findViewById(R.id.clearLogButtonView);
-        clearLogButtonView.draw();
+        logClearLogButtonView = findViewById(R.id.logClearLogButtonView);
+        logClearLogButtonView.draw();
 
         logToDoView = findViewById(R.id.logToDoView);
         logToDoView.init((Screen.width - logActivityDividerView.lineThk) / 2f);
@@ -72,15 +72,15 @@ public class LogActivity extends AppCompatActivity {
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         newLogLineButton.actionDown(event.getX(), event.getY());
-                        clearLogButtonView.actionDown(event.getX(), event.getY());
+                        logClearLogButtonView.actionDown(event.getX(), event.getY());
                         break;
                     case MotionEvent.ACTION_MOVE:
                         newLogLineButton.actionMove(event.getX(), event.getY());
-                        clearLogButtonView.actionMove(event.getX(), event.getY());
+                        logClearLogButtonView.actionMove(event.getX(), event.getY());
                         break;
                     case MotionEvent.ACTION_UP:
                         newLogLineButton.actionUp(event.getX(), event.getY());
-                        clearLogButtonView.actionUp(event.getX(), event.getY(), logLogLinesListView);
+                        logClearLogButtonView.actionUp(event.getX(), event.getY(), logLogLinesListView);
                         break;
                 }
                 return true;
