@@ -24,7 +24,7 @@ public class MainUsersListView extends View {
     private Drawable trashCan = getResources().getDrawable(R.drawable.ic_trashcan);
     private boolean useVector = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     private VectorDrawable vectorTrashCan;
-//    private BitmapDrawable bitmapTrashCan;
+    private BitmapDrawable bitmapTrashCan;
     private float trashX;
     private float trashRad;
     private int trashClickingIndex = -1;
@@ -52,10 +52,10 @@ public class MainUsersListView extends View {
     }
     @Override
     protected void onDraw(Canvas canvas) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (useVector) {
             vectorTrashCan = (VectorDrawable) trashCan;
         } else {
-//            bitmapTrashCan = (BitmapDrawable) trashCan;
+            bitmapTrashCan = (BitmapDrawable) trashCan;
         }
         for(int i = 0; i < Globals.users.size(); i ++) {
             // Define some helpful stuff
@@ -85,15 +85,15 @@ public class MainUsersListView extends View {
             int centerX = (int) (Screen.width * 0.85);
             int trashHeight = (spaceY * 2) / 3;
             int trashWidth = (int) (trashHeight * (7 / 10.0));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (useVector) {
                 vectorTrashCan.setBounds(
                         centerX - (trashWidth / 2),
                         (int) ((top + (spaceY / 2)) - (trashHeight / 2)),
                         centerX + (trashWidth / 2),
                         (int) ((top + (spaceY / 2)) + (trashHeight / 2))
                 );
-                vectorTrashCan.draw(canvas); // todo: run code below
-            } /*else {
+                vectorTrashCan.draw(canvas);
+            } else {
                 bitmapTrashCan.setBounds(
                         centerX - (trashWidth / 2),
                         (int) ((top + (spaceY / 2)) - (trashHeight / 2)),
@@ -101,7 +101,7 @@ public class MainUsersListView extends View {
                         (int) ((top + (spaceY / 2)) + (trashHeight / 2))
                 );
                 bitmapTrashCan.draw(canvas);
-            }*/
+            }
             trashX = centerX;
             trashRad = (float) (trashHeight * 0.65);
 
