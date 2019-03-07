@@ -35,24 +35,26 @@
             android:layout_height="wrap_content" />
 
     </ScrollView>
-    <com.stuff.log.ger.LogToDoView
-        android:id="@+id/logToDoView"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent" />
-    <com.stuff.log.ger.LogActivityDividerView
-        android:id="@+id/logActivityDividerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
     <com.stuff.log.ger.NewLogLineButtonView
         android:id="@+id/newLogLineButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <com.stuff.log.ger.ClearLogButtonView
+    <com.stuff.log.ger.LogClearLogButtonView
         android:id="@+id/logClearLogButtonView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="62dp"
         tools:layout_editor_absoluteY="0dp" />
+
+    <com.stuff.log.ger.LogToDoView
+        android:id="@+id/logToDoView"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
+
+    <com.stuff.log.ger.LogActivityDividerView
+        android:id="@+id/logActivityDividerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <com.stuff.log.ger.LogTopBarView
         android:id="@+id/logTopBarView"
         android:layout_width="match_parent"
