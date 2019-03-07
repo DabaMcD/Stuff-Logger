@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class NewLogLineButtonView extends View {
+public class LogNewLogLineButtonView extends View {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private RectShadow logLineAdderPlus1 = new RectShadow();
     private RectShadow logLineAdderPlus2 = new RectShadow();
@@ -20,15 +20,15 @@ public class NewLogLineButtonView extends View {
 
     private Context context;
 
-    public NewLogLineButtonView(Context context) {
+    public LogNewLogLineButtonView(Context context) {
         super(context);
         init(context);
     }
-    public NewLogLineButtonView(Context context, @Nullable AttributeSet attrs) {
+    public LogNewLogLineButtonView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
-    public NewLogLineButtonView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public LogNewLogLineButtonView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }

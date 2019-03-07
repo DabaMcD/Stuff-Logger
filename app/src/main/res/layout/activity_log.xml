@@ -35,8 +35,8 @@
             android:layout_height="wrap_content" />
 
     </ScrollView>
-    <com.stuff.log.ger.NewLogLineButtonView
-        android:id="@+id/newLogLineButton"
+    <com.stuff.log.ger.LogNewLogLineButtonView
+        android:id="@+id/logNewLogLineButtonView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <com.stuff.log.ger.LogClearLogButtonView
