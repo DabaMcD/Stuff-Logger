@@ -15,7 +15,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class UsersListView extends View {
+public class MainUsersListView extends View {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private float lineThk;
     private float userButtonHt;
@@ -31,15 +31,15 @@ public class UsersListView extends View {
     private int touchingUserIndex = -1;
     private Context context;
 
-    public UsersListView(Context context) {
+    public MainUsersListView(Context context) {
         super(context);
         init(context);
     }
-    public UsersListView(Context context, @Nullable AttributeSet attrs) {
+    public MainUsersListView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
-    public UsersListView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public MainUsersListView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }

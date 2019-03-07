@@ -17,8 +17,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/topBarHorizontalGuideline">
 
-        <com.stuff.log.ger.UsersListView
-            android:id="@+id/usersListView"
+        <com.stuff.log.ger.MainUsersListView
+            android:id="@+id/mainUsersListView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </ScrollView>

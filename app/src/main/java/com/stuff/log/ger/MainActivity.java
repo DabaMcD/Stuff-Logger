@@ -9,7 +9,7 @@ import android.view.ViewTreeObserver;
 
 public class MainActivity extends AppCompatActivity {
     private MainTopBarShadowView mainTopBarShadowView;
-    private UsersListView usersListView;
+    private MainUsersListView mainUsersListView;
     private MainTopBarView mainTopBarView;
 
     @Override
@@ -28,11 +28,11 @@ public class MainActivity extends AppCompatActivity {
         // Define all the things in the xml code
         mainTopBarShadowView = findViewById(R.id.mainTopBarShadowView);
         mainTopBarView = findViewById(R.id.mainTopBarView);
-        usersListView = findViewById(R.id.usersListView);
+        mainUsersListView = findViewById(R.id.mainUsersListView);
 
         // Draw the stuff in the xml code
-        usersListView.init(this);
-        usersListView.draw();
+        mainUsersListView.init(this);
+        mainUsersListView.draw();
         mainTopBarShadowView.draw();
         mainTopBarView.draw();
 
@@ -40,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
         setTopBarTouchListener();
         setUserListTouchListener();
 
-        usersListView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+        mainUsersListView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
             @Override
             public void onScrollChanged() {
-                usersListView.setTouchingUserIndex(-1);
-                usersListView.draw();
+                mainUsersListView.setTouchingUserIndex(-1);
+                mainUsersListView.draw();
             }
         });
     }
@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onResume() { // Should be called when coming off of ConfirmUserDelete activity
-        usersListView.setTrashClickingIndex(-1);
-        usersListView.draw();
+        mainUsersListView.setTrashClickingIndex(-1);
+        mainUsersListView.draw();
         super.onResume();
     }
     @Override
@@ -101,19 +101,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void setUserListTouchListener() {
-        findViewById(R.id.usersListView).setOnTouchListener(new View.OnTouchListener() {
+        findViewById(R.id.mainUsersListView).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 v.performClick();
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        usersListView.actionDown(event.getX(), event.getY());
+                        mainUsersListView.actionDown(event.getX(), event.getY());
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        usersListView.actionMove(event.getX(), event.getY());
+                        mainUsersListView.actionMove(event.getX(), event.getY());
                         break;
                     case MotionEvent.ACTION_UP:
-                        usersListView.actionUp(event.getX(), event.getY());
+                        mainUsersListView.actionUp(event.getX(), event.getY());
                         break;
                 }
                 return true;
