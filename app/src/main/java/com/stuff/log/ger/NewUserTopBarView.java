@@ -6,14 +6,14 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class UserTopBarView extends View {
-    public UserTopBarView(Context context) {
+public class NewUserTopBarView extends View {
+    public NewUserTopBarView(Context context) {
         super(context);
     }
-    public UserTopBarView(Context context, @Nullable AttributeSet attrs) {
+    public NewUserTopBarView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
-    public UserTopBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public NewUserTopBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
     @Override

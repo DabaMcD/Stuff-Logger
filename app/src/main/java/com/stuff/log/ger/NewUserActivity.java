@@ -6,19 +6,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-public class UserActivity extends AppCompatActivity {
+public class NewUserActivity extends AppCompatActivity {
     private EditText name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        setContentView(R.layout.activity_new_user);
 
         Screen.correctDims(getResources());
 
         name = findViewById(R.id.name);
-        UserTopBarView userTopBarView = findViewById(R.id.userTopBarView);
-        userTopBarView.draw();
+        NewUserTopBarView newUserTopBarView = findViewById(R.id.newUserTopBarView);
+        newUserTopBarView.draw();
 
         String[] nicknames = new String[] {
                 "e.g. Bobby Joe",

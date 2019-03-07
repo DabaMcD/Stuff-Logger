@@ -101,7 +101,7 @@ public class MainTopBarView extends View {
         hovering = false;
     }
     private void onNewUserTouch() {
-        Intent myIntent = new Intent(context, UserActivity.class);
+        Intent myIntent = new Intent(context, NewUserActivity.class);
         context.startActivity(myIntent);
     }
 }

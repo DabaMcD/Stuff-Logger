@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.stuff.log.ger.LogActivity" />
-        <activity android:name="com.stuff.log.ger.UserActivity"
+        <activity android:name="com.stuff.log.ger.NewUserActivity"
             android:windowSoftInputMode="stateVisible" />
         <activity android:name="com.stuff.log.ger.NewLogLineActivity"
             android:windowSoftInputMode="stateVisible" />

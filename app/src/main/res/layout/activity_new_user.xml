@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.stuff.log.ger.UserActivity">
+    tools:context="com.stuff.log.ger.NewUserActivity">
 
-    <com.stuff.log.ger.UserTopBarView
-        android:id="@+id/userTopBarView"
+    <com.stuff.log.ger.NewUserTopBarView
+        android:id="@+id/newUserTopBarView"
         android:layout_height="match_parent"
         android:layout_width="match_parent" />
     <EditText
