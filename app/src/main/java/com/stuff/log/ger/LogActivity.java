@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 public class LogActivity extends AppCompatActivity {
     private LogLogLinesListView logLogLinesListView;
@@ -14,6 +15,8 @@ public class LogActivity extends AppCompatActivity {
     private LogTopBarView logTopBarView;
     private LogActivityDividerView logActivityDividerView;
     private LogToDoView logToDoView;
+
+    private ScrollView logLinesScrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,6 @@ public class LogActivity extends AppCompatActivity {
         logActivityDividerView = findViewById(R.id.logActivityDividerView);
         logActivityDividerView.init();
 
-        // todo: rename some of the files and classes below
         logLogLinesListView = findViewById(R.id.logLogLinesListView);
         logLogLinesListView.init((Screen.width - logActivityDividerView.lineThk) / 2f);
         logLogLinesListView.draw();
@@ -53,6 +55,13 @@ public class LogActivity extends AppCompatActivity {
 
         // Set up click listener
         setTouchListeners();
+
+        logLinesScrollView = findViewById(R.id.logLinesScrollView);
+        logLinesScrollView.post(new Runnable() {
+            public void run() {
+                logLinesScrollView.scrollTo(0, logLinesScrollView.getBottom());
+            }
+        });
     }
     @Override
     public void onBackPressed() {

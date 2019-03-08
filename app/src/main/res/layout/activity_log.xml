@@ -21,6 +21,7 @@
         app:layout_constraintGuide_percent="0.175" />
     <!-- Any time when you want to change the number on the line above, you need to update at the other place in the project with keyword MATHED_POTATOES -->
     <ScrollView
+        android:id="@+id/logLinesScrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="0dp"
