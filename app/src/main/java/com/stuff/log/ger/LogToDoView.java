@@ -23,10 +23,11 @@ public class LogToDoView extends View {
     public LogToDoView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-    void init(float width) {
+    void init(float width, float logTopBarHeight) {
         this.width = width;
-        topBarHeight = TopBar.standardHeight;
+        topBarHeight = logTopBarHeight;
         height = Screen.height - topBarHeight;
+        setVerticalScrollBarEnabled(true);
     }
     @Override
     protected void onDraw(Canvas canvas) {

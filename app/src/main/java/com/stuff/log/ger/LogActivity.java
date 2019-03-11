@@ -31,32 +31,34 @@ public class LogActivity extends AppCompatActivity {
 
         Screen.correctDims(getResources());
 
+        // Get all instances out of xml file
+        logActivityDividerView = findViewById(R.id.logActivityDividerView);
+        logLogLinesListView = findViewById(R.id.logLogLinesListView);
+        logNewLogLineButtonView = findViewById(R.id.logNewLogLineButtonView);
+        logClearLogButtonView = findViewById(R.id.logClearLogButtonView);
+        logToDoView = findViewById(R.id.logToDoView);
+        logTopBarView = findViewById(R.id.logTopBarView);
+        logLinesScrollView = findViewById(R.id.logLinesScrollView);
+
         // todo: switch out references to TopBar.standardHeight for an actual value from the logActivity's top bar instance
 
-        logActivityDividerView = findViewById(R.id.logActivityDividerView);
         logActivityDividerView.init();
 
-        logLogLinesListView = findViewById(R.id.logLogLinesListView);
         logLogLinesListView.init((Screen.width - logActivityDividerView.lineThk) / 2f);
         logLogLinesListView.draw();
-        logNewLogLineButtonView = findViewById(R.id.logNewLogLineButtonView);
         logNewLogLineButtonView.draw();
-        logClearLogButtonView = findViewById(R.id.logClearLogButtonView);
         logClearLogButtonView.draw();
 
-        logToDoView = findViewById(R.id.logToDoView);
-        logToDoView.init((Screen.width - logActivityDividerView.lineThk) / 2f);
+        logToDoView.init((Screen.width - logActivityDividerView.lineThk) / 2f, logTopBarView.getHeight());
         logToDoView.draw();
 
         logActivityDividerView.draw();
 
-        logTopBarView = findViewById(R.id.logTopBarView);
         logTopBarView.draw();
 
         // Set up click listener
         setTouchListeners();
 
-        logLinesScrollView = findViewById(R.id.logLinesScrollView);
         logLinesScrollView.post(new Runnable() {
             public void run() {
                 logLinesScrollView.scrollTo(0, logLinesScrollView.getBottom());

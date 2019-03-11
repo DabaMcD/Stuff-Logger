@@ -30,7 +30,6 @@ public class LogLogLinesListView extends View {
     void init(float width) {
         this.width = width;
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
-
         // Make a nice short word (log) to represent the hash below
         log = Globals.users.get(0).logs.get(Globals.users.get(0).logs.size() - 1);
         lineGap = Screen.height / 10f; // Set min line gap
@@ -40,7 +39,7 @@ public class LogLogLinesListView extends View {
         updateFirstLineYpos();
         updateTextSize();
 
-
+        // Scrolling stuff
         setVerticalScrollBarEnabled(true);
         int bottomOfLogLines = (int) (firstLineYpos + lineGap * log.logLines.size() + lineGap * bufferAtBottom);
         int minScrollHeight = (int) (Screen.height - TopBar.standardHeight);
