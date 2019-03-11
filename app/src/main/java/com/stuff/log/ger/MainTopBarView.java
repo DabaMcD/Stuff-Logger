@@ -13,6 +13,7 @@ import android.view.View;
 public class MainTopBarView extends View {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Context context;
+    private float topBarHeight;
 
     // Button stuff
     private boolean hovering = false;
@@ -37,6 +38,7 @@ public class MainTopBarView extends View {
     }
     private void init(Context context) {
         this.context = context;
+        topBarHeight = TopBar.standardHeight;
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -45,7 +47,7 @@ public class MainTopBarView extends View {
         paint.setTypeface(Typeface.DEFAULT_BOLD);
         paint.setTextSize(Screen.height / 14f);
         paint.setColor(Color.BLACK);
-        TopBar.textShadow.draw("Stuff Logger", Screen.height / 40f, TopBar.standardHeight / 2 + paint.getTextSize() / 3, canvas, paint);
+        TopBar.textShadow.draw("Stuff Logger", Screen.height / 40f, topBarHeight / 2 + paint.getTextSize() / 3, canvas, paint);
 
         drawButton(canvas);
 

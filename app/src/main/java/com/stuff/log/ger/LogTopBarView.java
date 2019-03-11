@@ -27,4 +27,7 @@ public class LogTopBarView extends View {
         invalidate();
         requestLayout();
     }
+    float getTopBarHeight() {
+        return TopBar.standardHeight;
+    }
 }

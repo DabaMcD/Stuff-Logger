@@ -27,7 +27,7 @@ public class LogLogLinesListView extends View {
     public LogLogLinesListView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-    void init(float width) {
+    void init(float width, float logTopBarHeight) {
         this.width = width;
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
         // Make a nice short word (log) to represent the hash below
@@ -42,7 +42,7 @@ public class LogLogLinesListView extends View {
         // Scrolling stuff
         setVerticalScrollBarEnabled(true);
         int bottomOfLogLines = (int) (firstLineYpos + lineGap * log.logLines.size() + lineGap * bufferAtBottom);
-        int minScrollHeight = (int) (Screen.height - TopBar.standardHeight);
+        int minScrollHeight = (int) (Screen.height - logTopBarHeight);
         setMinimumHeight(bottomOfLogLines > minScrollHeight ? bottomOfLogLines : minScrollHeight);
     }
     @Override

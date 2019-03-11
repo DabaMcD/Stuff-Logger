@@ -40,16 +40,14 @@ public class LogActivity extends AppCompatActivity {
         logTopBarView = findViewById(R.id.logTopBarView);
         logLinesScrollView = findViewById(R.id.logLinesScrollView);
 
-        // todo: switch out references to TopBar.standardHeight for an actual value from the logActivity's top bar instance
-
         logActivityDividerView.init();
 
-        logLogLinesListView.init((Screen.width - logActivityDividerView.lineThk) / 2f);
+        logLogLinesListView.init((Screen.width - logActivityDividerView.lineThk) / 2f, logTopBarView.getTopBarHeight());
         logLogLinesListView.draw();
         logNewLogLineButtonView.draw();
         logClearLogButtonView.draw();
 
-        logToDoView.init((Screen.width - logActivityDividerView.lineThk) / 2f, logTopBarView.getHeight());
+        logToDoView.init((Screen.width - logActivityDividerView.lineThk) / 2f, logTopBarView.getTopBarHeight());
         logToDoView.draw();
 
         logActivityDividerView.draw();
