@@ -34,7 +34,6 @@
             android:id="@+id/logLogLinesListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
     </ScrollView>
     <com.stuff.log.ger.LogNewLogLineButtonView
         android:id="@+id/logNewLogLineButtonView"
@@ -47,10 +46,20 @@
         tools:layout_editor_absoluteX="62dp"
         tools:layout_editor_absoluteY="0dp" />
 
-    <com.stuff.log.ger.LogToDoView
-        android:id="@+id/logToDoView"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent" />
+    <ScrollView
+        android:id="@+id/logToDoScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline12"
+        app:layout_constraintTop_toTopOf="@+id/guideline14">
+        <com.stuff.log.ger.LogToDoScrollView
+            android:id="@+id/logToDoScrollView"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
+    </ScrollView>
 
     <com.stuff.log.ger.LogActivityDividerView
         android:id="@+id/logActivityDividerView"
