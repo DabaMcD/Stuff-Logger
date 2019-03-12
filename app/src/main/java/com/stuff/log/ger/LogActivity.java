@@ -14,7 +14,7 @@ public class LogActivity extends AppCompatActivity {
     private LogClearLogButtonView logClearLogButtonView;
     private LogTopBarView logTopBarView;
     private LogActivityDividerView logActivityDividerView;
-    private LogToDoScrollView logToDoScrollView;
+    private LogToDoListView logToDoListView;
 
     private ScrollView logLinesScrollView;
 
@@ -36,7 +36,7 @@ public class LogActivity extends AppCompatActivity {
         logLogLinesListView = findViewById(R.id.logLogLinesListView);
         logNewLogLineButtonView = findViewById(R.id.logNewLogLineButtonView);
         logClearLogButtonView = findViewById(R.id.logClearLogButtonView);
-        logToDoScrollView = findViewById(R.id.logToDoScrollView);
+        logToDoListView = findViewById(R.id.logToDoListView);
         logTopBarView = findViewById(R.id.logTopBarView);
         logLinesScrollView = findViewById(R.id.logLinesScrollView);
 
@@ -47,8 +47,8 @@ public class LogActivity extends AppCompatActivity {
         logNewLogLineButtonView.draw();
         logClearLogButtonView.draw();
 
-        logToDoScrollView.init((Screen.width - logActivityDividerView.lineThk) / 2f, logTopBarView.getTopBarHeight());
-        logToDoScrollView.draw();
+        logToDoListView.init((Screen.width - logActivityDividerView.lineThk) / 2f, logTopBarView.getTopBarHeight());
+        logToDoListView.draw();
 
         logActivityDividerView.draw();
 

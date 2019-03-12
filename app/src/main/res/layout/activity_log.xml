@@ -47,7 +47,7 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <ScrollView
-        android:id="@+id/logToDoScrollView"
+        android:id="@+id/toDoScrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="0dp"
@@ -55,8 +55,8 @@
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toTopOf="@+id/guideline14">
-        <com.stuff.log.ger.LogToDoScrollView
-            android:id="@+id/logToDoScrollView"
+        <com.stuff.log.ger.LogToDoListView
+            android:id="@+id/logToDoListView"
             android:layout_height="wrap_content"
             android:layout_width="match_parent" />
     </ScrollView>

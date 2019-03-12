@@ -7,20 +7,20 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class LogToDoScrollView extends View {
+public class LogToDoListView extends View {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private float width;
     private float height;
     private float topBarHeight;
     private final String topText = "To Do List";
 
-    public LogToDoScrollView(Context context) {
+    public LogToDoListView(Context context) {
         super(context);
     }
-    public LogToDoScrollView(Context context, @Nullable AttributeSet attrs) {
+    public LogToDoListView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
-    public LogToDoScrollView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public LogToDoListView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
     void init(float width, float logTopBarHeight) {
