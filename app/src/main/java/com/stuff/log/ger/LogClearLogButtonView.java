@@ -14,7 +14,7 @@ public class LogClearLogButtonView extends View {
     float buttonDistFromCorner, x, y, rad;
     private CircleShadow logClearer = new CircleShadow();
     private TextShadow clearText = new TextShadow();
-    private boolean touching = false;
+    private boolean touching;
 
     private Context context;
 
@@ -32,15 +32,15 @@ public class LogClearLogButtonView extends View {
     }
     private void init(Context context) {
         this.context = context;
-    }
-    @Override
-    protected void onDraw(Canvas canvas) {
-        // Define vars
+        touching = false;
+
         buttonDistFromCorner = (float) (Math.min(Screen.width, Screen.height) / 4.5);
         x = (float) (Screen.width - buttonDistFromCorner / 1.2);
         y = (float) (Screen.height - buttonDistFromCorner / 0.4);
         rad = buttonDistFromCorner / 2;
-
+    }
+    @Override
+    protected void onDraw(Canvas canvas) {
         // Button
         paint.setColor(Globals.inverseColor(Globals.users.get(0).color));
         logClearer.draw(x, y, rad, canvas, paint);
@@ -49,6 +49,7 @@ public class LogClearLogButtonView extends View {
             canvas.drawCircle(x, y, rad, paint);
         }
 
+        // Text
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setColor(Color.BLACK);
         paint.setTypeface(Typeface.DEFAULT_BOLD);
