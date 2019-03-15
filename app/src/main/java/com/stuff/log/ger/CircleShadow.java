@@ -31,7 +31,7 @@ class CircleShadow extends Shadows {
             }
         }
 
-        // Draw the initial rect
+        // Draw the original circle
         paint.setColor(origColor);
         canvas.drawCircle(x, y, radius, paint);
     }

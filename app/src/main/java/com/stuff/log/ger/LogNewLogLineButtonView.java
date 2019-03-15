@@ -17,30 +17,25 @@ public class LogNewLogLineButtonView extends View {
     private CircleShadow logLineAdder = new CircleShadow();
     float x, y, rad;
     private boolean touching;
-    private float buttonDistFromCorner;
 
     private Context context;
 
     public LogNewLogLineButtonView(Context context) {
         super(context);
-        init(context);
     }
     public LogNewLogLineButtonView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(context);
     }
     public LogNewLogLineButtonView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
     }
-    void init(Context context) {
+    void init(Context context, float width) {
         this.context = context;
+        rad = width / 4;
         touching = false;
 
-        buttonDistFromCorner = (float) (Math.min(Screen.width, Screen.height) / 4.5);
-        x = (float) (Screen.width - buttonDistFromCorner / 1.2);
-        y = (float) (Screen.height - buttonDistFromCorner / 1.2);
-        rad = buttonDistFromCorner / 2;
+        x = rad * 3;
+        y = Screen.height - rad;
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -53,7 +48,7 @@ public class LogNewLogLineButtonView extends View {
         }
 
         // + sign
-        paint.setTextSize(buttonDistFromCorner / 2 * 3);
+        paint.setTextSize(rad);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         paint.setColor(Color.DKGRAY);

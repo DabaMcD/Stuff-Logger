@@ -11,7 +11,7 @@ import android.view.View;
 
 public class LogClearLogButtonView extends View {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    float buttonDistFromCorner, x, y, rad;
+    float x, y, rad;
     private CircleShadow logClearer = new CircleShadow();
     private TextShadow clearText = new TextShadow();
     private boolean touching;
@@ -20,24 +20,20 @@ public class LogClearLogButtonView extends View {
 
     public LogClearLogButtonView(Context context) {
         super(context);
-        init(context);
     }
     public LogClearLogButtonView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(context);
     }
     public LogClearLogButtonView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
     }
-    private void init(Context context) {
+    void init(Context context, float width) {
         this.context = context;
+        rad = width / 4;
         touching = false;
 
-        buttonDistFromCorner = (float) (Math.min(Screen.width, Screen.height) / 4.5);
-        x = (float) (Screen.width - buttonDistFromCorner / 1.2);
-        y = (float) (Screen.height - buttonDistFromCorner / 0.4);
-        rad = buttonDistFromCorner / 2;
+        x = rad;
+        y = Screen.height - rad;
     }
     @Override
     protected void onDraw(Canvas canvas) {

@@ -18,6 +18,8 @@ public class LogActivity extends AppCompatActivity {
 
     private ScrollView logLinesScrollView;
 
+    private float halfWidth; // Not actually half. Slightly less.
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +43,14 @@ public class LogActivity extends AppCompatActivity {
         logLinesScrollView = findViewById(R.id.logLinesScrollView);
 
         logActivityDividerView.init();
+        halfWidth = (Screen.width - logActivityDividerView.lineThk) / 2f;
 
-        logLogLinesListView.init((Screen.width - logActivityDividerView.lineThk) / 2f, logTopBarView.getTopBarHeight());
+        logLogLinesListView.init(halfWidth, logTopBarView.getTopBarHeight());
         logLogLinesListView.draw();
         logNewLogLineButtonView.draw();
         logClearLogButtonView.draw();
 
-        logToDoListView.init((Screen.width - logActivityDividerView.lineThk) / 2f, logTopBarView.getTopBarHeight());
+        logToDoListView.init(halfWidth, logTopBarView.getTopBarHeight());
         logToDoListView.draw();
 
         logActivityDividerView.draw();
@@ -70,7 +73,8 @@ public class LogActivity extends AppCompatActivity {
     }
     @Override
     protected void onResume() {
-        logNewLogLineButtonView.init(this);
+        logNewLogLineButtonView.init(this, halfWidth);
+        logClearLogButtonView.init(this, halfWidth);
         super.onResume();
     }
     private void setTouchListeners() {
