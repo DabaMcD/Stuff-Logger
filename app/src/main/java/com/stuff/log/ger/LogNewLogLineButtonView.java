@@ -31,11 +31,11 @@ public class LogNewLogLineButtonView extends View {
     }
     void init(Context context, float width) {
         this.context = context;
-        rad = width / 4;
+        rad = width / 8;
         touching = false;
 
-        x = rad * 3;
-        y = Screen.height - rad;
+        x = rad * 6;
+        y = Screen.height - rad * 2;
     }
     @Override
     protected void onDraw(Canvas canvas) {

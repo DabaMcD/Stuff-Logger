@@ -1,6 +1,7 @@
 package com.stuff.log.ger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,7 +12,7 @@ import android.view.View;
 
 public class LogClearLogButtonView extends View {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    float x, y, rad;
+    private float x, y, rad;
     private CircleShadow logClearer = new CircleShadow();
     private TextShadow clearText = new TextShadow();
     private boolean touching;
@@ -29,11 +30,11 @@ public class LogClearLogButtonView extends View {
     }
     void init(Context context, float width) {
         this.context = context;
-        rad = width / 4;
+        rad = width / 8;
         touching = false;
 
-        x = rad;
-        y = Screen.height - rad;
+        x = rad * 2;
+        y = Screen.height - rad * 2;
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -81,12 +82,13 @@ public class LogClearLogButtonView extends View {
             draw();
         }
     }
-    void actionUp(float touchX, float touchY, LogLogLinesListView logLogLinesListView) {
+    void actionUp(float touchX, float touchY, Intent currentIntent) {
         if(touching) {
             if (Globals.getDist(touchX, touchY, x, y) <= rad) {
                 Globals.users.get(0).newLog();
                 Files.reSave(context);
-                logLogLinesListView.draw();
+                currentIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                context.startActivity(currentIntent);
             }
             draw();
         }

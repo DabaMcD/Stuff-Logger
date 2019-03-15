@@ -78,7 +78,7 @@ public class LogActivity extends AppCompatActivity {
         super.onResume();
     }
     private void setTouchListeners() {
-        findViewById(R.id.LayoutBackground).setOnTouchListener(new RelativeLayout.OnTouchListener() {
+        findViewById(R.id.logNewLogLineButtonView).setOnTouchListener(new RelativeLayout.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 v.performClick();
@@ -93,9 +93,13 @@ public class LogActivity extends AppCompatActivity {
                         break;
                     case MotionEvent.ACTION_UP:
                         logNewLogLineButtonView.actionUp(event.getX(), event.getY());
-                        logClearLogButtonView.actionUp(event.getX(), event.getY(), logLogLinesListView);
+                        logClearLogButtonView.actionUp(event.getX(), event.getY(), getIntent());
                         break;
                 }
+//                Intent intent = getIntent();
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                finish();
+//                startActivity(intent);
                 return true;
             }
         });
