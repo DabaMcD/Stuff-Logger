@@ -47,8 +47,7 @@ public class LogActivity extends AppCompatActivity {
 
         logLogLinesListView.init(halfWidth, logTopBarView.getTopBarHeight());
         logLogLinesListView.draw();
-        logNewLogLineButtonView.draw();
-        logClearLogButtonView.draw();
+        drawButtons();
 
         logToDoListView.init(halfWidth, logTopBarView.getTopBarHeight());
         logToDoListView.draw();
@@ -82,26 +81,40 @@ public class LogActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 v.performClick();
+                boolean canClear = Globals.users.get(0).logs.get(Globals.users.get(0).logs.size() - 1).logLines.size() > 0;
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         logNewLogLineButtonView.actionDown(event.getX(), event.getY());
-                        logClearLogButtonView.actionDown(event.getX(), event.getY());
+                        if(canClear) {
+                            logClearLogButtonView.actionDown(event.getX(), event.getY());
+                        }
                         break;
                     case MotionEvent.ACTION_MOVE:
                         logNewLogLineButtonView.actionMove(event.getX(), event.getY());
-                        logClearLogButtonView.actionMove(event.getX(), event.getY());
+                        if(canClear) {
+                            logClearLogButtonView.actionMove(event.getX(), event.getY());
+                        }
                         break;
                     case MotionEvent.ACTION_UP:
                         logNewLogLineButtonView.actionUp(event.getX(), event.getY());
-                        logClearLogButtonView.actionUp(event.getX(), event.getY(), getIntent());
+                        if(canClear) {
+                            logClearLogButtonView.actionUp(event.getX(), event.getY(), getIntent());
+                        }
                         break;
                 }
-//                Intent intent = getIntent();
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//                finish();
-//                startActivity(intent);
                 return true;
             }
         });
+    }
+    private void drawButtons() {
+        boolean canClear = Globals.users.get(0).logs.get(Globals.users.get(0).logs.size() - 1).logLines.size() > 0;
+        if(canClear) {
+            logNewLogLineButtonView.init(this, halfWidth);
+            logNewLogLineButtonView.draw();
+//            logClearLogButtonView.draw();
+        } else {
+            logNewLogLineButtonView.x = (Screen.width - logActivityDividerView.lineThk) / 4f;
+            logNewLogLineButtonView.draw();
+        }
     }
 }
