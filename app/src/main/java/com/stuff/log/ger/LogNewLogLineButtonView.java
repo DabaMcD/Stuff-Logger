@@ -15,7 +15,7 @@ public class LogNewLogLineButtonView extends View {
     private RectShadow logLineAdderPlus1 = new RectShadow();
     private RectShadow logLineAdderPlus2 = new RectShadow();
     private CircleShadow logLineAdder = new CircleShadow();
-    float x, y, rad;
+    private float x, y, rad;
     private boolean touching;
 
     private Context context;

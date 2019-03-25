@@ -17,6 +17,8 @@ public class LogClearLogButtonView extends View {
     private TextShadow clearText = new TextShadow();
     private boolean touching;
 
+    boolean canClear; // If false, button gets grayed out
+
     private Context context;
 
     public LogClearLogButtonView(Context context) {
@@ -52,6 +54,12 @@ public class LogClearLogButtonView extends View {
         paint.setTypeface(Typeface.DEFAULT_BOLD);
         tweakClearTextSize();
         clearText.draw("CLEAR", x, y + paint.getTextSize() / 3, canvas, paint);
+
+        // Gray out the button
+        if(!canClear) {
+            paint.setColor(Color.argb(100, 255, 255, 255));
+            canvas.drawCircle(x, y, rad, paint);
+        }
 
         super.onDraw(canvas);
     }
