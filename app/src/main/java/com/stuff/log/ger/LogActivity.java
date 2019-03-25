@@ -111,7 +111,7 @@ public class LogActivity extends AppCompatActivity {
         if(canClear) {
             logNewLogLineButtonView.init(this, halfWidth);
             logNewLogLineButtonView.draw();
-//            logClearLogButtonView.draw();
+            logClearLogButtonView.draw();
         } else {
             logNewLogLineButtonView.x = (Screen.width - logActivityDividerView.lineThk) / 4f;
             logNewLogLineButtonView.draw();

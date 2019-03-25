@@ -65,21 +65,21 @@ public class LogClearLogButtonView extends View {
         }
     }
     void draw() {
-//        invalidate();
-//        requestLayout();
+        invalidate();
+        requestLayout();
     }
     void actionDown(float touchX, float touchY) {
         // If touching inside button
         if(Globals.getDist(touchX, touchY, x, y) <= rad) {
             touching = true;
-//            draw();
+            draw();
         }
     }
     void actionMove(float touchX, float touchY) {
         // If touching outside button
         if(Globals.getDist(touchX, touchY, x, y) > rad && touching) {
             touching = false;
-//            draw();
+            draw();
         }
     }
     void actionUp(float touchX, float touchY, Intent currentIntent) {
@@ -90,7 +90,7 @@ public class LogClearLogButtonView extends View {
                 currentIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 context.startActivity(currentIntent);
             }
-//            draw();
+            draw();
         }
         touching = false;
     }
