@@ -42,19 +42,27 @@ public class LogActivity extends AppCompatActivity {
         logTopBarView = findViewById(R.id.logTopBarView);
         logLinesScrollView = findViewById(R.id.logLinesScrollView);
 
+        // Initiate everything which needs initiation
         logActivityDividerView.init();
         halfWidth = (Screen.width - logActivityDividerView.lineThk) / 2f;
-
         logLogLinesListView.init(halfWidth, logTopBarView.getTopBarHeight());
-        logLogLinesListView.draw();
-        drawClearButton();
-
+        logClearLogButtonView.canClear = Globals.users.get(0).logs.get(Globals.users.get(0).logs.size() - 1).logLines.size() > 0;
         logToDoListView.init(halfWidth, logTopBarView.getTopBarHeight());
+
+        // Draw things on left of page
+        logLogLinesListView.draw();
+        logNewLogLineButtonView.draw();
+        logClearLogButtonView.draw();
+
+        // Draw things on right of page
         logToDoListView.draw();
 
+        // Draw things in middle of page
         logActivityDividerView.draw();
 
+        // Draw things on top of page
         logTopBarView.draw();
+//        logNewToDoButtonView.draw();
 
         // Set up click listener
         setTouchListeners();
@@ -106,9 +114,5 @@ public class LogActivity extends AppCompatActivity {
                 return true;
             }
         });
-    }
-    private void drawClearButton() {
-        logClearLogButtonView.canClear = Globals.users.get(0).logs.get(Globals.users.get(0).logs.size() - 1).logLines.size() > 0;
-        logClearLogButtonView.draw();
     }
 }
