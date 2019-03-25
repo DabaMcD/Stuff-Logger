@@ -8,6 +8,7 @@ class User implements Serializable {
     ArrayList<Subject> subjects = new ArrayList<>();
     int color;
     ArrayList<Log> logs = new ArrayList<>();
+    ToDoList toDoList = new ToDoList();
 
     User(String name) {
         this.name = name;

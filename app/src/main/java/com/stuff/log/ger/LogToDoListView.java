@@ -38,10 +38,6 @@ public class LogToDoListView extends View {
     }
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.save();
-        canvas.translate(Screen.width - width, topBarHeight);
-
-        canvas.restore();
 
         super.onDraw(canvas);
     }
