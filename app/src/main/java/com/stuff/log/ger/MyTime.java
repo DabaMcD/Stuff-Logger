@@ -124,4 +124,11 @@ class MyTime implements Serializable {
                 getCurrentDayOfMonth() + ", " + // 19,
                 getCurrentYear(); // 2018
     }
+    static String getCurrentShortDate() {
+        // Returns the date in the form   19/02/2018
+        return getCurrentDayOfMonth() + "/" + // 19/
+                getCurrentMonth() + "/" + // 02/
+                getCurrentYear(); // 2018
+        // todo: use a println to make sure the functions above work
+    }
 }
