@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 class MyTime implements Serializable {
-    int year;
-    int month;
-    int dayOfWeek;
-    int dayOfMonth;
-    int hour;
-    int minute;
-    int second; // not needed now but maybe later
-    int millis;
+    private int year;
+    private int month;
+    private int dayOfWeek;
+    private int dayOfMonth;
+    private int hour;
+    private int minute;
+    private int second; // not needed now but maybe later
+    private int millis;
 
     MyTime() {
         year = getCurrentYear();
