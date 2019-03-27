@@ -4,5 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 class ToDoList implements Serializable {
-    ArrayList<ToDoItem> toDoItems = new ArrayList<>();
+    private ArrayList<ToDoItem> toDoItems;
+
+    ToDoList() {
+        this.toDoItems = new ArrayList<>();
+    }
+    ToDoItem getItem(int index) {
+        return toDoItems.get(index);
+    }
+    void addToDoItem(ToDoItem toDoItem) {
+        toDoItems.add(toDoItem);
+    }
 }

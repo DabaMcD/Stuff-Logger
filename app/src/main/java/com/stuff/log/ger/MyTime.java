@@ -7,6 +7,8 @@ class MyTime implements Serializable {
     int hour;
     int minute;
     int second; // not needed now but maybe later
+    int day;
+    int
 
     MyTime(int hour, int minute, int second) {
         this.hour = hour;
