@@ -4,50 +4,67 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 class MyTime implements Serializable {
+    int year;
+    int month;
+    int dayOfWeek;
+    int dayOfMonth;
     int hour;
     int minute;
     int second; // not needed now but maybe later
-    int day;
-    int
+    int millis;
 
-    MyTime(int hour, int minute, int second) {
-        this.hour = hour;
-        this.minute = minute;
-        this.second = second;
-    }
     MyTime() {
-        hour = getHour();
-        minute = getMinute();
-        second = getSecond();
+        year = getCurrentYear();
+        month = getCurrentMonth();
+        dayOfWeek = getCurrentDayOfWeek();
+        dayOfMonth = getCurrentDayOfMonth();
+        hour = getCurrentHour();
+        minute = getCurrentMinute();
+        second = getCurrentSecond();
+        millis = getCurrentMillis();
     }
-    static int getHour() {
-        return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-    }
-    static int getMinute() {
-        return Calendar.getInstance().get(Calendar.MINUTE);
-    }
-    static int getSecond() {
-        return Calendar.getInstance().get(Calendar.SECOND);
-    }
-    static int getMillis() {
-        return Calendar.getInstance().get(Calendar.MILLISECOND);
-    }
-    static String getDadTime(int hour, int minute) {
+    static String getDadTime(MyTime time) {
         String result = "";
-        if(Math.round((double) minute / (double) 6) >= 10) {
-            if(String.valueOf((hour + 1) % 24).length() <= 1) {
+        if(Math.round((double) time.minute / (double) 6) >= 10) {
+            if(String.valueOf((time.hour + 1) % 24).length() <= 1) {
                 result += "0";
             }
-            result += String.valueOf((hour + 1) % 24);
+            result += String.valueOf((time.hour + 1) % 24);
             result += "0";
         } else {
-            if(String.valueOf(hour).length() <= 1) {
+            if(String.valueOf(time.hour).length() <= 1) {
                 result += "0";
             }
-            result += String.valueOf(hour);
-            result += Math.round((double) minute / (double) 6);
+            result += String.valueOf(time.hour);
+            result += Math.round((double) time.minute / (double) 6);
         }
         return result;
+    }
+
+    // Current time references (all return and int)
+    static int getCurrentYear() {
+        return Calendar.getInstance().get(Calendar.YEAR);
+    }
+    static int getCurrentMonth() {
+        return Calendar.getInstance().get(Calendar.MONTH);
+    }
+    static int getCurrentDayOfWeek() {
+        return Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+    }
+    static int getCurrentDayOfMonth() {
+        return Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+    }
+    static int getCurrentHour() {
+        return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+    }
+    static int getCurrentMinute() {
+        return Calendar.getInstance().get(Calendar.MINUTE);
+    }
+    static int getCurrentSecond() {
+        return Calendar.getInstance().get(Calendar.SECOND);
+    }
+    static int getCurrentMillis() {
+        return Calendar.getInstance().get(Calendar.MILLISECOND);
     }
     static String monthFromInt(int month) {
         switch(month) {
@@ -99,12 +116,12 @@ class MyTime implements Serializable {
                 return "Invalid number";
         }
     }
-    static String getDisplayableDate() {
+
+    static String getCurrentPrettyDate() {
         // Returns the date in the form   Mon, Feb 19, 2018
-        Calendar cal = Calendar.getInstance();
-        return weekdayFromInt(cal.get(Calendar.DAY_OF_WEEK)) + ", " + // Mon,
-                monthFromInt(cal.get(Calendar.MONTH)) + " " + // Feb
-                cal.get(Calendar.DAY_OF_MONTH) + ", " + // 19,
-                cal.get(Calendar.YEAR); // 2018
+        return weekdayFromInt(getCurrentDayOfWeek()) + ", " + // Mon,
+                monthFromInt(getCurrentMonth()) + " " + // Feb
+                getCurrentDayOfMonth() + ", " + // 19,
+                getCurrentYear(); // 2018
     }
 }

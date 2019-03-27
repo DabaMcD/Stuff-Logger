@@ -9,7 +9,7 @@ class Log implements Serializable {
     String date;
 
     Log() {
-        date = MyTime.getDisplayableDate();
+        date = MyTime.getCurrentPrettyDate();
         logLines = new ArrayList<>();
     }
 }
