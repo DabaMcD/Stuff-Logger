@@ -23,20 +23,20 @@ class MyTime implements Serializable {
         second = getCurrentSecond();
         millis = getCurrentMillis();
     }
-    static String getDadTime(MyTime time) {
+    String getDadTime() {
         String result = "";
-        if(Math.round((double) time.minute / (double) 6) >= 10) {
-            if(String.valueOf((time.hour + 1) % 24).length() <= 1) {
+        if(Math.round((double) minute / (double) 6) >= 10) {
+            if(String.valueOf((hour + 1) % 24).length() <= 1) {
                 result += "0";
             }
-            result += String.valueOf((time.hour + 1) % 24);
+            result += String.valueOf((hour + 1) % 24);
             result += "0";
         } else {
-            if(String.valueOf(time.hour).length() <= 1) {
+            if(String.valueOf(hour).length() <= 1) {
                 result += "0";
             }
-            result += String.valueOf(time.hour);
-            result += Math.round((double) time.minute / (double) 6);
+            result += String.valueOf(hour);
+            result += Math.round((double) minute / (double) 6);
         }
         return result;
     }
@@ -117,18 +117,35 @@ class MyTime implements Serializable {
         }
     }
 
+    // Other static methods
     static String getCurrentPrettyDate() {
-        // Returns the date in the form   Mon, Feb 19, 2018
+        // Returns the current date in the form   Mon, Feb 19, 2018
         return weekdayFromInt(getCurrentDayOfWeek()) + ", " + // Mon,
                 monthFromInt(getCurrentMonth()) + " " + // Feb
                 getCurrentDayOfMonth() + ", " + // 19,
                 getCurrentYear(); // 2018
     }
     static String getCurrentShortDate() {
-        // Returns the date in the form   19/02/2018
+        // Returns the current date in the form   19/02/2018
         return getCurrentDayOfMonth() + "/" + // 19/
                 getCurrentMonth() + "/" + // 02/
                 getCurrentYear(); // 2018
-        // todo: use a println to make sure the functions above work
+    }
+    static String getCurrentDadTime() {
+        String result = "";
+        if(Math.round((double) getCurrentMinute() / (double) 6) >= 10) {
+            if(String.valueOf((getCurrentHour() + 1) % 24).length() <= 1) {
+                result += "0";
+            }
+            result += String.valueOf((getCurrentHour() + 1) % 24);
+            result += "0";
+        } else {
+            if(String.valueOf(getCurrentHour()).length() <= 1) {
+                result += "0";
+            }
+            result += String.valueOf(getCurrentHour());
+            result += Math.round((double) getCurrentMinute() / (double) 6);
+        }
+        return result;
     }
 }
