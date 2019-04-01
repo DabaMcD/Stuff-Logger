@@ -131,7 +131,7 @@ public class LogLogLinesListView extends View {
                     (paint.getTextSize() / 3d) // Centering the text vertically
             );
 
-            String dadTime = MyTime.getDadTime(log.logLines.get(i).startTime);
+            String dadTime = log.logLines.get(i).startTime.getDadTime();
             canvas.drawText(
                     String.valueOf(dadTime.charAt(0)), 
                     sideLimit,// Correct x-position according to the chart above
