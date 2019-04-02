@@ -12,6 +12,9 @@ class ToDoList implements Serializable {
     ToDoItem getItem(int index) {
         return toDoItems.get(index);
     }
+    int getSize() {
+        return toDoItems.size();
+    }
     void addToDoItem(ToDoItem toDoItem) {
         toDoItems.add(toDoItem);
     }

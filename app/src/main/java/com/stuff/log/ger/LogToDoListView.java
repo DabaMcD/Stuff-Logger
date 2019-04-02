@@ -23,6 +23,8 @@ public class LogToDoListView extends View {
     private float lineGap;
     private float firstLineYpos;
 
+    private final float bufferAtBottom = 0.75f; // in LineGaps
+
     public LogToDoListView(Context context) {
         super(context);
     }
@@ -54,10 +56,10 @@ public class LogToDoListView extends View {
         int longestLogLineIndex = -1;
         updateSideLimit();
         updateTextSize();
-        float recordLineWidth = paint.measureText(log.date) + sideLimit * 2f;
-        for(int i = 0; i < log.logLines.size(); i ++) {
+        float recordLineWidth = paint.measureText(topText) + sideLimit * 2f;
+        for(int i = 0; i < toDoList.getSize(); i ++) {
             // Get the length of a log line (without left and right margins)
-            float logLineNameWidth = paint.measureText(log.logLines.get(i).subject.name);
+            float logLineNameWidth = paint.measureText(toDoList.getItem(i).getName());
             float thisLogLineLength = logLineNameWidth + paint.measureText("888N-N") + sideLimit * 2f; // sideLimit * 2 because you gotta account for both sides
 
             if(thisLogLineLength > recordLineWidth) { // If it breaks the line length record
@@ -71,9 +73,9 @@ public class LogToDoListView extends View {
             updateSideLimit();
 
             if(longestLogLineIndex == -1) {
-                recordLineWidth = paint.measureText(log.date) + sideLimit * 2f; // sideLimit * 2 because you gotta account for both sides
+                recordLineWidth = paint.measureText(topText) + sideLimit * 2f; // sideLimit * 2 because you gotta account for both sides
             } else {
-                String logLineSubjectName = log.logLines.get(longestLogLineIndex).subject.name;
+                String logLineSubjectName = toDoList.getItem(longestLogLineIndex).getName();
 
                 // logLineNameBounds = bounds of subject name
                 float logLineNameWidth = paint.measureText(logLineSubjectName);
@@ -81,7 +83,7 @@ public class LogToDoListView extends View {
             }
         }
         updateFirstLineYpos();
-        while(log.logLines.size() * lineGap + firstLineYpos /* and just for extra buffer at the bottom: */ + lineGap * bufferAtBottom > Screen.height) {
+        while(toDoList.getSize() * lineGap + firstLineYpos /* and just for extra buffer at the bottom: */ + lineGap * bufferAtBottom > Screen.height) {
             decreaseLineGap();
             updateFirstLineYpos();
         }
@@ -108,7 +110,7 @@ public class LogToDoListView extends View {
     private void drawDate(Canvas canvas) {
         paint.setColor(Color.DKGRAY);
         paint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText(log.date, sideLimit, lineGap + paint.getTextSize() / 3f, paint);
+        canvas.drawText(topText, sideLimit, lineGap + paint.getTextSize() / 3f, paint);
     }
     void draw() {
         invalidate();
