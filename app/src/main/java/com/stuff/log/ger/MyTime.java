@@ -40,6 +40,19 @@ class MyTime implements Serializable {
         }
         return result;
     }
+    String getPrettyDate() {
+        // Returns the current date in the form   Mon, Feb 19, 2018
+        return weekdayFromInt(dayOfWeek) + ", " + // Mon,
+                monthFromInt(month) + " " + // Feb
+                dayOfMonth + ", " + // 19,
+                year; // 2018
+    }
+    String getShortDate() {
+        // Returns the current date in the form   19/02/2018
+        return dayOfMonth + "/" + // 19/
+                month + "/" + // 02/
+                year; // 2018
+    }
 
     // Current time references (all return and int)
     static int getCurrentYear() {
