@@ -73,10 +73,6 @@ public class LogActivity extends AppCompatActivity {
                 logLinesScrollView.scrollTo(0, logLinesScrollView.getBottom());
             }
         });
-
-        System.out.println(MyTime.getCurrentPrettyDate());
-        System.out.println(MyTime.getCurrentShortDate());
-        System.out.println(MyTime.getCurrentDadTime());
     }
     @Override
     public void onBackPressed() {

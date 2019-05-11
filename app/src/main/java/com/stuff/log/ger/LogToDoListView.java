@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.icu.text.RelativeDateTimeFormatter;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -27,17 +28,22 @@ public class LogToDoListView extends View {
 
     public LogToDoListView(Context context) {
         super(context);
+        this.setWillNotDraw(false); // For some weird reason we need this or else the onDraw method won't run.
     }
     public LogToDoListView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        this.setWillNotDraw(false); // For some weird reason we need this or else the onDraw method won't run.
     }
     public LogToDoListView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.setWillNotDraw(false); // For some weird reason we need this or else the onDraw method won't run.
     }
     void init(float width, float logTopBarHeight) {
         toDoList = Globals.users.get(0).toDoList;
         this.width = width;
         paint.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
+        tweakLineGap();
+        System.out.println(paint.getTextSize());
 
         toDoList = Globals.users.get(0).toDoList;
         topBarHeight = logTopBarHeight;
@@ -45,11 +51,20 @@ public class LogToDoListView extends View {
 
         setVerticalScrollBarEnabled(true);
         setMinimumHeight((int) (Screen.height - topBarHeight));
+        setMinimumWidth((int) width);
+        this.setWillNotDraw(false); // For some weird reason we need this or else the onDraw method won't run.
     }
     @Override
     protected void onDraw(Canvas canvas) {
+        canvas.save();
+        canvas.translate(topBarHeight, Screen.width - width);
+
+        paint.setColor(Color.RED);
+        canvas.drawPaint(paint);
         drawHorizontalGridLines(canvas);
         drawTopText(canvas);
+
+        canvas.restore();
 
         super.onDraw(canvas);
     }
@@ -83,5 +98,7 @@ public class LogToDoListView extends View {
     void draw() {
         invalidate();
         requestLayout();
+        System.out.println(getWidth());
+        System.out.println(getHeight());
     }
 }

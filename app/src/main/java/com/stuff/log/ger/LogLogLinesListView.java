@@ -34,7 +34,6 @@ public class LogLogLinesListView extends View {
         log = Globals.users.get(0).logs.get(Globals.users.get(0).logs.size() - 1);
         lineGap = Screen.height / 10f; // Set min line gap
 
-        tweakLineGap();
         updateSideLimit();
         updateFirstLineYpos();
         updateTextSize();
@@ -47,6 +46,7 @@ public class LogLogLinesListView extends View {
     }
     @Override
     protected void onDraw(Canvas canvas) {
+        tweakLineGap();
         drawHorizontalGridLines(canvas);
         drawDate(canvas);
         drawLogLines(canvas);
