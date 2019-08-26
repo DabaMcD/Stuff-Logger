@@ -8,14 +8,14 @@
     android:id="@+id/LayoutBackground">
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline12"
+        android:id="@+id/guideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline14"
+        android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -27,8 +27,8 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline12"
-        app:layout_constraintTop_toTopOf="@+id/guideline14">
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
 
         <com.stuff.log.ger.LogToDoListView
             android:id="@+id/logToDoListView"
@@ -51,9 +51,9 @@
         android:layout_height="0dp"
         android:layout_marginEnd="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/guideline12"
+        app:layout_constraintEnd_toEndOf="@+id/guideline1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline14">
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
         <com.stuff.log.ger.LogLogLinesListView
             android:id="@+id/logLogLinesListView"
             android:layout_height="wrap_content"
