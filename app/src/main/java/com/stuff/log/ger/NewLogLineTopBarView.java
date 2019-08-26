@@ -18,8 +18,12 @@ public class NewLogLineTopBarView extends View {
     }
     @Override
     protected void onDraw(Canvas canvas) {
-        User user = Globals.users.get(0);
-        TopBar.drawRectTextAndShadows(canvas, user.color, true, "Add Log Line (for " + user.name + ")");
+        try {
+            User user = Globals.users.get(0);
+            TopBar.drawRectTextAndShadows(canvas, user.color, true, "Add Log Line (for " + user.name + ")");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         super.onDraw(canvas);
     }
