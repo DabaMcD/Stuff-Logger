@@ -35,12 +35,12 @@ public class LogActivity extends AppCompatActivity {
 
         // Get all instances out of xml file
         logActivityDividerView = findViewById(R.id.logActivityDividerView);
-        logLogLinesListView = findViewById(R.id.logLogLinesListView);
+//        logLogLinesListView = findViewById(R.id.logLogLinesListView);
         logNewLogLineButtonView = findViewById(R.id.logNewLogLineButtonView);
         logClearLogButtonView = findViewById(R.id.logClearLogButtonView);
-        logToDoListView = findViewById(R.id.logToDoListView);
+//        logToDoListView = findViewById(R.id.logToDoListView);
         logTopBarView = findViewById(R.id.logTopBarView);
-        logLinesScrollView = findViewById(R.id.logLinesScrollView);
+//        logLinesScrollView = findViewById(R.id.logLinesScrollView);
 
         // Initiate everything which needs initiation
         logActivityDividerView.init();

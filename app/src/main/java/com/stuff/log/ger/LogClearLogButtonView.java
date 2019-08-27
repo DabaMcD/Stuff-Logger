@@ -40,25 +40,29 @@ public class LogClearLogButtonView extends View {
     }
     @Override
     protected void onDraw(Canvas canvas) {
-        // Button
-        paint.setColor(Globals.inverseColor(Globals.users.get(0).color));
-        logClearer.draw(x, y, rad, canvas, paint);
-        if(touching) {
-            paint.setColor(Color.argb(30, 0, 0, 0));
-            canvas.drawCircle(x, y, rad, paint);
-        }
+        try {
+            // Button
+            paint.setColor(Globals.inverseColor(Globals.users.get(0).color));
+            logClearer.draw(x, y, rad, canvas, paint);
+            if(touching) {
+                paint.setColor(Color.argb(30, 0, 0, 0));
+                canvas.drawCircle(x, y, rad, paint);
+            }
 
-        // Text
-        paint.setTextAlign(Paint.Align.CENTER);
-        paint.setColor(Color.BLACK);
-        paint.setTypeface(Typeface.DEFAULT_BOLD);
-        tweakClearTextSize();
-        clearText.draw("CLEAR", x, y + paint.getTextSize() / 3, canvas, paint);
+            // Text
+            paint.setTextAlign(Paint.Align.CENTER);
+            paint.setColor(Color.BLACK);
+            paint.setTypeface(Typeface.DEFAULT_BOLD);
+            tweakClearTextSize();
+            clearText.draw("CLEAR", x, y + paint.getTextSize() / 3, canvas, paint);
 
-        // Gray out the button
-        if(!canClear) {
-            paint.setColor(Color.argb(100, 255, 255, 255));
-            canvas.drawCircle(x, y, rad, paint);
+            // Gray out the button
+            if(!canClear) {
+                paint.setColor(Color.argb(100, 255, 255, 255));
+                canvas.drawCircle(x, y, rad, paint);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         super.onDraw(canvas);
