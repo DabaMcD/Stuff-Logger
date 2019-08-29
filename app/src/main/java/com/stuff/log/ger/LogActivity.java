@@ -35,27 +35,27 @@ public class LogActivity extends AppCompatActivity {
 
         // Get all instances out of xml file
         logActivityDividerView = findViewById(R.id.logActivityDividerView);
-//        logLogLinesListView = findViewById(R.id.logLogLinesListView);
+        logLogLinesListView = findViewById(R.id.logLogLinesListView);
         logNewLogLineButtonView = findViewById(R.id.logNewLogLineButtonView);
         logClearLogButtonView = findViewById(R.id.logClearLogButtonView);
-//        logToDoListView = findViewById(R.id.logToDoListView);
+        logToDoListView = findViewById(R.id.logToDoListView);
         logTopBarView = findViewById(R.id.logTopBarView);
-//        logLinesScrollView = findViewById(R.id.logLinesScrollView);
+        logLinesScrollView = findViewById(R.id.logLinesScrollView);
 
         // Initiate everything which needs initiation
         logActivityDividerView.init();
         halfWidth = (Screen.width - logActivityDividerView.lineThk) / 2f;
-//        logLogLinesListView.init(halfWidth, logTopBarView.getTopBarHeight());
+        logLogLinesListView.init(halfWidth, logTopBarView.getTopBarHeight());
         logClearLogButtonView.canClear = Globals.users.get(0).logs.get(Globals.users.get(0).logs.size() - 1).logLines.size() > 0;
-//        logToDoListView.init(halfWidth, logTopBarView.getTopBarHeight());
+        logToDoListView.init(halfWidth, logTopBarView.getTopBarHeight());
 
         // Draw things on left of page
-//        logLogLinesListView.draw();
+        logLogLinesListView.draw();
         logNewLogLineButtonView.draw();
         logClearLogButtonView.draw();
 
         // Draw things on right of page
-//        logToDoListView.draw();
+        logToDoListView.draw();
 
         // Draw things in middle of page
         logActivityDividerView.draw();

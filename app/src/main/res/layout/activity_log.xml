@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toTopOf="@+id/guideline2">
         <com.stuff.log.ger.LogToDoListView
-            android:id="@+id/a"
+            android:id="@+id/logToDoListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </ScrollView>
