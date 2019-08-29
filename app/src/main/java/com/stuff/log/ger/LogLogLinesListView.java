@@ -14,7 +14,7 @@ public class LogLogLinesListView extends View {
     private Log log;
     private float sideMargin;
     private float lineGap;
-    private float firstLineYpos;
+    private float firstLineYPos;
     private float width;
     private final float bufferAtBottom = 1.5f; // Measured in lineGaps
 
@@ -35,20 +35,20 @@ public class LogLogLinesListView extends View {
         lineGap = Screen.height / 10f; // Set min line gap
 
         updateSideMargin();
-        updateFirstLineYpos();
+        updateFirstLineYPos();
         updateTextSize();
 
         // Scrolling stuff
         setVerticalScrollBarEnabled(true);
         setMinimumHeight(100);
-        int bottomOfLogLines = (int) (firstLineYpos + lineGap * log.logLines.size() + lineGap * bufferAtBottom);
+        int bottomOfLogLines = (int) (firstLineYPos + lineGap * log.logLines.size() + lineGap * bufferAtBottom);
         int minScrollHeight = (int) (Screen.height - logTopBarHeight);
         setMinimumHeight(bottomOfLogLines > minScrollHeight ? bottomOfLogLines : minScrollHeight);
     }
     @Override
     protected void onDraw(Canvas canvas) {
         try {
-            tweakLineGap();
+            updateLineGap();
             drawHorizontalGridLines(canvas);
             drawDate(canvas);
             drawLogLines(canvas);
@@ -58,7 +58,7 @@ public class LogLogLinesListView extends View {
 
         super.onDraw(canvas);
     }
-    private void tweakLineGap() {
+    private void updateLineGap() {
         // Goal: set the line gap correctly so that the length of the longest piece of
         // text will perfectly fit with perfect margin on both sides
         //
@@ -72,7 +72,17 @@ public class LogLogLinesListView extends View {
         // My 2 variables will be lineGap and sideMargin
         // I will solve them in terms of widthToHeightRatio and width
         float widthToHeightRatio = getLongestLineWidth() / paint.getTextSize();
-        lineGap = ((width - 2 * sideMargin) / widthToHeightRatio) / 0.8f; // 1st equation
+        // lineGap = (width - 2f * sideMargin) / (widthToHeightRatio * 0.8f) <== 1st equation
+        // sideMargin = lineGap / 2f <== 2nd equation
+        // lineGap = (width - 2f * lineGap / 2f) / (widthToHeightRatio * 0.8f) <== combine both
+        // lineGap = (width / (widthToHeightRatio * 0.8f)) - (lineGap / (widthToHeightRatio * 0.8f))
+        // lineGap + (lineGap / (widthToHeightRatio * 0.8f)) = (width / (widthToHeightRatio * 0.8f))
+        // lineGap * (1f + 1f / (widthToHeightRatio * 0.8f) = (width / (widthToHeightRatio * 0.8f))
+        // lineGap = width / ((1f + 1f / (widthToHeightRatio * 0.8f)) * (widthToHeightRatio * 0.8f))
+        // lineGap = width / (widthToHeightRatio * 0.8f + 1)
+        lineGap = width / (widthToHeightRatio * 0.8f + 1);
+        // And sideMargin = lineGap / 2f
+        // But that's not this function's job. This function just does the lineGap part
     }
     private float getLongestLineWidth() {
         float dateWidth = paint.measureText(log.date);
@@ -86,15 +96,15 @@ public class LogLogLinesListView extends View {
         paint.setTextSize(lineGap * 0.8f);
     }
     private void updateSideMargin() {
-        sideMargin = (float) (lineGap / 2d);
+        sideMargin = lineGap / 2f;
     }
-    private void updateFirstLineYpos() {
-        firstLineYpos = (float) (lineGap * 1.5);
+    private void updateFirstLineYPos() {
+        firstLineYPos = lineGap * 1.5f;
     }
     private void drawHorizontalGridLines(Canvas canvas) {
         paint.setColor(Color.LTGRAY);
         paint.setStrokeWidth(Math.max(lineGap / 20f, 2));
-        for(float i = firstLineYpos; i <= Screen.height; i += lineGap) {
+        for(float i = firstLineYPos; i <= Screen.height; i += lineGap) {
             canvas.drawLine(0, i, width, i, paint);
         }
     }
@@ -116,8 +126,8 @@ public class LogLogLinesListView extends View {
         // It is crucial that the text be sized and typefaced correctly at this point
 
         for(int i = 0; i < log.logLines.size(); i ++) {
-            float txtYpos = (float) (
-                    firstLineYpos + // The height of the top bar
+            float txtYPos = (float) (
+                    firstLineYPos + // The height of the top bar
                     (lineGap * (i + 0.5d)) + // Move down the log to the right spot
                     (paint.getTextSize() / 3d) // Centering the text vertically
             );
@@ -126,31 +136,31 @@ public class LogLogLinesListView extends View {
             canvas.drawText(
                     String.valueOf(dadTime.charAt(0)),
                     sideMargin,// Correct x-position according to the chart above
-                    txtYpos,
+                    txtYPos,
                     paint
             );
             canvas.drawText(
                     String.valueOf(dadTime.charAt(1)),
                     sideMargin + paint.measureText("8"), // Correct x-position according to the chart above
-                    txtYpos,
+                    txtYPos,
                     paint
             );
             canvas.drawText(
                     String.valueOf(dadTime.charAt(2)),
                     sideMargin + paint.measureText("88"), // Correct x-position according to the chart above
-                    txtYpos,
+                    txtYPos,
                     paint
             );
             canvas.drawText(
                     "-",
                     sideMargin + paint.measureText("888N"), // Correct x-position according to the chart above
-                    txtYpos,
+                    txtYPos,
                     paint
             );
             canvas.drawText(
                     log.logLines.get(i).subject.name,
                     sideMargin + paint.measureText("888N-N"), // Correct x-position according to the chart above
-                    txtYpos,
+                    txtYPos,
                     paint
             );
         }
