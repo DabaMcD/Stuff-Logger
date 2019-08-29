@@ -68,10 +68,11 @@ public class LogLogLinesListView extends View {
         // paint.getTextSize() / lineGap = 0.8
         // paint.measureText = width - sideMargin / 2
 
-        // 1. Find the longest text segment
-        // The text size doesn't matter for now,
-        // because we're just comparing strings between each other.
-        float longestLineWidth = getLongestLineWidth();
+        // Okay, now I have to set up a system of equations
+        // My 2 variables will be lineGap and sideMargin
+        // I will solve them in terms of widthToHeightRatio and width
+        float widthToHeightRatio = getLongestLineWidth() / paint.getTextSize();
+        lineGap = ((width - 2 * sideMargin) / widthToHeightRatio) / 0.8f; // 1st equation
     }
     private float getLongestLineWidth() {
         float dateWidth = paint.measureText(log.date);
@@ -82,7 +83,7 @@ public class LogLogLinesListView extends View {
         return Math.max(longestLogLineWidth, dateWidth);
     }
     private void updateTextSize() {
-        paint.setTextSize((float) (lineGap * 0.8d));
+        paint.setTextSize(lineGap * 0.8f);
     }
     private void updateSideMargin() {
         sideMargin = (float) (lineGap / 2d);
