@@ -88,9 +88,9 @@ public class LogLogLinesListView extends View {
         float dateWidth = paint.measureText(log.date);
         float longestLogLineWidth = 0f;
         for (int i = 0; i < log.logLines.size(); i ++) {
-            longestLogLineWidth = Math.max(longestLogLineWidth, LogLine.getLogLineWidth(log.logLines.get(i), paint));
+            longestLogLineWidth = (longestLogLineWidth > LogLine.getLogLineWidth(log.logLines.get(i), paint)) ? longestLogLineWidth : LogLine.getLogLineWidth(log.logLines.get(i), paint);
         }
-        return Math.max(longestLogLineWidth, dateWidth);
+        return longestLogLineWidth > dateWidth ? longestLogLineWidth : dateWidth;
     }
     private void updateTextSize() {
         paint.setTextSize(lineGap * 0.8f);
@@ -103,7 +103,7 @@ public class LogLogLinesListView extends View {
     }
     private void drawHorizontalGridLines(Canvas canvas) {
         paint.setColor(Color.LTGRAY);
-        paint.setStrokeWidth(Math.max(lineGap / 20f, 2));
+        paint.setStrokeWidth(lineGap / 20f);
         for(float i = firstLineYPos; i <= Screen.height; i += lineGap) {
             canvas.drawLine(0, i, width, i, paint);
         }
