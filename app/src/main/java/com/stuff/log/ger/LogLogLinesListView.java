@@ -40,16 +40,21 @@ public class LogLogLinesListView extends View {
 
         // Scrolling stuff
         setVerticalScrollBarEnabled(true);
+        setMinimumHeight(100);
         int bottomOfLogLines = (int) (firstLineYpos + lineGap * log.logLines.size() + lineGap * bufferAtBottom);
         int minScrollHeight = (int) (Screen.height - logTopBarHeight);
         setMinimumHeight(bottomOfLogLines > minScrollHeight ? bottomOfLogLines : minScrollHeight);
     }
     @Override
     protected void onDraw(Canvas canvas) {
-        tweakLineGap();
-        drawHorizontalGridLines(canvas);
-        drawDate(canvas);
-        drawLogLines(canvas);
+        try {
+            tweakLineGap();
+            drawHorizontalGridLines(canvas);
+            drawDate(canvas);
+            drawLogLines(canvas);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         super.onDraw(canvas);
     }
@@ -133,7 +138,7 @@ public class LogLogLinesListView extends View {
 
             String dadTime = log.logLines.get(i).startTime.getDadTime();
             canvas.drawText(
-                    String.valueOf(dadTime.charAt(0)), 
+                    String.valueOf(dadTime.charAt(0)),
                     sideLimit,// Correct x-position according to the chart above
                     txtYpos,
                     paint

@@ -42,12 +42,16 @@ public class MainTopBarView extends View {
     }
     @Override
     protected void onDraw(Canvas canvas) {
-        TopBar.drawRainbowRect(canvas);
-        paint.setTextAlign(Paint.Align.LEFT);
-        paint.setTypeface(Typeface.DEFAULT_BOLD);
-        paint.setTextSize(Screen.height / 14f);
-        paint.setColor(Color.BLACK);
-        TopBar.textShadow.draw("Stuff Logger", Screen.height / 40f, topBarHeight / 2 + paint.getTextSize() / 3, canvas, paint);
+        try {
+            TopBar.drawRainbowRect(canvas);
+            paint.setTextAlign(Paint.Align.LEFT);
+            paint.setTypeface(Typeface.DEFAULT_BOLD);
+            paint.setTextSize(Screen.height / 14f);
+            paint.setColor(Color.BLACK);
+            TopBar.textShadow.draw("Stuff Logger", Screen.height / 40f, topBarHeight / 2 + paint.getTextSize() / 3, canvas, paint);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         drawButton(canvas);
 

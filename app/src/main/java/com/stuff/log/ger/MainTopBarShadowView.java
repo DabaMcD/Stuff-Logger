@@ -19,7 +19,12 @@ public class MainTopBarShadowView extends View {
     }
     @Override
     protected void onDraw(Canvas canvas) {
-        TopBar.drawRectWithShadow(canvas, Color.BLACK);
+        try {
+            TopBar.drawRectWithShadow(canvas, Color.BLACK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         super.onDraw(canvas);
     }
     public void draw() {
