@@ -66,7 +66,20 @@ public class LogLogLinesListView extends View {
         // line gap using dimensional analysis using the following ratios:
         // paint.measureText(text) / paint.getTextSize() = (I'll have to calculate this on the fly)
         // paint.getTextSize() / lineGap = 0.8
+        // paint.measureText = width - sideMargin / 2
 
+        // 1. Find the longest text segment
+        // The text size doesn't matter for now,
+        // because we're just comparing strings between each other.
+        float longestLineWidth = getLongestLineWidth();
+    }
+    private float getLongestLineWidth() {
+        float dateWidth = paint.measureText(log.date);
+        float longestLogLineWidth = 0f;
+        for (int i = 0; i < log.logLines.size(); i ++) {
+            longestLogLineWidth = Math.max(longestLogLineWidth, LogLine.getLogLineWidth(log.logLines.get(i), paint));
+        }
+        return Math.max(longestLogLineWidth, dateWidth);
     }
     private void updateTextSize() {
         paint.setTextSize((float) (lineGap * 0.8d));
@@ -95,7 +108,8 @@ public class LogLogLinesListView extends View {
          *               137 - Code
          *<--sideMargin-->888N-NCode<--sideMargin-->
          *
-         * Do you follow the above? The upper text is what will actually be shown on the log. The lower text is the spacing I use to get everything aligned.
+         * Do you follow the above? The upper text is what will actually be shown on the log.
+         * The lower text is the spacing I use to get everything aligned.
          */
 
         // It is crucial that the text be sized and typefaced correctly at this point
