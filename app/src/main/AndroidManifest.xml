@@ -19,7 +19,6 @@
         </activity>
         <activity android:name="com.stuff.log.ger.LogActivity" />
         <activity android:name="com.stuff.log.ger.NewUserActivity"
-            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
             android:windowSoftInputMode="stateVisible" />
         <activity android:name="com.stuff.log.ger.NewLogLineActivity"
             android:windowSoftInputMode="stateVisible" />
